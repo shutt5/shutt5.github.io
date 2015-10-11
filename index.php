@@ -9,12 +9,14 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<?
-include 'nav.php';
-?>
+
 
 <body>
 <div class="container">
+
+  <?
+  include 'nav.php';
+  ?>
   <h1> Placating Plato with Plates of Pasta </h1>
   <p> Welcome to our new online tool.</p>
   <br>
