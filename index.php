@@ -2,7 +2,7 @@
 <html>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -17,6 +17,7 @@
   <?
   include 'nav.php';
   ?>
+<div class=articleBox>
   <h1> Placating Plato with Plates of Pasta </h1>
   <p> Welcome to our new online tool.</p>
   <br>
@@ -27,6 +28,44 @@
   <p> Explain </p>
   <h4> How do I get Started\? </h4>
   <p> Explain </p>
+</div>
+
+<div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">What is Placating Plato?</h3>
+            </div>
+            <div class="panel-body">
+              Explain
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Do I need an account?</h3>
+                      </div>
+                      <div class="panel-body">
+                        Explain
+                      </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title">How do I get started</h3>
+                                </div>
+                                <div class="panel-body">
+                                  Explain
+                                </div>
+                              </div>
+      <div class="row">
+
+        <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-lg btn-primary">Get Started</button>
+          </div>
+        </div>
+
+      </div>
 
 </div>
 </body>

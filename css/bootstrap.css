@@ -11,7 +11,23 @@ html {
 }
 body {
   margin: 0;
+  background: #AC2C23;
 }
+
+.articleBox {
+	width: 99%;
+	background: #FFFFFF;
+	margin: .5em auto;
+	padding: 1em;
+	border: .1em solid #333;
+	-moz-box-shadow: 0 0 .5em #888;
+	-webkit-box-shadow: 0 0 .5em #888;
+	box-shadow: 0 0 .5em #888;
+	-moz-border-radius: 1.5em;
+	border-radius: 1.5em;
+}
+
+
 article,
 aside,
 details,
