@@ -12,6 +12,14 @@
 
 
 <body>
+
+  <div class="bs-docs-header" id="content" tabindex="-1">
+      <div class="container">
+        <h1>CSS</h1>
+        <p>Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced grid system.</p>
+      </div>
+    </div>
+
 <div class="container">
 
   <?
@@ -48,14 +56,15 @@
                       </div>
                     </div>
 
-                    <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                  <h3 class="panel-title">How do I get started</h3>
-                                </div>
-                                <div class="panel-body">
-                                  Explain
-                                </div>
-                              </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">How do I get started</h3>
+        </div>
+        <div class="panel-body">
+            Explain
+        </div>
+    </div>
+    
       <div class="row">
 
         <div class="row">

@@ -8,10 +8,14 @@ html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
+  background: #AC2C23;
 }
 body {
   margin: 0;
   background: #AC2C23;
+
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .articleBox {
@@ -1603,6 +1607,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  background: #AC2C23;
 }
 @media (min-width: 768px) {
   .container {
