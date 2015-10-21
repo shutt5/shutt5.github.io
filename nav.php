@@ -23,6 +23,4 @@
         <li><a href="#">Contact</a></li>
         <li><a href="#">Help</a></li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+    </div><!-- /.navbar-collapse -
