@@ -40,24 +40,6 @@ We can implement a timer scheme to ensure some degree of fair play. The waiter w
 <script>
 'use strict';
 
-var canvas = document.getElementById("hAnimation");
-canvas.width = 200;
-canvas.height = 200;
-
-var animation = new Image();
-var anime = sprite({
-	context: canvas.getContext("2d"),
-	width:800,
-	height:200,
-	image: animation,
-	numberOfFrames: 4,
-	ticksPerFrame: 4
-});
-
-//animation.addEventListener("load", animationLoop);
-animation.src = "rscHierarchy.png";
-anime.render();
-
 function animationLoop() {
 	window.requestAnimationFrame(animationLoop);
 	anime.update();
@@ -102,6 +84,23 @@ function sprite(opts) {
 	};
 
 }
+
+var canvas = document.getElementById("hAnimation");
+canvas.width = 200;
+canvas.height = 200;
+
+var animation = new Image();
+var anime = sprite({
+	context: canvas.getContext("2d"),
+	width:800,
+	height:200,
+	image: animation,
+	numberOfFrames: 4,
+	ticksPerFrame: 4
+});
+
+animation.src = "rscHierarchy.png";
+anime.render();
 
 function showHierarchy(id) {
 	var r = "rscHierarchySol";
