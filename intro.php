@@ -1,7 +1,24 @@
 <!DOCTYPE html>
-<html>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
 <body>
-<h1>Hello World</h1>
+
+<div class="container">
+
+
+  <?
+  include 'nav.php';
+  ?>
+
+<h2>Introduction</h2>
 <p>The Dining Philosophers Problem is a popular way of thinking about concurrency issues in computers.  Throughout this lesson you will learn how this problem is at work behind the scenes every time you use your computer.<br>
 <br>
 ALRIGHT!<br>
@@ -24,6 +41,6 @@ Deadlock:<br>
 <p> INSERT ANIMATION OF PHILOSOPHERS DINING HERE</p>
 
 <p> Continue on to learn about this junk. </p>
-
+</div>
 </body>
 </html>
