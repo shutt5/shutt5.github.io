@@ -40,73 +40,83 @@ We can implement a timer scheme to ensure some degree of fair play. The waiter w
 <script>
 'use strict';
 
-function animationLoop() {
-	window.requestAnimationFrame(animationLoop);
-	anime.update();
-	anime.render();
-}
+function animate(source, backdrop) {
+	var diningImage = new Image();
+	diningImage.src = source;
 
-function sprite(opts) {
-	var that = {},
-		frameIndex = 0,
-		tickCount = 0,
-		ticksPerFrame = opts.ticksPerFrame || 0,
-		numberOfFrames = opts.numberOfFrames || 1;
-	that.context = opts.context;
-	that.width = opts.width;
-	that.height = opts.height;
-	that.image = opts.image;
+	function sprite(options) {
+		var that = {},
+		    frameIndex = 0,
+		    tickCount = 0,
+		    ticksPerFrame = options.ticksPerFrame,
+		    numberOfFrames = options.numberOfFrames || 1;
+		that.context = options.context;
+		that.width = options.width;
+		that.height = options.height;
+		that.image = options.image;
+		that.loop = options.loop;
+		
+		that.render = function() {
+			that.context.clearRect(0, 0, that.width, that.height);
+			that.context.drawImage(
+				that.image,
+				frameIndex * (that.width / numberOfFrames),
+				0,
+				that.width / numberOfFrames,
+				that.height,
+				0,
+				0,
+				that.width / numberOfFrames,
+				that.height);
+		};
 
-	that.update = function() {
-		tickCount += 1;
-		if(tickCount > ticksPerFrame) {
-			tickCount = 0;
-			if(frameIndex < numberOfFrames - 1) {
-				frameIndex += 1;
+		that.update = function() {
+			tickCount++;
+			if(tickCount > ticksPerFrame) {
+				tickCount = 0;
+				if(frameIndex < numberOfFrames - 1) {
+					frameIndex++;
+				}
+				else if(that.loop) {
+					frameIndex = 0;
+				}
 			}
-			else {
-				frameIndex = 0;
-			}
-		}
-	};
+		};
+		return that;
+	}
 
-	that.render = function() {
-		that.context.drawImage(
-			that.image,
-			frameIndex * that.width / numberOfFrames,
-			0,
-			that.width / numberOfFrames,
-			that.height,
-			0,
-			0,
-			that.width / numberOfFrames,
-			that.height);
-	};
+	var canvas = document.getElementById(backdrop);
+	canvas.width = 200;
+	canvas.height = 200;
+
+	var animation = sprite({
+		context: canvas.getContext("2d"),
+		width: 800,
+		height: 200,
+		image: diningImage,
+		numberOfFrames: 4,
+		ticksPerFrame: 15,
+		loop: 1
+		});
+	animation.render();
+
+	function frameLoop() {
+		window.requestAnimationFrame(frameLoop);
+
+		animation.update();
+		animation.render();
+	}
+
+	diningImage.addEventListener("load", frameLoop);
 
 }
-
-var canvas = document.getElementById("hAnimation");
-canvas.width = 200;
-canvas.height = 200;
-
-var animation = new Image();
-var anime = sprite({
-	context: canvas.getContext("2d"),
-	width:800,
-	height:200,
-	image: animation,
-	numberOfFrames: 4,
-	ticksPerFrame: 4
-});
-
-animation.src = "rscHierarchy.png";
-anime.render();
 
 function showHierarchy(id) {
 	var r = "rscHierarchySol";
 	var a = "arbitratorSol";
 	document.getElementById(a).style.display = "none";
-	document.getElementById(r).style.display = "inline";	
+	document.getElementById(r).style.display = "inline";
+	animate("rscHierarchy.png", "hAnimation");	
 	return 0;
 }
 
