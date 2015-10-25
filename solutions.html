@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>Solutions to the Dining Philosophers Problem
+<head>
 </head>
 <body>
 <div>
@@ -8,24 +8,124 @@ Now that we understand the Dining Philosophers Problem, we need to figure out a 
 Our optimal solution will ensure that each philosopher has an equal time to eat and think.
 Ideally, we would also want to maximize the amount of time each philosopher can spend on both tasks.
 We also want to make sure no philosophers starve or wait too long to eat.
+Please click on either button to learn more about the common solutions to the Dining Philosophers Problem.
 </div>
 <div>
 The Dining Philosophers Problem has two common solutions:
+<button id="rscHierarchy" type="button" onclick="showHierarchy()">1. Resource Hierarchy</button>
+<button id="arbitrator" type="button" onclick="showArbitrator()">2. Arbitrator</button>
+<div id="rscHierarchySol" style="display:none">
 <p>
-1. Resource Hierarchy
-The resource hierarchy solution establishes are ordering to the chopsticks...
+The resource hierarchy solution establishes are ordering to the chopsticks. Each chopstick is numbered (order does not matter). The philosophers will pick up the lower numbered chopstick adjacent to them then pick up the one numbered higher. Regardless of how you number the chopsticks, you are guaranteed to have at least one philospher who will have the ordering of their chopsticks reversed. For example, if we number the chopsticks in order from right to left with five philosophers around the table, the fifth philosopher will find that the lower numbered chopstick is to their right while every other philosopher's lower numbered chopstick is to their left. When reaching for the chopsticks, in this case, two of the philosophers will reach for the same one. Obviously, only one philosopher can hold a chopstick at any given time.
 </p>
 <p>
-2. Arbitrator
-Unlike the resource hierarchy solution, the arbitrator solution adds a new construct to the problem; a waiter...
+Let us assume, keeping our example from before, that the first philosopher beats the fifth philosopher to their shared chopstick. This keeps philosopher 5 waiting until philosopher 1 is done eating. However, philosopher 1 must wait for philosopher 2 to finish eating because they have philosopher 1's higher numbered chopstick. The same is true with philosopher 2 waiting on philosopher 3 and philosopher 3 waiting on philosopher 4. The fourth philosopher, however, is good to go. Since philosopher 5 is waiting on philosopher 1, they have not picked up their higher numbered chopstick which is shared with philosopher 4. Philosopher 4 claims this chopstick and is able to eat. Once they are finished, they will set down their chopsticks which allows philosopher 3 to eat and so on. The resource hierarchy method guarantees at least one philosopher is able to eat at any given time while the others wait.
 </p>
+<p>
+If we wanted to make sure all philosophers have a fair shot at eating (maybe one is very hungry and will not stop eating for a few hours), we can place a time limit on each philosopher when they begin eating. This, however, is optional as the heart of the problem has already been solved.
+</p>
+<canvas id="hAnimation"></canvas>
 </div>
-<div>
-Now it is your turn to try. Below you will find the philosophers ready to eat. There are a handful of variables you can manipulate to alter their behavior. See if you can solve the problem using either of the two methods above, or try your own method. There are more than two ways to solve this problem.
+<div id="arbitratorSol" style="display:none">
+<p>
+The arbitrator solution adds a new construct to the problem; a waiter. Instead of having a strict ordering to the chopsticks, we place a waiter in charge of ensuring only one philosopher has permission to eat at any given time. Our waiter will process each request to eat on a first-come-first-served basis. The waiter construct can be implemented as something called a mutex, meaning mutual exclusion. We ensure that only one philosopher can eat at a time by making the permission to eat a mutually exclusive resource. This by definition means that only one member of a group can access that resource at any given time. We might implement this as a lock meaning the first philosopher who asks for permission to eat is granted their request and claims the resource (permission to eat). Nobody else can obtain permission to eat until the currently eating philosopher finishes and gives it up. The waiter then gives permission to the next philosopher who requested permission to eat.
+</p>
+<p>
+We can implement a timer scheme to ensure some degree of fair play. The waiter will give each philospher requesting permission a certain amount of time to eat before they must relinquish their permission and it is passed on to the next request. Essentially, the mutex lock they have on the permission to eat will time out and they must give up their lock. This is an optional constraint as the problem has been solved by including the waiter without a timer.
+</p>
+<canvas id="aAnimation"></canvas>
+</div>
+</div>
+<script>
+'use strict';
 
-[Insert interactive table here]
-[Insert table with drag and drop variables (wait to pickup second chopstick, number the chopsticks, add/remove philosopher and chopstick, etc.)]
-<div>
-[Insert "Run Method" button here]
+function animate(source, backdrop) {
+	var diningImage = new Image();
+	diningImage.src = source;
+
+	function sprite(options) {
+		var that = {},
+		    frameIndex = 0,
+		    tickCount = 0,
+		    ticksPerFrame = options.ticksPerFrame,
+		    numberOfFrames = options.numberOfFrames || 1;
+		that.context = options.context;
+		that.width = options.width;
+		that.height = options.height;
+		that.image = options.image;
+		that.loop = options.loop;
+		
+		that.render = function() {
+			that.context.clearRect(0, 0, that.width, that.height);
+			that.context.drawImage(
+				that.image,
+				frameIndex * (that.width / numberOfFrames),
+				0,
+				that.width / numberOfFrames,
+				that.height,
+				0,
+				0,
+				that.width / numberOfFrames,
+				that.height);
+		};
+
+		that.update = function() {
+			tickCount++;
+			if(tickCount > ticksPerFrame) {
+				tickCount = 0;
+				if(frameIndex < numberOfFrames - 1) {
+					frameIndex++;
+				}
+				else if(that.loop) {
+					frameIndex = 0;
+				}
+			}
+		};
+		return that;
+	}
+
+	var canvas = document.getElementById(backdrop);
+	canvas.width = 200;
+	canvas.height = 200;
+
+	var animation = sprite({
+		context: canvas.getContext("2d"),
+		width: 800,
+		height: 200,
+		image: diningImage,
+		numberOfFrames: 4,
+		ticksPerFrame: 15,
+		loop: 1
+		});
+	animation.render();
+
+	function frameLoop() {
+		window.requestAnimationFrame(frameLoop);
+
+		animation.update();
+		animation.render();
+	}
+
+	diningImage.addEventListener("load", frameLoop);
+
+}
+
+function showHierarchy(id) {
+	var r = "rscHierarchySol";
+	var a = "arbitratorSol";
+	document.getElementById(a).style.display = "none";
+	document.getElementById(r).style.display = "inline";
+	animate("rscHierarchy.png", "hAnimation");	
+	return 0;
+}
+
+function showArbitrator() {
+	var r = "rscHierarchySol";
+	var a = "arbitratorSol";
+	document.getElementById(r).style.display = "none";
+	document.getElementById(a).style.display = "inline";
+	return 0;
+}
+</script>
 </body>
 </html>

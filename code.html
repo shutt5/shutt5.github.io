@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div>
+<p>
+Since we now understand the Dining Philosophers Problem (in both theoretical and practical contexts) and its solutions, it is now your turn to solve the problem. You can use one of the two common solutions or try one of your own. Below you will find some JavaScript code which simulates the Dining Philosophers Problem along with some helpful code to start you off on the right path. When you submit your test code, you will receive a message indicating if you were successful or not. If you were not, do not be discouraged. Give it another try. You will receive error messages that should guide you to a correct solution.
+</p>
+<p>
+If you are not too confident in your JavaScript abilities, please refer to the <a href="http://www.w3schools.com/js/default.asp">W3 Schools</a> tutorials to brush up on the syntax.
+</p>
+</div>
+<div>
+Code Here:
+<form>
+<textarea id="code" cols="128" rows="32">
+function dining_philosophers_problem() {
+
+	
+	return 0;
+}
+
+dining_philosophers_problem();
+</textarea>
+<br/>
+<button id="codeSubmit" type="button" onclick="runCode()">Test My Code</button> This may take awhile depending upon your code's time complexity.
+</form>
+</div>
+<script>
+'use strict';
+
+function parse(code) {
+	var i;
+	var j;
+	var injCount = 0;
+	var txt = code.split(" ");
+	var lower;
+	var injVulns = ["<script", "<object", "<applet", "<embed", ".js"];
+	for(i = 0; i < txt.length; i++) {
+		lower = txt[i].toLowerCase();
+		for(j = 0; j < injVulns.length; j++) {
+			if(lower.search(injVulns[j]) != -1) {
+				injCount++;
+			}
+		}
+	}
+	if(injCount != 0) {
+		alert("Innappropriate code injection detected.\nPlease refrain from including any other library or object.\nYou already have everything you need to solve the problem.");
+		return 1;
+	}
+
+	return 0;
+}
+
+function runCode() {
+	var code = document.getElementById("code").value;
+	var parseCheck = parse(code);
+	if(parseCheck != 0) {
+		return 1;
+	}
+	var retVal = eval(code);
+	if(retVal == 0) {
+		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+	}
+	else {
+		alert("Your solution does not solve the Dining Philosophers Problem.\nPlease try again.");
+	}
+	return 0;
+}
+</script>
+</body>
+</html>
