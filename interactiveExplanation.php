@@ -30,8 +30,8 @@ include 'nav.php';
 
 <p>Click on a philosopher to change their state.
 </p>
+<embed width="100%" height ="700px" src="interactiveExplanationVisualization/example.html">
 
-<script src="http://www3.nd.edu/~shutt/interactiveExplanationVisualization/example.html"></script>
 
 </div>
 
