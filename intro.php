@@ -16,6 +16,7 @@
 
   <?
   include 'nav.php';
+  $SESSION['started'] = "t";
   ?>
 
 <h2>Introduction</h2>
