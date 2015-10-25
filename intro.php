@@ -22,7 +22,7 @@
   $SESSION['started'] = "t";
   ?>
 
-<h2>Introduction</h2>
+<h1>Introduction</h1>
 <p>The Dining Philosophers Problem is a popular way of thinking about concurrency issues in computers.  Throughout this lesson you will learn how this problem is at work behind the scenes every time you use your computer.<br>
 <br>
 ALRIGHT!<br>
@@ -35,25 +35,27 @@ Suppose we have five philosophers sitting around a table.  Each philosopher has 
 
 <p> Main problems to avoid:<br>
 <br>
-Deadlock:<br>
 </p>
+<h2>Deadlock:<br>
+</h2>
 
 <canvas id="deadlock" width="500" height="500"
 style="background-color:#333">
 </canvas>
 
-<p> Starvation: <br></p>
+<p>  <br></p>
+<h2>Starvation: </h2>
 
 <canvas id="canvas" width="500" height="500"
 style="background-color:#333">
 </canvas>
 
-<p> Continue on to learn about this junk. </p>
 </div>
 
 <script>
 var kant;
 var img;
+var pasta;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var ctx_d = document.getElementById("deadlock").getContext("2d");
@@ -95,6 +97,10 @@ function drawFace(ctx, radius) {
 function animate(){
   eraseChopsticks();
   drawChopsticks(0);
+  ctx.drawImage(pasta, 10-radius, -25, 50, 50);
+  ctx.drawImage(pasta, radius-60, -25, 50, 50);
+  ctx_d.drawImage(pasta, 10-radius, -25, 50, 50);
+  ctx_d.drawImage(pasta, radius-60, -25, 50, 50);
 }
 
 function eraseChopsticks(){
@@ -201,7 +207,7 @@ function drawChopsticks(x){
 function loadImage(){
   img = document.getElementById("Plato");
   kant = document.getElementById("Kant");
-  var pasta = document.getElementById("Pasta");
+  pasta = document.getElementById("Pasta");
   ctx.drawImage(kant, -100-radius, -50, 75, 100);
   ctx.drawImage(img, 25+radius, -50, 75, 100);
   ctx.drawImage(pasta, 10-radius, -25, 50, 50);
