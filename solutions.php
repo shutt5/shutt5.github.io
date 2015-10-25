@@ -28,10 +28,21 @@ Ideally, we would also want to maximize the amount of time each philosopher can 
 We also want to make sure no philosophers starve or wait too long to eat.
 Please click on either button to learn more about the common solutions to the Dining Philosophers Problem.
 </div>
+
+<br>
+
 <div>
 The Dining Philosophers Problem has two common solutions:
-<button id="rscHierarchy" type="button" onclick="showHierarchy()">1. Resource Hierarchy</button>
-<button id="arbitrator" type="button" onclick="showArbitrator()">2. Arbitrator</button>
+<br>
+<br>
+<div class="row">
+	<div class="col-md-4">
+	<button id="rscHierarchy" type="button" onclick="showHierarchy()" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
+</div>
+	<div class="col-md-8">
+<button id="arbitrator" type="button" onclick="showArbitrator()" class="btn btn-lg btn-primary">2. Arbitrator</button>
+</div>
+</div>
 <div id="rscHierarchySol" style="display:none">
 <p>
 The resource hierarchy solution establishes are ordering to the chopsticks. Each chopstick is numbered (order does not matter). The philosophers will pick up the lower numbered chopstick adjacent to them then pick up the one numbered higher. Regardless of how you number the chopsticks, you are guaranteed to have at least one philospher who will have the ordering of their chopsticks reversed. For example, if we number the chopsticks in order from right to left with five philosophers around the table, the fifth philosopher will find that the lower numbered chopstick is to their right while every other philosopher's lower numbered chopstick is to their left. When reaching for the chopsticks, in this case, two of the philosophers will reach for the same one. Obviously, only one philosopher can hold a chopstick at any given time.
