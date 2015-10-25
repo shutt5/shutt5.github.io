@@ -31,7 +31,7 @@ include 'nav.php';
 <p>Click on a philosopher to change their state.
 </p>
 
-<object data="interactiveExplanationVisualization/example.swf"></object>
+<script src="http://www3.nd.edu/~shutt/interactiveExplanationVisualization/example.html"></script>
 
 </div>
 
