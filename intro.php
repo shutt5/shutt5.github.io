@@ -10,9 +10,16 @@
 
 
 <body>
-<img id="Plato" width="0" height="0" src="images/Plato.jpg" alt="Plato">
+<img id="Plato" width="0" height="0" src="interactiveExplanationVisualization/fiveThinking.png" alt="Plato">
+<img id="Plato_Starve" width="0" height="0" src="interactiveExplanationVisualization/fiveStarving.png" alt="Plato Starving">
+<img id="Plato_Need" width="0" height="0" src="interactiveExplanationVisualization/fiveNoChopsticks.png" alt="Plato Needs 2 Chopsticks">
+<img id="Plato_Eat" width="0" height="0" src="interactiveExplanationVisualization/fiveEatOverlay.png" alt="Plato Eating">
+
 <img id="Pasta" width="0" height="0" src="images/Pasta.jpg" alt="Pasta">
-<img id="Kant"  width="0" height="0"  src="images/Kant.jpg" alt="Kant">
+<img id="Kant" width="0" height="0" src="interactiveExplanationVisualization/oneThinking.png" alt="Kant">
+<img id="Kant_Starve" width="0" height="0" src="interactiveExplanationVisualization/oneStarving.png" alt="Kant Starving">
+<img id="Kant_Need" width="0" height="0" src="interactiveExplanationVisualization/oneNoChopsticks.png" alt="Kant Needs 2 Chopsticks">
+<img id="Kant_Eat" width="0" height="0" src="interactiveExplanationVisualization/oneEatOverlay.png" alt="Kant Eating">
 
 <div class="container">
 
@@ -53,6 +60,14 @@ style="background-color:#333">
 </div>
 
 <script>
+var kantstarve;
+var kantneed;
+var kant;
+var platoneed;
+var platoeat;
+var loaded_i = 0;
+var loaded_k = 0;
+var loaded_p = 0;
 var kant;
 var img;
 var pasta;
@@ -95,12 +110,14 @@ function drawFace(ctx, radius) {
 }
 
 function animate(){
-  eraseChopsticks();
-  drawChopsticks(0);
-  ctx.drawImage(pasta, 10-radius, -25, 50, 50);
-  ctx.drawImage(pasta, radius-60, -25, 50, 50);
-  ctx_d.drawImage(pasta, 10-radius, -25, 50, 50);
-  ctx_d.drawImage(pasta, radius-60, -25, 50, 50);
+  if(loaded_i + loaded_k + loaded_p > 2){
+    eraseChopsticks();
+    drawChopsticks(0);
+    ctx.drawImage(pasta, 10-radius, -25, 50, 50);
+    ctx.drawImage(pasta, radius-60, -25, 50, 50);
+    ctx_d.drawImage(pasta, 10-radius, -25, 50, 50);
+    ctx_d.drawImage(pasta, radius-60, -25, 50, 50);
+  }
 }
 
 function eraseChopsticks(){
@@ -110,16 +127,14 @@ function eraseChopsticks(){
   if(i + j + k > 110){
     if(k == 0){
       k = k + 1;
-      ctx.fillText("Om Nom Nom", radius-10, -75);
+      ctx.fillText("Eating", radius+30, -75);
       ctx.fillText("???????", 20-canvas.width/2, -75);
     }else if(k < 10){
       k = k + 1;
     }else if(k < 20){
       k = k + 1;
-      ctx.fillStyle = 'black';
-      ctx.fillText("X",-radius-75, 12);
-      ctx.fillText("X",-radius-90, 12);
-      ctx.fillStyle = 'white';
+      ctx.drawImage(kantstarve, -100-radius, -50, 75, 100);
+      ctx.drawImage(platoeat, 25+radius, -50, 75, 100);
     }else{
       ctx.drawImage(kant, -100-radius, -50, 75, 100);
       ctx.drawImage(img, 25+radius, -50, 75, 100);
@@ -150,12 +165,8 @@ function eraseChopsticks(){
       k_d = k_d + 1;
     }else if(k_d < 20){
       k_d = k_d + 1;
-      ctx_d.fillStyle = 'black';
-      ctx_d.fillText("X",radius+45, -5);
-      ctx_d.fillText("X",radius+66, -5);
-      ctx_d.fillText("X",-radius-75, 12);
-      ctx_d.fillText("X",-radius-90, 12);
-      ctx_d.fillStyle = 'white';
+      ctx_d.drawImage(kantneed, -100-radius, -50, 75, 100);
+      ctx_d.drawImage(platoneed, 25+radius, -50, 75, 100);
     }else{
       ctx_d.drawImage(kant, -100-radius, -50, 75, 100);
       ctx_d.drawImage(img, 25+radius, -50, 75, 100);
@@ -205,9 +216,17 @@ function drawChopsticks(x){
 }
 
 function loadImage(){
+  
   img = document.getElementById("Plato");
   kant = document.getElementById("Kant");
   pasta = document.getElementById("Pasta");
+  platoeat = document.getElementById("Plato_Eat");
+  platoneed = document.getElementById("Plato_Need");
+  kantneed = document.getElementById("Kant_Need");
+  kantstarve = document.getElementById("Kant_Starve");
+  var newPlato = img;
+  var newKant = kant;
+  var newPasta = pasta;
   ctx.drawImage(kant, -100-radius, -50, 75, 100);
   ctx.drawImage(img, 25+radius, -50, 75, 100);
   ctx.drawImage(pasta, 10-radius, -25, 50, 50);
@@ -218,6 +237,23 @@ function loadImage(){
   ctx_d.drawImage(pasta, 10-radius, -25, 50, 50);
   ctx_d.drawImage(pasta, radius-60, -25, 50, 50);
 
+  newPlato.onload=function(){
+    loaded_i = 1;
+    ctx.drawImage(img, 25+radius, -50, 75, 100);
+    ctx_d.drawImage(img, 25+radius, -50, 75, 100);
+  }
+  newKant.onload=function(){
+    loaded_k = 1;
+    ctx.drawImage(kant, -100-radius, -50, 75, 100);
+    ctx_d.drawImage(kant, -100-radius, -50, 75, 100);
+  }
+  newPasta.onload=function(){
+    loaded_p = 1;
+    ctx_d.drawImage(pasta, 10-radius, -25, 50, 50);
+    ctx_d.drawImage(pasta, radius-60, -25, 50, 50);
+    ctx.drawImage(pasta, 10-radius, -25, 50, 50);
+    ctx.drawImage(pasta, radius-60, -25, 50, 50);
+  }
 
   setInterval(animate, 100);
 }
