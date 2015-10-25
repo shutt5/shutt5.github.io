@@ -31,13 +31,7 @@ include 'nav.php';
 <p>Click on a philosopher to change their state.
 </p>
 
-<object>
-    <param name="movie" value="interactiveExplanationVisualization/example.swf">
-    <embed src="interactiveExplanationVisualization/example.swf">
-    </embed>
-</object>
-
-
+<object data="interactiveExplanationVisualization/example.swf"></object>
 
 </div>
 
