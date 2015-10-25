@@ -3,6 +3,24 @@
 <head>
 </head>
 <body>
+	<!DOCTYPE html>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<div class="container">
+
+<?
+include 'nav.php';
+
+?>
+
+
 <div>
 Now that we understand the Dining Philosophers Problem, we need to figure out a solution.
 Our optimal solution will ensure that each philosopher has an equal time to eat and think.
@@ -54,7 +72,7 @@ function animate(source, backdrop) {
 		that.height = options.height;
 		that.image = options.image;
 		that.loop = options.loop;
-		
+
 		that.render = function() {
 			that.context.clearRect(0, 0, that.width, that.height);
 			that.context.drawImage(
@@ -115,7 +133,7 @@ function showHierarchy(id) {
 	var a = "arbitratorSol";
 	document.getElementById(a).style.display = "none";
 	document.getElementById(r).style.display = "inline";
-	animate("rscHierarchy.png", "hAnimation");	
+	animate("rscHierarchy.png", "hAnimation");
 	return 0;
 }
 
@@ -127,5 +145,6 @@ function showArbitrator() {
 	return 0;
 }
 </script>
+</div>
 </body>
 </html>
