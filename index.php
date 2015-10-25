@@ -63,7 +63,7 @@
         <div class="row">
           <div class="col-md-10"></div>
           <div class="col-md-2">
-            <a href = "intro.html"><button type="button" class="btn btn-lg btn-primary">Get Started</button></a>
+            <a href = "intro.php"><button type="button" class="btn btn-lg btn-primary">Get Started</button></a>
           </div>
         </div>
 
