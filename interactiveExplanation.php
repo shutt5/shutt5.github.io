@@ -30,8 +30,9 @@ include 'nav.php';
 
 <p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are allowed to eat.
 </p>
+<center>
 <embed width="775px" height ="655px" src="interactiveExplanationVisualization/example.html">
-
+</center>
 
 </div>
 
