@@ -28,9 +28,9 @@ include 'nav.php';
 <p>To better understand the need for an automated solution to this problem, the following visualization has been designed.
 </p>
 
-<p>Click on a philosopher to change their state.
+<p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are allowed to eat.
 </p>
-<embed width="100%" height ="700px" src="interactiveExplanationVisualization/example.html">
+<embed width="775px" height ="655px" src="interactiveExplanationVisualization/example.html">
 
 
 </div>
