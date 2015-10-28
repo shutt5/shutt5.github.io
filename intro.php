@@ -30,7 +30,7 @@ Suppose we have five philosophers sitting around a table.  Each philosopher has 
 <h3> Main problems to avoid:</h3>
 <p>
 <br>
-There are several problems that arise when we try to find a solution to the Dining Philosophers Problem.  One such problem is called <quot> Deadlock </quot>.  This occurs when philosophers have claimed one chopstick each but there are no more chopsticks for any of them to claim.
+There are several problems that arise when we try to find a solution to the Dining Philosophers Problem.  One such problem is called <q>deadlock</q>.  This occurs when philosophers have claimed one chopstick each but there are no more chopsticks for any of them to claim.
 <br>
 
 </p>
@@ -38,12 +38,12 @@ There are several problems that arise when we try to find a solution to the Dini
 </h2>
 
 <div>
-	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="600" id="Deadlock">
-		<param name="movie" value="Deadlock.swf" />
+	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="600" id="DeadlockWithTitle">
+		<param name="movie" value="DeadlockWithTitle.swf" />
 		<param name="play" value="true" />
 		<param name="loop" value="true" />
 		<!--[if !IE]>-->
-		<object type="application/x-shockwave-flash" data="Deadlock.swf" width="800" height="600">
+		<object type="application/x-shockwave-flash" data="DeadlockWithTitle.swf" width="800" height="600">
 			<param name="play" value="true" />
 			<param name="loop" value="true" />
 		<!--<![endif]-->
@@ -58,18 +58,18 @@ There are several problems that arise when we try to find a solution to the Dini
 
 <p>
 <br>
-Another major issue that arises in this problem is called <quot>Starvation</quot>.  Starvation occurs when one philosopher never gets the chopsticks because they are claimed every time that philosopher attempts to claim one.
+Another major issue that arises in this problem is called <q>starvation</q>.  Starvation occurs when one philosopher never gets the chopsticks because they are claimed every time that philosopher attempts to claim one.
 <br>
 </p>
 <h2>Starvation: </h2>
 
 <div>
-	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="600" id="Starvation">
-		<param name="movie" value="Starvation.swf" />
+	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="600" id="StarvationWithTitle">
+		<param name="movie" value="StarvationWithTitle.swf" />
 		<param name="play" value="true" />
 		<param name="loop" value="true" />
 		<!--[if !IE]>-->
-		<object type="application/x-shockwave-flash" data="Starvation.swf" width="800" height="600">
+		<object type="application/x-shockwave-flash" data="StarvationWithTitle.swf" width="800" height="600">
 			<param name="play" value="true" />
 			<param name="loop" value="true" />
 		<!--<![endif]-->
