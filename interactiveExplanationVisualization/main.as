@@ -1,4 +1,4 @@
-package
+﻿package
 {
     import flash.display.MovieClip;
 	import flash.events.MouseEvent;
@@ -149,7 +149,7 @@ package
 		}
 		public function oneClicked(ev:MouseEvent):void
 		{
-			if(pOne.getStatus() == 1 && pTwo.getStatus() == 1 && pFive.getStatus() == 1){
+			if(pOne.getStatus() == 1 && pTwo.getStatus() != 2 && pFive.getStatus() != 2){
 				pOne.setStatus(2);
 				oneTimer.stop();
 				oneTimer2.start();
@@ -163,7 +163,7 @@ package
 				chopstick1.x = 264.85; chopstick1.y = 200.75;
 				chopstick5.x = 214.30; chopstick5.y = 377;
 			}
-			else{
+			else if(pOne.getStatus() == 1 && (pTwo.getStatus() == 2 || pFive.getStatus() == 2)){
 				var image:Image2 = new Image2("oneNoChopsticks.png");
 				oneButton.addChild(image);
 			}
@@ -185,7 +185,10 @@ package
 			if(pOne.getHunger() == 0){
 				var image:Image2 = new Image2("oneStarving.png");
 				oneButton.addChild(image);
+				pOne.setStatus(3);
 				oneTimer.stop();
+				oneTimer2.stop();
+				progBar1.removeChildren();
 			}
 		}
 		
@@ -220,7 +223,7 @@ package
 		}
 		public function twoClicked(ev:MouseEvent):void
 		{
-			if(pTwo.getStatus() == 1 && pOne.getStatus() == 1 && pThree.getStatus() == 1){
+			if(pTwo.getStatus() == 1 && pOne.getStatus() != 2 && pThree.getStatus() != 2){
 				twoTimer.stop();
 				twoTimer2.start();
 				pTwo.setStatus(2);
@@ -234,7 +237,7 @@ package
 				chopstick1.x = 264.85; chopstick1.y = 200.75;
 				chopstick2.x = 449.95; chopstick2.y = 202.3;
 			}
-			else{
+			else if(pTwo.getStatus() == 1 && (pOne.getStatus() == 2 || pThree.getStatus() == 2)){
 				var image:Image2 = new Image2("twoNoChopsticks.png");
 				twoButton.addChild(image);
 			}
@@ -256,7 +259,10 @@ package
 			if(pTwo.getHunger() == 0){
 				var image:Image2 = new Image2("twoStarving.png");
 				twoButton.addChild(image);
+				pTwo.setStatus(3);
 				twoTimer.stop();
+				twoTimer2.stop();
+				progBar2.removeChildren();
 			}
 		}
 		
@@ -291,7 +297,7 @@ package
 		}
 		public function threeClicked(ev:MouseEvent):void
 		{
-			if(pThree.getStatus() == 1 && pTwo.getStatus() == 1 && pFour.getStatus() == 1){
+			if(pThree.getStatus() == 1 && pTwo.getStatus() != 2 && pFour.getStatus() != 2){
 				threeTimer.stop();
 				threeTimer2.start();
 				pThree.setStatus(2);
@@ -305,7 +311,7 @@ package
 				chopstick2.x = 449.95; chopstick2.y = 202.3;
 				chopstick3.x = 470.40; chopstick3.y = 379.25;
 			}
-			else{
+			else if(pThree.getStatus() == 1 && (pTwo.getStatus() == 2 || pFour.getStatus() == 2)){
 				var image:Image2 = new Image2("threeNoChopsticks.png");
 				threeButton.addChild(image);
 			}
@@ -327,7 +333,10 @@ package
 			if(pThree.getHunger() == 0){
 				var image:Image2 = new Image2("threeStarving.png");
 				threeButton.addChild(image);
+				pThree.setStatus(3);
 				threeTimer.stop();
+				threeTimer2.stop();
+				progBar3.removeChildren();
 			}
 		}
 		
@@ -362,7 +371,7 @@ package
 		}
 		public function fourClicked(ev:MouseEvent):void
 		{
-			if(pFour.getStatus() == 1 && pThree.getStatus() == 1 && pFive.getStatus() == 1){
+			if(pFour.getStatus() == 1 && pThree.getStatus() != 2 && pFive.getStatus() != 2){
 				fourTimer.stop();
 				fourTimer2.start();
 				pFour.setStatus(2);
@@ -377,7 +386,7 @@ package
 				chopstick3.x = 470.40; chopstick3.y = 379.25;
 				chopstick4.x = 381; chopstick4.y = 465.45;
 			}
-			else{
+			else if(pFour.getStatus() == 1 && (pThree.getStatus() == 2 || pFive.getStatus() == 2)){
 				var image:Image2 = new Image2("fourNoChopsticks.png");
 				fourButton.addChild(image);
 			}
@@ -399,7 +408,10 @@ package
 			if(pFour.getHunger() == 0){
 				var image:Image2 = new Image2("fourStarving.png");
 				fourButton.addChild(image);
+				pFour.setStatus(3);
 				fourTimer.stop();
+				fourTimer2.stop();
+				progBar4.removeChildren();
 			}
 		}
 		
@@ -434,7 +446,7 @@ package
 		}
 		public function fiveClicked(ev:MouseEvent):void
 		{
-			if(pFive.getStatus() == 1 && pOne.getStatus() == 1 && pFour.getStatus() == 1){
+			if(pFive.getStatus() == 1 && pOne.getStatus() != 2 && pFour.getStatus() != 2){
 				fiveTimer.stop();
 				fiveTimer2.start();
 				pFive.setStatus(2);
@@ -448,7 +460,7 @@ package
 				chopstick4.x = 381; chopstick4.y = 465.45;
 				chopstick5.x = 214.3; chopstick5.y = 377;
 			}
-			else{
+			else if(pFive.getStatus() == 1 && (pOne.getStatus() == 2 || pFour.getStatus() == 2)){
 				var image:Image2 = new Image2("fiveNoChopsticks.png");
 				fiveButton.addChild(image);
 			}
@@ -470,7 +482,10 @@ package
 			if(pFive.getHunger() == 0){
 				var image:Image2 = new Image2("fiveStarving.png");
 				fiveButton.addChild(image);
+				pFive.setStatus(3);
 				fiveTimer.stop();
+				fiveTimer2.stop();
+				progBar5.removeChildren();
 			}
 		}
 	}
