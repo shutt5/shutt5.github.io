@@ -27,10 +27,12 @@ Suppose we have five philosophers sitting around a table.  Each philosopher has 
 <br>
 </p>
 
-<p>INSERT PRETTY PICTURES HERE</p>
-
-<p> Main problems to avoid:<br>
+<h3> Main problems to avoid:</h3>
+<p>
 <br>
+There are several problems that arise when we try to find a solution to the Dining Philosophers Problem.  One such problem is called <quot> Deadlock </quot>.  This occurs when philosophers have claimed one chopstick each but there are no more chopsticks for any of them to claim.
+<br>
+
 </p>
 <h2>Deadlock:<br>
 </h2>
@@ -54,7 +56,11 @@ Suppose we have five philosophers sitting around a table.  Each philosopher has 
 	</object>
 </div>
 
-<p>  <br></p>
+<p>
+<br>
+Another major issue that arises in this problem is called <quot>Starvation</quot>.  Starvation occurs when one philosopher never gets the chopsticks because they are claimed every time that philosopher attempts to claim one.
+<br>
+</p>
 <h2>Starvation: </h2>
 
 <div>
