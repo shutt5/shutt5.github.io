@@ -18,7 +18,7 @@
   $SESSION['started'] = "t";
   ?>
 
-<h1>Introduction</h1>
+<h1>Getting Started</h1>
 <p>The Dining Philosophers Problem is a popular way of thinking about concurrency issues in computers.  Throughout this lesson you will learn how this problem is at work behind the scenes every time you use your computer.<br>
 <br>
 Suppose we have five philosophers sitting around a table.  Each philosopher has a plate of food in front of them.  Between each pair of philosophers is a single chopstick.  How do we get the philosophers to share the chopsticks without communicating and such that no philosopher starves?<br>
