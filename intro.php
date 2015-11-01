@@ -21,8 +21,6 @@
 <h1>Introduction</h1>
 <p>The Dining Philosophers Problem is a popular way of thinking about concurrency issues in computers.  Throughout this lesson you will learn how this problem is at work behind the scenes every time you use your computer.<br>
 <br>
-ALRIGHT!<br>
-<br>
 Suppose we have five philosophers sitting around a table.  Each philosopher has a plate of food in front of them.  Between each pair of philosophers is a single chopstick.  How do we get the philosophers to share the chopsticks without communicating and such that no philosopher starves?<br>
 <br>
 </p>
@@ -30,7 +28,7 @@ Suppose we have five philosophers sitting around a table.  Each philosopher has 
 <h3> Main problems to avoid:</h3>
 <p>
 <br>
-There are several problems that arise when we try to find a solution to the Dining Philosophers Problem.  One such problem is called <q>deadlock</q>.  This occurs when philosophers have claimed one chopstick each but there are no more chopsticks for any of them to claim.
+There are several problems that arise when we try to find a solution to the Dining Philosophers Problem.  One such problem is called <q>deadlock</q>.  This occurs when philosophers have claimed one chopstick each but there are no more chopsticks for any of them to claim.  Thus no philosopher is able to eat as all are waiting for a second chopstick.
 <br>
 
 </p>
