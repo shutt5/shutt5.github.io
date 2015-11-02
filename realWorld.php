@@ -47,6 +47,15 @@ Either of these conditions would result in the Operating system failing to perfo
 
 So how do we solve it?
 
+<div class="row">
+
+<div class="row">
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+    <a href = "code.html"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+  </div>
+</div>
+
 </div>
 </body>
 </html>
