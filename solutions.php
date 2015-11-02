@@ -114,16 +114,16 @@ function animate(source, backdrop) {
 	}
 
 	var canvas = document.getElementById(backdrop);
-	canvas.width = 200;
-	canvas.height = 200;
+	canvas.width = 463.45;
+	canvas.height = 450;
 
 	var animation = sprite({
 		context: canvas.getContext("2d"),
-		width: 800,
-		height: 200,
+		width: 5098,
+		height: 450,
 		image: diningImage,
-		numberOfFrames: 4,
-		ticksPerFrame: 15,
+		numberOfFrames: 11,
+		ticksPerFrame: 45,
 		loop: 1
 		});
 	animation.render();
