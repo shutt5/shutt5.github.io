@@ -17,11 +17,66 @@ Code Here:
 <textarea id="code" cols="64" rows="32">
 function dining_philosophers_problem() {
 
-	var locke = new Worker("philosopher.js");
-	var rousseau = new Worker("philosopher.js");
-	var newton = new Worker("philosopher.js");
-	var descartes = new Worker("philosopher.js");
-	var kant = new Worker("philosoper.js");
+	var blobURL = URL.createObjectURL(new Blob(['(',
+		function() {
+			var full = 0;
+			var eat = 0;
+			var hunger = 0;
+			var think = 0;
+			var left_chopstick = 0;
+			var right_chopstick = 0;
+			var name;
+			self.addEventListener('message', function(e) {
+				var data = e.data;
+				switch(data.cmd) {
+					case 'start':
+						name = data.id;
+						self.postMessage({'status':0, 'id':name, 'rqst':"request_chopsticks"});
+					case 'get_left_chopstick':
+						left_chopstick = 1;
+						if(right_chopstick == 1) {
+							eat++;
+						}
+						else {
+							hunger++;
+						}
+					case 'get_right_chopstick':
+						right_chopstick = 1;
+						if(left_chopstick == 1) {
+							eat++;
+						}
+					default:
+						if(hunger == 10) {
+							self.postMessage({'status':1, 'id':name, 'rqst':"starving"});
+						}
+						if(eat != 10) {
+							if(left_chopstick && right_chopstick) {
+								eat++;
+							}
+							else {
+								hunger++;
+								self.postMessage({'status':0, 'id':name, 'rqst':"request_chopsticks"});
+							}
+						}
+						else if(think != 10) {
+							if(left_chopstick) { self.postMessage({'status':0, 'id':name, 'rqst':"give_left_chopstick"});}
+							if(right_chopstick) { self.postMessage({'status':0, 'id':name, 'rqst':"give_right_chopstick"});}
+							think++;
+							self.postMessage({'status':0, 'id':name, 'rqst':"think"});
+						}
+						else {
+							self.postMessage({'status':2, 'id':name, 'rqst':done});
+							self.close();
+						}
+					}
+				}
+		}.toString(), ')()'], {type: "application/javascript"}));
+
+	var locke = new Worker(blobURL);
+	var rousseau = new Worker(blobURL);
+	var newton = new Worker(blobURL);
+	var descartes = new Worker(blobURL);
+	var kant = new Worker(blobURL);
 
 	var everyone_full = 0;
 
