@@ -156,6 +156,16 @@ function showArbitrator() {
 	return 0;
 }
 </script>
+
+<div class="row">
+
+<div class="row">
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+    <a href = "makeReal.php"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+  </div>
+</div>
+
 </div>
 </body>
 </html>
