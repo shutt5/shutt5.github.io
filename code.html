@@ -79,40 +79,125 @@ function dining_philosophers_problem() {
 	var kant = new Worker(blobURL);
 
 	var everyone_full = 0;
-
-	sendMessage to workers = pick up chopsticks;
-	while true on each worker {
-		if(not full) {
-			if(both chopsticks not claimed) {
-				attempt to pick up both chopsticks;
-				if(failed to pick up both chopsticks) {
-					hunger++;
-				}
-			}
-			else {
-				eat++;
-			}
+	
+	var chopsticks[5];
+	for(var i = 0; i < 5; i++){
+		chopsticks[i] = True;
+	}
+	
+	self.addEventListener('message', function(info){
+		switch(info.status){
+			case '2':
+				//full
+				everyone_full++;
+				break;
+			case '1':
+				//starving
+				killEverything();
+				alert("You failed.  " + info.id + " starved.");
+				return 1;
+				break;
 		}
-		if(full) {
-			release chopsticks;
-			think++;
-		}
-		if(think_complete) {
-			sendMessage to master = thread finished;
-			terminate thread;
-		}
-		else {
-			hunger++;
+		switch(info.rqst){
+			case 'requestChopstick':
+				requestChopstick(info.id);
+				break;
+			case 'giveLeftChopstick':
+				giveChopstick(0,info.id);
+				break;
+			case 'giveRightChopstick':
+				giveChopstick(1,info.id);
+				break;
+			case 'requestThink':
+				requestThink(info.id);
+				break;
 		}
 	}
-	while(everyone_full < 4) {
-		if(philosopher flags they are full and have spent enough time thinking) {
-			everyone_full++;
+	
+	function requestThink(name){
+		locke.postMessage({"cmd": "default"});
+		rousseau.postMessage({"cmd": "default"});
+		newton.postMessage({"cmd": "default"});
+		descartes.postMessage({"cmd": "default"});
+		kant.postMessage({"cmd": "default"});
+	}
+	
+	function giveChopstick(pos, name){
+		if(name == "Locke"){
+			chopsticks[0+pos] = True;
+		}else if(name == "Rousseau"){
+			chopsticks[1+pos] = True;
+		}else if(name == "Newton"){
+			chopsticks[2+pos] = True;
+		}else if(name == "Descartes"){
+			chopsticks[3+pos] = True;
+		}else if(name == "Kant"){
+			chopsticks[4+pos] = True;
 		}
-		if(philosopher flags they are starving) {
-			stop all workers;
-			alert("Philosopher 'name' has starved holding 'x' chopstick(s) having eaten 'n' time(s) and thought 'm' time(s).");
-			return 1;
+	}
+	
+	function requestChopstick(name){
+		if(name == "Locke"){
+			if(chopsticks[0]){
+				locke.postMessage({"cmd": "get_left_chopstick"});
+			}else if(chopsticks[1]){
+				locke.postMessage({"cmd" : "get_right_chopstick"});
+			}else{
+				lock.postMessage({"cmd" : "default"});
+			}
+		}else if(name == "Rousseau"){
+			if(chopsticks[1]){
+				rousseau.postMessage({"cmd": "get_left_chopstick"});
+			}else if(chopsticks[2]){
+				rousseau.postMessage({"cmd" : "get_right_chopstick"});
+			}else{
+				lock.postMessage({"cmd" : "default"});
+			}
+		}else if(name == "Newton"){
+			if(chopsticks[2]){
+				newton.postMessage({"cmd": "get_left_chopstick"});
+			}else if(chopsticks[3]){
+				newton.postMessage({"cmd" : "get_right_chopstick"});
+			}else{
+				lock.postMessage({"cmd" : "default"});
+			}
+		}else if(name == "Descartes"){
+			if(chopsticks[3]){
+				descartes.postMessage({"cmd": "get_left_chopstick"});
+			}else if(chopsticks[4]){
+				descartes.postMessage({"cmd" : "get_right_chopstick"});
+			}else{
+				lock.postMessage({"cmd" : "default"});
+			}
+		}else if(name == "Kant"){
+			if(chopsticks[4]){
+				kant.postMessage({"cmd": "get_left_chopstick"});
+			}else if(chopsticks[0]){
+				kant.postMessage({"cmd" : "get_right_chopstick"});
+			}else{
+				lock.postMessage({"cmd" : "default"});
+			}
+		}
+	}
+	
+	function killEverything(){
+		locke.terminate();
+		rousseau.terminate();
+		newton.terminate();
+		descartes.terminate();
+		kant.terminate();
+	}
+
+	if(name == "Locke"){
+		locke.postMessage({"cmd": "start", "id" : "Locke"});
+	}else if(name == "Rousseau"){
+		rousseau.postMessage({"cmd": "start", "id" : "Rousseau"});
+	}else if(name == "Newton"){
+		newton.postMessage({"cmd": "start", "id": "Newton"});
+	}else if(name == "Descartes"){
+		descartes.postMessage({"cmd": "start", "id": "Descartes"});
+	}else if(name == "Kant"){
+		kant.postMessage({"cmd": "start", "id": "Kant"});
 	}
 	
 	return 0;
