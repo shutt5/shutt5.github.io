@@ -14,9 +14,51 @@ If you are not too confident in your JavaScript abilities, please refer to the <
 <div>
 Code Here:
 <form>
-<textarea id="code" cols="128" rows="32">
+<textarea id="code" cols="64" rows="32">
 function dining_philosophers_problem() {
 
+	var locke = new Worker("philosopher.js");
+	var rousseau = new Worker("philosopher.js");
+	var newton = new Worker("philosopher.js");
+	var descartes = new Worker("philosopher.js");
+	var kant = new Worker("philosoper.js");
+
+	var everyone_full = 0;
+
+	sendMessage to workers = pick up chopsticks;
+	while true on each worker {
+		if(not full) {
+			if(both chopsticks not claimed) {
+				attempt to pick up both chopsticks;
+				if(failed to pick up both chopsticks) {
+					hunger++;
+				}
+			}
+			else {
+				eat++;
+			}
+		}
+		if(full) {
+			release chopsticks;
+			think++;
+		}
+		if(think_complete) {
+			sendMessage to master = thread finished;
+			terminate thread;
+		}
+		else {
+			hunger++;
+		}
+	}
+	while(everyone_full < 4) {
+		if(philosopher flags they are full and have spent enough time thinking) {
+			everyone_full++;
+		}
+		if(philosopher flags they are starving) {
+			stop all workers;
+			alert("Philosopher 'name' has starved holding 'x' chopstick(s) having eaten 'n' time(s) and thought 'm' time(s).");
+			return 1;
+	}
 	
 	return 0;
 }
@@ -29,6 +71,19 @@ dining_philosophers_problem();
 </div>
 <script>
 'use strict';
+
+var textareas = document.getElementsByTagName("textarea");
+var count = textareas.length;
+for(var i = 0;i < count; i++){
+    textareas[i].onkeydown = function(e){
+        if(e.keyCode==9 || e.which==9){
+            e.preventDefault();
+            var s = this.selectionStart;
+            this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+            this.selectionEnd = s + 1; 
+        }
+    }
+}
 
 function parse(code) {
 	var i;
