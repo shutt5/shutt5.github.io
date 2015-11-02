@@ -34,6 +34,15 @@ include 'nav.php';
 <embed width="775px" height ="655px" src="interactiveExplanationVisualization/example.html">
 </center>
 
+      <div class="row">
+
+        <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2">
+            <a href = "solutions.php"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+          </div>
+        </div>
+
 </div>
 
 </body>
