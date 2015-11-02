@@ -185,10 +185,8 @@
 			if(pOne.getHunger() == 0){
 				var image:Image2 = new Image2("oneStarving.png");
 				oneButton.addChild(image);
-				pOne.setStatus(3);
 				oneTimer.stop();
 				oneTimer2.stop();
-				progBar1.removeChildren();
 			}
 		}
 		
@@ -259,10 +257,8 @@
 			if(pTwo.getHunger() == 0){
 				var image:Image2 = new Image2("twoStarving.png");
 				twoButton.addChild(image);
-				pTwo.setStatus(3);
 				twoTimer.stop();
 				twoTimer2.stop();
-				progBar2.removeChildren();
 			}
 		}
 		
@@ -333,10 +329,8 @@
 			if(pThree.getHunger() == 0){
 				var image:Image2 = new Image2("threeStarving.png");
 				threeButton.addChild(image);
-				pThree.setStatus(3);
 				threeTimer.stop();
 				threeTimer2.stop();
-				progBar3.removeChildren();
 			}
 		}
 		
@@ -408,10 +402,8 @@
 			if(pFour.getHunger() == 0){
 				var image:Image2 = new Image2("fourStarving.png");
 				fourButton.addChild(image);
-				pFour.setStatus(3);
 				fourTimer.stop();
 				fourTimer2.stop();
-				progBar4.removeChildren();
 			}
 		}
 		
@@ -482,10 +474,8 @@
 			if(pFive.getHunger() == 0){
 				var image:Image2 = new Image2("fiveStarving.png");
 				fiveButton.addChild(image);
-				pFive.setStatus(3);
 				fiveTimer.stop();
 				fiveTimer2.stop();
-				progBar5.removeChildren();
 			}
 		}
 	}
