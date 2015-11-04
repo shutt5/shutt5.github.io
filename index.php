@@ -40,14 +40,14 @@
             </div>
           </div>
 
-          <div class="panel panel-primary">
+ <!--        <div class="panel panel-primary">
                       <div class="panel-heading">
                         <h3 class="panel-title">Do I need an account?</h3>
                       </div>
                       <div class="panel-body">
                         No, you can run through our tutorial without an account. Just click 'Get Started' to get underway.
                       </div>
-                    </div>
+                    </div>*/
 
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -56,7 +56,7 @@
         <div class="panel-body">
             It's easy, you just click 'Get Started' which is obvious, so you probably are not reading this.
         </div>
-    </div>
+    </div>-->
 
       <div class="row">
 
