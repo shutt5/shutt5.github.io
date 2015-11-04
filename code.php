@@ -1,8 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head>
-</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
 <body>
+<div class="container">
+
+
+  <?
+  include 'nav.php';
+  $SESSION['started'] = "t";
+  ?>
 <div>
 <p>
 Since we now understand the Dining Philosophers Problem (in both theoretical and practical contexts) and its solutions, it is now your turn to solve the problem. You can use one of the two common solutions or try one of your own. Below you will find some JavaScript code which simulates the Dining Philosophers Problem along with some helpful code to start you off on the right path. When you submit your test code, you will receive a message indicating if you were successful or not. If you were not, do not be discouraged. Give it another try. You will receive error messages that should guide you to a correct solution.
@@ -79,12 +93,12 @@ function dining_philosophers_problem() {
 	var kant = new Worker(blobURL);
 
 	var everyone_full = 0;
-	
+
 	var chopsticks[5];
 	for(var i = 0; i < 5; i++){
 		chopsticks[i] = True;
 	}
-	
+
 	self.addEventListener('message', function(info){
 		switch(info.status){
 			case '2':
@@ -113,7 +127,7 @@ function dining_philosophers_problem() {
 				break;
 		}
 	}
-	
+
 	function requestThink(name){
 		locke.postMessage({"cmd": "default"});
 		rousseau.postMessage({"cmd": "default"});
@@ -121,7 +135,7 @@ function dining_philosophers_problem() {
 		descartes.postMessage({"cmd": "default"});
 		kant.postMessage({"cmd": "default"});
 	}
-	
+
 	function giveChopstick(pos, name){
 		if(name == "Locke"){
 			chopsticks[0+pos] = True;
@@ -135,7 +149,7 @@ function dining_philosophers_problem() {
 			chopsticks[4+pos] = True;
 		}
 	}
-	
+
 	function requestChopstick(name){
 		if(name == "Locke"){
 			if(chopsticks[0]){
@@ -179,7 +193,7 @@ function dining_philosophers_problem() {
 			}
 		}
 	}
-	
+
 	function killEverything(){
 		locke.terminate();
 		rousseau.terminate();
@@ -199,7 +213,7 @@ function dining_philosophers_problem() {
 	}else if(name == "Kant"){
 		kant.postMessage({"cmd": "start", "id": "Kant"});
 	}
-	
+
 	return 0;
 }
 
@@ -220,7 +234,7 @@ for(var i = 0;i < count; i++){
             e.preventDefault();
             var s = this.selectionStart;
             this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
-            this.selectionEnd = s + 1; 
+            this.selectionEnd = s + 1;
         }
     }
 }
@@ -264,5 +278,6 @@ function runCode() {
 	return 0;
 }
 </script>
+</div>
 </body>
 </html>
