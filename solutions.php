@@ -123,7 +123,7 @@ function animate(source, backdrop) {
 		height: 450,
 		image: diningImage,
 		numberOfFrames: 11,
-		ticksPerFrame: 45,
+		ticksPerFrame: 60,
 		loop: 1
 		});
 	animation.render();
