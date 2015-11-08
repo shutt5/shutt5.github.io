@@ -28,7 +28,7 @@ If you are not too confident in your JavaScript abilities, please refer to the <
 <div>
 Code Here:
 <form>
-<textarea id="code" cols="64" rows="32">
+<textarea id="code" cols="64" rows="48">
 function dining_philosophers_problem() {
 
 	var blobURL = URL.createObjectURL(new Blob(['(',
@@ -227,7 +227,7 @@ dining_philosophers_problem();
 <button id="codeSubmit" type="button" onclick="runCode">Test My Code</button> This may take awhile depending upon your code's time complexity.
 </form>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="jquery-2.1.4.js"></script>
 <script>
 'use strict';
 
