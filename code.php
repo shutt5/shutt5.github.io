@@ -224,7 +224,7 @@ function dining_philosophers_problem() {
 dining_philosophers_problem();
 </textarea>
 <br/>
-<button id="codeSubmit" type="button" onclick="runCode">Test My Code</button> This may take awhile depending upon your code's time complexity.
+<button id="codeSubmit" type="button" onclick="runCode()">Test My Code</button> This may take awhile depending upon your code's time complexity.
 </form>
 </div>
 <script src="jquery-2.1.4.js"></script>
