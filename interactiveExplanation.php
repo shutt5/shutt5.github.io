@@ -21,17 +21,20 @@ include 'nav.php';
 
 ?>
 
-
-
 <h1> Interactive Explanation</h1>
 
-<p>To better understand the need for an automated solution to this problem, the following visualization has been designed.
+<p>Having covered the basics, try out the following visualization
 </p>
 
-<p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are allowed to eat.
+<p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are switched to an eating state.
 </p>
+
 <center>
-<embed width="775px" height ="655px" src="interactiveExplanationVisualization/example.html">
+  <object widht="775px" height="645px">
+    <param name="movie" value="interactiveExplanationVisualization/example.swf"
+    <embed width="775px" height ="645px" src="interactiveExplanationVisualization/example.swf">
+    </embed>
+  </object>
 </center>
 
       <div class="row">
