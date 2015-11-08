@@ -52,7 +52,7 @@ So how do we solve it?
 <div class="row">
   <div class="col-md-10"></div>
   <div class="col-md-2">
-    <a href = "code.html"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+    <a href = "code.php"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
   </div>
 </div>
 
