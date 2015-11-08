@@ -223,7 +223,7 @@ dining_philosophers_problem();
 <button id="codeSubmit" type="button" onclick="runCode()">Test My Code</button> This may take awhile depending upon your code's time complexity.
 </form>
 </div>
-<script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 'use strict';
 
