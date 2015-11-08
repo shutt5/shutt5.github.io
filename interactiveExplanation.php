@@ -31,7 +31,7 @@ include 'nav.php';
 
 <center>
   <object widht="775px" height="645px">
-    <param name="movie" value="interactiveExplanationVisualization/example.swf"
+    <param name="movie" value="interactiveExplanationVisualization/example.swf">
     <embed width="775px" height ="645px" src="interactiveExplanationVisualization/example.swf">
     </embed>
   </object>
