@@ -25,7 +25,7 @@ If you are not too confident in your JavaScript abilities, please refer to the <
 <div>
 Code Here:
 <form>
-<textarea id="code" cols="64" rows="128">
+<textarea id="code" cols="128" rows="32">
 function dining_philosophers_problem() {
 
 	var blobURL = URL.createObjectURL(new Blob(['(',
