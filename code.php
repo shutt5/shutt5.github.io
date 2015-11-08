@@ -43,10 +43,11 @@ function dining_philosophers_problem() {
 			self.addEventListener('message', function(e) {
 				var data = e.data;
 				switch(data.cmd) {
-					case 'start':
+					case "start":
 						name = data.id;
-						self.postMessage({'status':0, 'id':name, 'rqst':"request_chopsticks"});
-					case 'get_left_chopstick':
+						self.postMessage({"status":0, "id":name, "rqst":"request_chopsticks"});
+						break;
+					case "get_left_chopstick":
 						left_chopstick = 1;
 						if(right_chopstick == 1) {
 							eat++;
@@ -54,14 +55,16 @@ function dining_philosophers_problem() {
 						else {
 							hunger++;
 						}
-					case 'get_right_chopstick':
+						break;
+					case "get_right_chopstick":
 						right_chopstick = 1;
 						if(left_chopstick == 1) {
 							eat++;
 						}
+						break;
 					default:
 						if(hunger == 10) {
-							self.postMessage({'status':1, 'id':name, 'rqst':"starving"});
+							self.postMessage({"status":1, "id":name, "rqst":"starving"});
 						}
 						if(eat != 10) {
 							if(left_chopstick && right_chopstick) {
@@ -69,19 +72,20 @@ function dining_philosophers_problem() {
 							}
 							else {
 								hunger++;
-								self.postMessage({'status':0, 'id':name, 'rqst':"request_chopsticks"});
+								self.postMessage({"status":0, "id":name, "rqst":"request_chopsticks"});
 							}
 						}
 						else if(think != 10) {
-							if(left_chopstick) { self.postMessage({'status':0, 'id':name, 'rqst':"give_left_chopstick"});}
-							if(right_chopstick) { self.postMessage({'status':0, 'id':name, 'rqst':"give_right_chopstick"});}
+							if(left_chopstick) { self.postMessage({"status":0, "id":name, "rqst":"give_left_chopstick"});}
+							if(right_chopstick) { self.postMessage({"status":0, "id":name, "rqst":"give_right_chopstick"});}
 							think++;
-							self.postMessage({'status':0, 'id':name, 'rqst':"think"});
+							self.postMessage({"status":0, "id":name, "rqst":"think"});
 						}
 						else {
-							self.postMessage({'status':2, 'id':name, 'rqst':done});
+							self.postMessage({"status":2, "id":name, "rqst":done});
 							self.close();
 						}
+						break;
 					}
 				}
 		}.toString(), ')()'], {type: "application/javascript"}));
@@ -101,11 +105,11 @@ function dining_philosophers_problem() {
 
 	self.addEventListener('message', function(info){
 		switch(info.status){
-			case '2':
+			case "2":
 				//full
 				everyone_full++;
 				break;
-			case '1':
+			case "1":
 				//starving
 				killEverything();
 				alert("You failed.  " + info.id + " starved.");
@@ -113,16 +117,16 @@ function dining_philosophers_problem() {
 				break;
 		}
 		switch(info.rqst){
-			case 'requestChopstick':
+			case "requestChopstick":
 				requestChopstick(info.id);
 				break;
-			case 'giveLeftChopstick':
+			case "giveLeftChopstick":
 				giveChopstick(0,info.id);
 				break;
-			case 'giveRightChopstick':
+			case "giveRightChopstick":
 				giveChopstick(1,info.id);
 				break;
-			case 'requestThink':
+			case "requestThink":
 				requestThink(info.id);
 				break;
 		}
@@ -220,7 +224,7 @@ function dining_philosophers_problem() {
 dining_philosophers_problem();
 </textarea>
 <br/>
-<button id="codeSubmit" type="button" onclick="runCode()">Test My Code</button> This may take awhile depending upon your code's time complexity.
+<button id="codeSubmit" type="button" onclick="runCode">Test My Code</button> This may take awhile depending upon your code's time complexity.
 </form>
 </div>
 <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
