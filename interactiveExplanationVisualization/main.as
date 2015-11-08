@@ -8,13 +8,11 @@
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	import flash.display.Shape;
-	import fl.transitions.Tween;
-	import fl.transitions.easing.*;
 
     public class main extends MovieClip
     {		
 		//INITIALIZE TIMERS
-		var speed:Number = 2000;
+		var speed:Number = 1500;
 		var oneTimer:Timer = new Timer(speed);
 		var oneTimer2:Timer = new Timer(speed/2);
 		var twoTimer:Timer = new Timer(speed);
@@ -35,41 +33,21 @@
 		
         public function main()
         {	
-			//SET HEALTH BARS
-			var i:int;
-			for(i = 0; i < 13; i++){
-				var bar:Image2 = new Image2("progressBlock.png")
-				bar.y = (bar.y - 10*i);
-				progBar1.addChild(bar)
-			}
-			var i2:int;
-			for(i2 = 0; i2 < 13; i2++){
-				var bar2:Image2 = new Image2("progressBlock.png")
-				bar2.y = (bar2.y - 10*i2);
-				progBar2.addChild(bar2)
-			}
-			var i3:int;
-			for(i3 = 0; i3 < 13; i3++){
-				var bar3:Image2 = new Image2("progressBlock.png")
-				bar3.y = (bar3.y - 10*i3);
-				progBar3.addChild(bar3)
-			}
-			var i4:int;
-			for(i4 = 0; i4 < 13; i4++){
-				var bar4:Image2 = new Image2("progressBlock.png")
-				bar4.y = (bar4.y - 10*i4);
-				progBar4.addChild(bar4)
-			}
-			var i5:int;
-			for(i5 = 0; i5 < 13; i5++){
-				var bar5:Image2 = new Image2("progressBlock.png")
-				bar5.y = (bar5.y - 10*i5);
-				progBar5.addChild(bar5)
-			}
+			progBar1.removeChildren();
+			progBar2.removeChildren();
+			progBar3.removeChildren();
+			progBar4.removeChildren();
+			progBar5.removeChildren();
+			
+			setHealthBars(progBar1);
+			setHealthBars(progBar2);
+			setHealthBars(progBar3);
+			setHealthBars(progBar4);
+			setHealthBars(progBar5);
 
 			startButton.addEventListener(MouseEvent.CLICK, start);
 		}
-		
+				
 		//START
 		public function start(ev:MouseEvent):void
 		{
@@ -84,69 +62,112 @@
 			
 			//ONE
 			oneButton.addEventListener(MouseEvent.CLICK, oneClicked);
-			oneButton.addEventListener(MouseEvent.ROLL_OVER, oneRollOver);
-			oneButton.addEventListener(MouseEvent.ROLL_OUT, oneRollOut);
-			oneTimer2.addEventListener(TimerEvent.TIMER, oneIncHunger);
-			oneTimer.addEventListener(TimerEvent.TIMER, oneDecHunger);
+			oneButton.addEventListener(MouseEvent.ROLL_OVER, rollOver(pOne, oneButton, "oneEatOverlay.png", "oneThinkOverlay.png"));
+			oneButton.addEventListener(MouseEvent.ROLL_OUT, rollOut(pOne, oneButton, "oneStarving.png", "oneThinking.png", "oneEating.png"));
+			oneTimer2.addEventListener(TimerEvent.TIMER, incHunger(pOne, progBar1, oneTimer2));
+			oneTimer.addEventListener(TimerEvent.TIMER, decHunger(pOne, progBar1, oneButton, oneTimer, oneTimer2, "oneStarving.png"));
 			
 			//TWO
 			twoButton.addEventListener(MouseEvent.CLICK, twoClicked);
-			twoButton.addEventListener(MouseEvent.ROLL_OVER, twoRollOver);
-			twoButton.addEventListener(MouseEvent.ROLL_OUT, twoRollOut);
-			twoTimer2.addEventListener(TimerEvent.TIMER, twoIncHunger);
-			twoTimer.addEventListener(TimerEvent.TIMER, twoDecHunger);
+			twoButton.addEventListener(MouseEvent.ROLL_OVER, rollOver(pTwo, twoButton, "twoEatOverlay.png", "twoThinkOverlay.png"));
+			twoButton.addEventListener(MouseEvent.ROLL_OUT, rollOut(pTwo, twoButton, "twoStarving.png", "twoThinking.png", "twoEating.png"));
+			twoTimer2.addEventListener(TimerEvent.TIMER, incHunger(pTwo, progBar2, twoTimer2));
+			twoTimer.addEventListener(TimerEvent.TIMER, decHunger(pTwo, progBar2, twoButton, twoTimer, twoTimer2, "twoStarving.png"));
 			
 			//THREE
 			threeButton.addEventListener(MouseEvent.CLICK, threeClicked);
-			threeButton.addEventListener(MouseEvent.ROLL_OVER, threeRollOver);
-			threeButton.addEventListener(MouseEvent.ROLL_OUT, threeRollOut);
-			threeTimer2.addEventListener(TimerEvent.TIMER, threeIncHunger);
-			threeTimer.addEventListener(TimerEvent.TIMER, threeDecHunger);
+			threeButton.addEventListener(MouseEvent.ROLL_OVER, rollOver(pThree, threeButton, "threeEatOverlay.png", "threeThinkOverlay.png"));
+			threeButton.addEventListener(MouseEvent.ROLL_OUT, rollOut(pThree, threeButton, "threeStarving.png", "threeThinking.png", "threeEating.png"));
+			threeTimer2.addEventListener(TimerEvent.TIMER, incHunger(pThree, progBar3, threeTimer2));
+			threeTimer.addEventListener(TimerEvent.TIMER, decHunger(pThree, progBar3, threeButton, threeTimer, threeTimer2, "threeStarving.png"));
 			
 			//FOUR
 			fourButton.addEventListener(MouseEvent.CLICK, fourClicked);
-			fourButton.addEventListener(MouseEvent.ROLL_OVER, fourRollOver);
-			fourButton.addEventListener(MouseEvent.ROLL_OUT, fourRollOut);
-			fourTimer2.addEventListener(TimerEvent.TIMER, fourIncHunger);
-			fourTimer.addEventListener(TimerEvent.TIMER, fourDecHunger);
+			fourButton.addEventListener(MouseEvent.ROLL_OVER, rollOver(pFour, fourButton, "fourEatOverlay.png", "fourThinkOverlay.png"));
+			fourButton.addEventListener(MouseEvent.ROLL_OUT, rollOut(pFour, fourButton, "fourStarving.png", "fourThinking.png", "fourEating.png"));
+			fourTimer2.addEventListener(TimerEvent.TIMER, incHunger(pFour, progBar4, fourTimer2));
+			fourTimer.addEventListener(TimerEvent.TIMER, decHunger(pFour, progBar4, fourButton, fourTimer, fourTimer2, "fourStarving.png"));
 			
 			//FIVE
 			fiveButton.addEventListener(MouseEvent.CLICK, fiveClicked);
-			fiveButton.addEventListener(MouseEvent.ROLL_OVER, fiveRollOver);
-			fiveButton.addEventListener(MouseEvent.ROLL_OUT, fiveRollOut);
-			fiveTimer2.addEventListener(TimerEvent.TIMER, fiveIncHunger);
-			fiveTimer.addEventListener(TimerEvent.TIMER, fiveDecHunger);
+			fiveButton.addEventListener(MouseEvent.ROLL_OVER, rollOver(pFive, fiveButton, "fiveEatOverlay.png", "fiveThinkOverlay.png"));
+			fiveButton.addEventListener(MouseEvent.ROLL_OUT, rollOut(pFive, fiveButton, "fiveStarving.png", "fiveThinking.png", "fiveEating.png"));
+			fiveTimer2.addEventListener(TimerEvent.TIMER, incHunger(pFive, progBar5, fiveTimer2));
+			fiveTimer.addEventListener(TimerEvent.TIMER, decHunger(pFive, progBar5, fiveButton, fiveTimer, fiveTimer2, "fiveStarving.png"));
 		}
 		
-		//ONE		
-		public function oneRollOver(ev:MouseEvent):void
-		{
-			if(pOne.getStatus() == 1){
-				var image:Image1 = new Image1("oneEatOverlay.png");
-				oneButton.addChild(image);
-			}
-			if(pOne.getStatus() == 2){
-				var image2:Image1 = new Image1("oneThinkOverlay.png");
-				oneButton.addChild(image2);
+		//GLOBAL
+		public function setHealthBars(progBar:Object):void{
+			var i:int;
+			for(i = 0; i < 13; i++){
+				var bar:Image2 = new Image2("progressBlock.png")
+				bar.y = (bar.y - 10*i);
+				progBar.addChild(bar)
 			}
 		}
-		public function oneRollOut(ev:MouseEvent):void
+		public function rollOver(p:Object, button:Object, eatOverlay:String, thinkOverlay:String):Function
 		{
-			if(pOne.getStatus() == 1){
-				if(pOne.getHunger() == 0){
-				var image3:Image2 = new Image2("oneStarving.png");
-				oneButton.addChild(image3);
+			return function(ev:MouseEvent):void{
+				if(p.getStatus() == 1){
+					var image:Image1 = new Image1(eatOverlay);
+					button.addChild(image);
 				}
+				if(p.getStatus() == 2){
+					var image2:Image1 = new Image1(thinkOverlay);
+					button.addChild(image2);
+				}
+			};
+		}
+		public function rollOut(p:Object, button:Object, starving:String, thinking:String, eating:String):Function
+		{
+			return function(ev:MouseEvent):void{
+				if(p.getStatus() == 1){
+					if(p.getHunger() == 0){
+					var image3:Image2 = new Image2(starving);
+					button.addChild(image3);
+					}
+					else{
+					var image:Image2 = new Image2(thinking);
+					button.addChild(image);
+					}
+				}
+				if(p.getStatus() == 2){
+					var image2:Image2 = new Image2(eating);
+					button.addChild(image2);
+				}
+			};
+		}
+		public function incHunger(p:Object, progBar:Object, timer2:Timer):Function
+		{
+			return function(ev:Event):void{
+				if(p.getHunger() == 13){
+					timer2.stop();
+					}
 				else{
-				var image:Image2 = new Image2("oneThinking.png");
-				oneButton.addChild(image);
+					var bar:Image2 = new Image2("progressBlock.png")
+					bar.y = (bar.y - 10*p.getHunger());
+					progBar.addChild(bar)
+					p.incrementHunger();
 				}
 			}
-			if(pOne.getStatus() == 2){
-				var image2:Image2 = new Image2("oneEating.png");
-				oneButton.addChild(image2);
-			}
 		}
+		public function decHunger(p:Object, progBar:Object, button:Object, timer:Timer, timer2:Timer, starving:String):Function
+		{
+			return function(ev:Event):void{
+				if(p.getHunger() > 1){
+					p.decrementHunger();
+					progBar.removeChildAt(p.getHunger());
+				}
+				if(p.getHunger() == 1){
+					var image:Image2 = new Image2(starving);
+					button.addChild(image);
+					timer.stop();
+					timer2.stop();
+				}
+			};
+		}
+		
+		//CLICK
 		public function oneClicked(ev:MouseEvent):void
 		{
 			if(pOne.getStatus() == 1 && pTwo.getStatus() != 2 && pFive.getStatus() != 2){
@@ -166,57 +187,6 @@
 			else if(pOne.getStatus() == 1 && (pTwo.getStatus() == 2 || pFive.getStatus() == 2)){
 				var image:Image2 = new Image2("oneNoChopsticks.png");
 				oneButton.addChild(image);
-			}
-		}
-		public function oneIncHunger(ev:Event):void
-		{
-			pOne.incrementHunger();
-			var bar:Image2 = new Image2("progressBlock.png")
-			bar.y = (bar.y - 10*pOne.getHunger());
-			progBar1.addChild(bar)
-			if(pOne.getHunger() == 12){
-				oneTimer2.stop();
-				}
-		}
-		public function oneDecHunger(ev:Event):void
-		{
-			pOne.decrementHunger();
-			progBar1.removeChildAt(pOne.getHunger()+2);
-			if(pOne.getHunger() == 0){
-				var image:Image2 = new Image2("oneStarving.png");
-				oneButton.addChild(image);
-				oneTimer.stop();
-				oneTimer2.stop();
-			}
-		}
-		
-		//TWO
-		public function twoRollOver(ev:MouseEvent):void
-		{
-			if(pTwo.getStatus() == 1){
-				var image:Image1 = new Image1("twoEatOverlay.png");
-				twoButton.addChild(image);
-			}
-			if(pTwo.getStatus() == 2){
-				var image2:Image1 = new Image1("twoThinkOverlay.png");
-				twoButton.addChild(image2);
-			}
-		}
-		public function twoRollOut(ev:MouseEvent):void
-		{
-			if(pTwo.getStatus() == 1){
-				if(pTwo.getHunger() == 0){
-				var image3:Image2 = new Image2("twoStarving.png");
-				twoButton.addChild(image3);
-				}
-				else{
-				var image:Image2 = new Image2("twoThinking.png");
-				twoButton.addChild(image);
-				}
-			}
-			if(pTwo.getStatus() == 2){
-				var image2:Image2 = new Image2("twoEating.png");
-				twoButton.addChild(image2);
 			}
 		}
 		public function twoClicked(ev:MouseEvent):void
@@ -240,57 +210,6 @@
 				twoButton.addChild(image);
 			}
 		}
-		public function twoIncHunger(ev:Event):void
-		{
-			pTwo.incrementHunger();
-			var bar:Image2 = new Image2("progressBlock.png")
-			bar.y = (bar.y - 10*pTwo.getHunger());
-			progBar2.addChild(bar)
-			if(pTwo.getHunger() == 12){
-				twoTimer2.stop();
-				}
-		}
-		public function twoDecHunger(ev:Event):void
-		{
-			pTwo.decrementHunger();
-			progBar2.removeChildAt(pTwo.getHunger()+2);
-			if(pTwo.getHunger() == 0){
-				var image:Image2 = new Image2("twoStarving.png");
-				twoButton.addChild(image);
-				twoTimer.stop();
-				twoTimer2.stop();
-			}
-		}
-		
-		//THREE
-		public function threeRollOver(ev:MouseEvent):void
-		{
-			if(pThree.getStatus() == 1){
-				var image:Image1 = new Image1("threeEatOverlay.png");
-				threeButton.addChild(image);
-			}
-			if(pThree.getStatus() == 2){
-				var image2:Image1 = new Image1("threeThinkOverlay.png");
-				threeButton.addChild(image2);
-			}
-		}
-		public function threeRollOut(ev:MouseEvent):void
-		{
-			if(pThree.getStatus() == 1){
-				if(pThree.getHunger() == 0){
-				var image3:Image2 = new Image2("threeStarving.png");
-				threeButton.addChild(image3);
-				}
-				else{
-				var image:Image2 = new Image2("threeThinking.png");
-				threeButton.addChild(image);
-				}
-			}
-			if(pThree.getStatus() == 2){
-				var image2:Image2 = new Image2("threeEating.png");
-				threeButton.addChild(image2);
-			}
-		}
 		public function threeClicked(ev:MouseEvent):void
 		{
 			if(pThree.getStatus() == 1 && pTwo.getStatus() != 2 && pFour.getStatus() != 2){
@@ -310,57 +229,6 @@
 			else if(pThree.getStatus() == 1 && (pTwo.getStatus() == 2 || pFour.getStatus() == 2)){
 				var image:Image2 = new Image2("threeNoChopsticks.png");
 				threeButton.addChild(image);
-			}
-		}
-		public function threeIncHunger(ev:Event):void
-		{
-			pThree.incrementHunger();
-			var bar:Image2 = new Image2("progressBlock.png")
-			bar.y = (bar.y - 10*pThree.getHunger());
-			progBar3.addChild(bar)
-			if(pThree.getHunger() == 12){
-				threeTimer2.stop();
-				}
-		}
-		public function threeDecHunger(ev:Event):void
-		{
-			pThree.decrementHunger();
-			progBar3.removeChildAt(pThree.getHunger()+2);
-			if(pThree.getHunger() == 0){
-				var image:Image2 = new Image2("threeStarving.png");
-				threeButton.addChild(image);
-				threeTimer.stop();
-				threeTimer2.stop();
-			}
-		}
-		
-		//FOUR
-		public function fourRollOver(ev:MouseEvent):void
-		{
-			if(pFour.getStatus() == 1){
-				var image:Image1 = new Image1("fourEatOverlay.png");
-				fourButton.addChild(image);
-			}
-			if(pFour.getStatus() == 2){
-				var image2:Image1 = new Image1("fourThinkOverlay.png");
-				fourButton.addChild(image2);
-			}
-		}
-		public function fourRollOut(ev:MouseEvent):void
-		{
-			if(pFour.getStatus() == 1){
-				if(pFour.getHunger() == 0){
-				var image3:Image2 = new Image2("fourStarving.png");
-				fourButton.addChild(image3);
-				}
-				else{
-				var image:Image2 = new Image2("fourThinking.png");
-				fourButton.addChild(image);
-				}
-			}
-			if(pFour.getStatus() == 2){
-				var image2:Image2 = new Image2("fourEating.png");
-				fourButton.addChild(image2);
 			}
 		}
 		public function fourClicked(ev:MouseEvent):void
@@ -385,57 +253,6 @@
 				fourButton.addChild(image);
 			}
 		}
-		public function fourIncHunger(ev:Event):void
-		{
-			pFour.incrementHunger();
-			var bar:Image2 = new Image2("progressBlock.png")
-			bar.y = (bar.y - 10*pFour.getHunger());
-			progBar4.addChild(bar)
-			if(pFour.getHunger() == 12){
-				fourTimer2.stop();
-				}
-		}
-		public function fourDecHunger(ev:Event):void
-		{
-			pFour.decrementHunger();
-			progBar4.removeChildAt(pFour.getHunger()+2);
-			if(pFour.getHunger() == 0){
-				var image:Image2 = new Image2("fourStarving.png");
-				fourButton.addChild(image);
-				fourTimer.stop();
-				fourTimer2.stop();
-			}
-		}
-		
-		//FIVE
-		public function fiveRollOver(ev:MouseEvent):void
-		{
-			if(pFive.getStatus() == 1){
-				var image:Image1 = new Image1("fiveEatOverlay.png");
-				fiveButton.addChild(image);
-			}
-			if(pFive.getStatus() == 2){
-				var image2:Image1 = new Image1("fiveThinkOverlay.png");
-				fiveButton.addChild(image2);
-			}
-		}
-		public function fiveRollOut(ev:MouseEvent):void
-		{
-			if(pFive.getStatus() == 1){
-				if(pFive.getHunger() == 0){
-				var image3:Image2 = new Image2("fiveStarving.png");
-				fiveButton.addChild(image3);
-				}
-				else{
-				var image:Image2 = new Image2("fiveThinking.png");
-				fiveButton.addChild(image);
-				}
-			}
-			if(pFive.getStatus() == 2){
-				var image2:Image2 = new Image2("fiveEating.png");
-				fiveButton.addChild(image2);
-			}
-		}
 		public function fiveClicked(ev:MouseEvent):void
 		{
 			if(pFive.getStatus() == 1 && pOne.getStatus() != 2 && pFour.getStatus() != 2){
@@ -455,27 +272,6 @@
 			else if(pFive.getStatus() == 1 && (pOne.getStatus() == 2 || pFour.getStatus() == 2)){
 				var image:Image2 = new Image2("fiveNoChopsticks.png");
 				fiveButton.addChild(image);
-			}
-		}
-		public function fiveIncHunger(ev:Event):void
-		{
-			pFive.incrementHunger();
-			var bar:Image2 = new Image2("progressBlock.png")
-			bar.y = (bar.y - 10*pFive.getHunger());
-			progBar5.addChild(bar)
-			if(pFive.getHunger() == 12){
-				fiveTimer2.stop();
-				}
-		}
-		public function fiveDecHunger(ev:Event):void
-		{
-			pFive.decrementHunger();
-			progBar5.removeChildAt(pFive.getHunger()+2);
-			if(pFive.getHunger() == 0){
-				var image:Image2 = new Image2("fiveStarving.png");
-				fiveButton.addChild(image);
-				fiveTimer.stop();
-				fiveTimer2.stop();
 			}
 		}
 	}

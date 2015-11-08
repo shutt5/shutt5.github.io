@@ -8,10 +8,7 @@
 		// If status = 3 STARVING
 		public var status:Number = 1;
 		
-		//each starts at 0
-		//if status = 1
-		//	slowly increment hunger
-		public var hunger:Number = 0;
+		public var hunger:Number = 13;
 		
 		//Constructor
 		public function philosopher() {
@@ -37,15 +34,11 @@
 		
 		//Functions
 		public function incrementHunger():void {
-			if(hunger < 12){
-				this.hunger = (hunger + 1);
-			}
+			this.hunger = (hunger + 1);
 		}
 		
 		public function decrementHunger():void {
-			if(hunger > 0){
-				this.hunger = (hunger - 1);
-			}
+			this.hunger = (hunger - 1);
 		}
 		
 	}
