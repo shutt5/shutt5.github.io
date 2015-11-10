@@ -37,10 +37,10 @@ The Dining Philosophers Problem has two common solutions:
 <br>
 <div class="row">
 	<div class="col-md-4">
-	<button id="rscHierarchy" type="button" onclick="showHierarchy()" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
+	<button id="rscHierarchy" type="button" onclick="showHierarchy(0)" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
 </div>
 	<div class="col-md-8">
-<button id="arbitrator" type="button" onclick="showArbitrator()" class="btn btn-lg btn-primary">2. Arbitrator</button>
+<button id="arbitrator" type="button" onclick="showArbitrator(0)" class="btn btn-lg btn-primary">2. Arbitrator</button>
 </div>
 </div>
 <div id="rscHierarchySol" style="display:none">
@@ -54,6 +54,8 @@ Let us assume, keeping our example from before, that the first philosopher beats
 If we wanted to make sure all philosophers have a fair shot at eating (maybe one is very hungry and will not stop eating for a few hours), we can place a time limit on each philosopher when they begin eating. This prevents the philosophers from encountering resource starvation.
 </p>
 <canvas id="hAnimation"></canvas>
+<button id="rscUpdate" type="button" onclick="updateHierarchy()" class="btn btn-lg btn-primary">Next Animation Step</button>
+<label id="rscCount" value=0 style="display:none"></label>
 </div>
 <div id="arbitratorSol" style="display:none">
 <p>
@@ -63,18 +65,23 @@ The arbitrator solution adds a new construct to the problem; a waiter. Instead o
 We can implement a timer scheme to ensure some degree of fair play. The waiter will give each philospher requesting permission a certain amount of time to eat before they must relinquish their permission and it is passed on to the next request. Essentially, the mutex lock they have on the permission to eat will time out and they must give up their lock. This constraint prevents the philosophers from encountering resource starvation.
 </p>
 <canvas id="aAnimation"></canvas>
+<button id="arbUpdate" type="button" onclick="updateArbitrator()" class="btn btn-lg btn-primary">Next Animation Step</button>
+<label id="arbCount" value=0 style="display:none"></label>
 </div>
 </div>
 <script>
 'use strict';
 
-function animate(source, backdrop) {
+document.getElementById("arbCount").value = 0;
+document.getElementById("rscCount").value = 0;
+
+function animate(source, backdrop, frame) {
 	var diningImage = new Image();
 	diningImage.src = source;
 
 	function sprite(options) {
 		var that = {},
-		    frameIndex = 0,
+		    frameIndex = frame,
 		    tickCount = 0,
 		    ticksPerFrame = options.ticksPerFrame,
 		    numberOfFrames = options.numberOfFrames || 1;
@@ -131,28 +138,56 @@ function animate(source, backdrop) {
 	function frameLoop() {
 		window.requestAnimationFrame(frameLoop);
 
-		animation.update();
 		animation.render();
 	}
 
-	diningImage.addEventListener("load", frameLoop);
-
+	return 0;
 }
 
-function showHierarchy(id) {
+function showHierarchy(frame) {
 	var r = "rscHierarchySol";
 	var a = "arbitratorSol";
 	document.getElementById(a).style.display = "none";
 	document.getElementById(r).style.display = "inline";
-	animate("rscHierarchy.png", "hAnimation");
+	animate("rscHierarchy.png", "hAnimation", frame);
 	return 0;
 }
 
-function showArbitrator() {
+function showArbitrator(frame) {
 	var r = "rscHierarchySol";
 	var a = "arbitratorSol";
+	var frame = document.getElementById("arbCount").value;
 	document.getElementById(r).style.display = "none";
 	document.getElementById(a).style.display = "inline";
+	animate("arbitrator.png", "aAnimation", frame);
+	return 0;
+}
+
+function updateHierarchy() {
+	var update = document.getElementById("rscCount").value;
+	update++;
+	if(update < 11) {
+		document.getElementById("rscCount").value = update;
+		showHierarchy(update);
+	}
+	else {
+		document.getElementById("rscCount").value = 0;
+		showHierarchy(0);
+	}
+	return 0;
+}
+
+function updateArbitrator() {
+	var update = document.getElementById("arbCount").value;
+	update++;
+	if(update < 11) {
+		document.getElementById("arbCount").value = update;
+		showArbitrator(update);
+	}
+	else {
+		document.getElementById("arbCount").value = 0;
+		showArbitrator(0);
+	}
 	return 0;
 }
 </script>
