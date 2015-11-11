@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-document.getElementById("arbCount").value = 0;
-document.getElementById("rscCount").value = 0;
-</script>
 </head>
 <body>
 	<!DOCTYPE html>
@@ -75,6 +71,8 @@ We can implement a timer scheme to ensure some degree of fair play. The waiter w
 </div>
 <script>
 'use strict';
+var arbCount = 0;
+var rscCount = 0;
 
 function animate(source, backdrop, frame) {
 	var diningImage = new Image();
@@ -165,16 +163,15 @@ function showArbitrator(frame) {
 }
 
 function updateHierarchy() {
-	var update = document.getElementById("rscCount").value + 1;
-	//if(update < 11 && update != 0) {
+	var update = rscCount + 1;
+	if(update < 11 && update != 0) {
 	//document.getElementById("rscCount").value = update;
-	//showHierarchy(update);
-	alert(update);
-	/*}
+		showHierarchy(update);
+	}
 	else {
-		document.getElementById("rscCount").value = 0;
+		rscCount = 0;
 		showHierarchy(0);
-	}*/
+	}
 	return 0;
 }
 
