@@ -166,14 +166,14 @@ function showArbitrator(frame) {
 
 function updateHierarchy() {
 	var update = document.getElementById("rscCount").value + 1;
-	if(update < 11 && update != 0) {
-		document.getElementById("rscCount").value = update;
-		showHierarchy(update);
-	}
+	//if(update < 11 && update != 0) {
+	document.getElementById("rscCount").value = update;
+	showHierarchy(update);
+	/*}
 	else {
 		document.getElementById("rscCount").value = 0;
 		showHierarchy(0);
-	}
+	}*/
 	return 0;
 }
 
