@@ -163,10 +163,10 @@ function showArbitrator(frame) {
 }
 
 function updateHierarchy() {
-	var update = rscCount + 1;
-	if(update < 11 && update != 0) {
-	//document.getElementById("rscCount").value = update;
+	var update = rscCount;
+	if(update < 11) {
 		showHierarchy(update);
+		update++;
 	}
 	else {
 		rscCount = 0;
