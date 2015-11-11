@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+document.getElementById("arbCount").value = 0;
+document.getElementById("rscCount").value = 0;
+</script>
 </head>
 <body>
 	<!DOCTYPE html>
@@ -71,9 +75,6 @@ We can implement a timer scheme to ensure some degree of fair play. The waiter w
 </div>
 <script>
 'use strict';
-
-document.getElementById("arbCount").value = 0;
-document.getElementById("rscCount").value = 0;
 
 function animate(source, backdrop, frame) {
 	var diningImage = new Image();
