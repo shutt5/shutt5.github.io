@@ -41,10 +41,10 @@ The Dining Philosophers Problem has two common solutions:
 <br>
 <div class="row">
 	<div class="col-md-4">
-	<button id="rscHierarchy" type="button" onclick="updateHierarchy(0)" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
+	<button id="rscHierarchy" type="button" onclick="updateHierarchy()" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
 </div>
 	<div class="col-md-8">
-<button id="arbitrator" type="button" onclick="updateArbitrator(0)" class="btn btn-lg btn-primary">2. Arbitrator</button>
+<button id="arbitrator" type="button" onclick="updateArbitrator()" class="btn btn-lg btn-primary">2. Arbitrator</button>
 </div>
 </div>
 <div id="rscHierarchySol" style="display:none">
