@@ -167,8 +167,9 @@ function showArbitrator(frame) {
 function updateHierarchy() {
 	var update = document.getElementById("rscCount").value + 1;
 	//if(update < 11 && update != 0) {
-	document.getElementById("rscCount").value = update;
-	showHierarchy(update);
+	//document.getElementById("rscCount").value = update;
+	//showHierarchy(update);
+	alert(update);
 	/*}
 	else {
 		document.getElementById("rscCount").value = 0;
