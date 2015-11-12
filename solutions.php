@@ -37,10 +37,10 @@ The Dining Philosophers Problem has two common solutions:
 <br>
 <div class="row">
 	<div class="col-md-4">
-	<button id="rscHierarchy" type="button" onclick="showHierarchy(100)" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
+	<button id="rscHierarchy" type="button" onclick="showHierarchy(0)" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
 </div>
 	<div class="col-md-8">
-<button id="arbitrator" type="button" onclick="showArbitrator(100)" class="btn btn-lg btn-primary">2. Arbitrator</button>
+<button id="arbitrator" type="button" onclick="showArbitrator(0)" class="btn btn-lg btn-primary">2. Arbitrator</button>
 </div>
 </div>
 <div id="rscHierarchySol" style="display:none">
@@ -167,10 +167,6 @@ function showHierarchy(frame) {
 	var a = "arbitratorSol";
 	document.getElementById(a).style.display = "none";
 	document.getElementById(r).style.display = "inline";
-	if(frame == 100) {
-		frame = 0;
-		rscCount++;
-	}
 	animate("rscHierarchy.png", "hAnimation", frame, 0);
 	return 0;
 }
@@ -180,18 +176,13 @@ function showArbitrator(frame) {
 	var a = "arbitratorSol";
 	document.getElementById(r).style.display = "none";
 	document.getElementById(a).style.display = "inline";
-	if(frame == 100) {
-		frame = 0;
-		arbCount++;
-	}
 	animate("arbitrator.png", "aAnimation", frame, 1);
 	return 0;
 }
 
 function updateHierarchy() {
-	var update = rscCount;
-	if(update < 11) {
-		showHierarchy(update);
+	if(rscCount < 11) {
+		showHierarchy(rscCount);
 		rscCount++;
 	}
 	else {
@@ -203,9 +194,8 @@ function updateHierarchy() {
 }
 
 function updateArbitrator() {
-	var update = arbCount;
-	if(update < 7) {
-		showArbitrator(update);
+	if(arbCount < 7) {
+		showArbitrator(arbCount);
 		arbCount++;
 	}
 	else {
