@@ -37,10 +37,10 @@ The Dining Philosophers Problem has two common solutions:
 <br>
 <div class="row">
 	<div class="col-md-4">
-	<button id="rscHierarchy" type="button" onclick="updateHierarchy()" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
+	<button id="rscHierarchy" type="button" onclick="showHierarchy(100)" class="btn btn-lg btn-primary">1. Resource Hierarchy</button><br>
 </div>
 	<div class="col-md-8">
-<button id="arbitrator" type="button" onclick="updateArbitrator()" class="btn btn-lg btn-primary">2. Arbitrator</button>
+<button id="arbitrator" type="button" onclick="showArbitrator(100)" class="btn btn-lg btn-primary">2. Arbitrator</button>
 </div>
 </div>
 <div id="rscHierarchySol" style="display:none">
@@ -74,11 +74,11 @@ We can implement a timer scheme to ensure some degree of fair play. The waiter w
 var arbCount = 0;
 var rscCount = 0;
 
-function animate(source, backdrop, frame) {
+function animate(source, backdrop, frameNum, id) {
 	var diningImage = new Image();
 	diningImage.src = source;
 
-	function sprite(options) {
+	function sprite(options, frame) {
 		var that = {},
 		    frameIndex = frame,
 		    tickCount = 0,
@@ -120,19 +120,38 @@ function animate(source, backdrop, frame) {
 	}
 
 	var canvas = document.getElementById(backdrop);
-	canvas.width = 463.45;
+	if(id == 0) {
+		canvas.width = 463;
+	}
+	if(id == 1) {
+		canvas.width = 461;
+	}
 	canvas.height = 450;
 
-	var animation = sprite({
-		context: canvas.getContext("2d"),
-		width: 5098,
-		height: 450,
-		image: diningImage,
-		numberOfFrames: 11,
-		ticksPerFrame: 60,
-		loop: 1
-		});
-	animation.render();
+	if(id == 0) {
+		var animation = sprite({
+			context: canvas.getContext("2d"),
+			width: 5098,
+			height: 450,
+			image: diningImage,
+			numberOfFrames: 11,
+			ticksPerFrame: 60,
+			loop: 1
+			}, frameNum);
+			animation.render();
+	}
+	if(id == 1) {
+		var animation = sprite({
+			context: canvas.getContext("2d"),
+			width: 3244,
+			height: 450,
+			image: diningImage,
+			numberOfFrames: 7,
+			ticksPerFrame: 60,
+			loop: 1
+			}, frameNum);
+			animation.render();
+	}
 
 	function frameLoop() {
 		window.requestAnimationFrame(frameLoop);
@@ -148,17 +167,24 @@ function showHierarchy(frame) {
 	var a = "arbitratorSol";
 	document.getElementById(a).style.display = "none";
 	document.getElementById(r).style.display = "inline";
-	animate("rscHierarchy.png", "hAnimation", frame);
+	if(frame == 100) {
+		frame = 0;
+		rscCount++;
+	}
+	animate("rscHierarchy.png", "hAnimation", frame, 0);
 	return 0;
 }
 
 function showArbitrator(frame) {
 	var r = "rscHierarchySol";
 	var a = "arbitratorSol";
-	var frame = document.getElementById("arbCount").value;
 	document.getElementById(r).style.display = "none";
 	document.getElementById(a).style.display = "inline";
-	animate("arbitrator.png", "aAnimation", frame);
+	if(frame == 100) {
+		frame = 0;
+		arbCount++;
+	}
+	animate("arbitrator.png", "aAnimation", frame, 1);
 	return 0;
 }
 
@@ -166,24 +192,26 @@ function updateHierarchy() {
 	var update = rscCount;
 	if(update < 11) {
 		showHierarchy(update);
-		update++;
+		rscCount++;
 	}
 	else {
 		rscCount = 0;
 		showHierarchy(0);
+		rscCount++;
 	}
 	return 0;
 }
 
 function updateArbitrator() {
-	var update = document.getElementById("arbCount").value + 1;
-	if(update < 11 && update != 0) {
-		document.getElementById("arbCount").value = update;
+	var update = arbCount;
+	if(update < 7) {
 		showArbitrator(update);
+		arbCount++;
 	}
 	else {
-		document.getElementById("arbCount").value = 0;
+		arbCount = 0;
 		showArbitrator(0);
+		arbCount++;
 	}
 	return 0;
 }
