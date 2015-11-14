@@ -1,3 +1,0 @@
-To better understand the need for an automated solution to this problem, the following visualization has been designed.
-
-Click on a philsopher to change their state.

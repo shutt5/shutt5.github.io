@@ -5,7 +5,6 @@
 		// Properties
 		// If status = 1 THINKING
 		// If status = 2 EATING
-		// If status = 3 STARVING
 		public var status:Number = 1;
 		
 		public var hunger:Number = 13;
