@@ -22,9 +22,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li ><a href="index.php">Home</a></li>
+        <? if(isset($SESSION['started'])){ ?>
         <li><a href="#">Getting Started</a></li>
         <li><a href="whoAreWe.php">Who are we?</a></li>
          <li><a href="interactiveExplanation.php">Stressful Game</a></li>
+       <? } ?>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
