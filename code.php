@@ -7,8 +7,10 @@
 
 <head>
 <script>
-var dpBlocks = ["","do_action","if_too_hungry","release_sticks","report_starvation","exit_failure","close1","if_not_full","if_has_sticks","eat_until_full","blank1","blank2","blank3","close2","else1","hunger++","request_sticks_no_order","blank4","blank5","repeat_do_action","close3","close4","if_done_thinking","release_sticks","think","exit_success","close5","close6"];
+var dpBlocks = ["do_action","if_too_hungry","release_sticks","report_starvation","exit_failure","close1","if_not_full","if_has_sticks","eat_until_full","blank1","blank2","blank3","close2","else1","hunger++","request_sticks_no_order","blank4","blank5","repeat_do_action","close3","close4","if_done_thinking","release_sticks","think","exit_success","close5","close6"];
 var mainBlocks = ["number_sticks_no_order","run_philosophers","while_true","if_stick_request","give_available_sticks","blank200","blank201","blank202","blank203","blank204","close200","close201"];
+var dpToolbox = ["request_sticks_in_order","eat_until_timer_ends","blank100","blank101"];
+var mainToolbox = ["number_sticks_in_order","run_timer","interrupt_current_action","blank300","blank301"];
 var dragSrc;
 function droppable(ev) {
 	ev.preventDefault();
@@ -25,39 +27,23 @@ function drop(ev) {
 	var src = document.getElementById(dragSrc);
 	var tar = ev.target.parentNode.id;
 	var origin = src.id;
-	//alert(tar);
-	//alert(origin);
 	if(tar < 200 && origin > 199) {
 		return;
 	}
 	else if(tar > 199 && origin < 199) {
 		return;
 	}
-	//ev.preventDefault();
 	var dat = ev.dataTransfer.getData("text");
 	var switchDat = document.getElementById("junkyard");
 	switchDat.innerHTML = ev.target.parentNode.innerHTML;
 	ev.target.parentNode.innerHTML = src.innerHTML;
 	src.innerHTML = switchDat.innerHTML;
-/*
-	if(ev.target.hasChildNodes()) {
-		switchDat = ev.target.firstChild.id;
-		src.appendChild(ev.target.firstChild);
-		ev.target.removeChild(ev.target.firstChild);
-	}*/
-	//switchDat = document.getElementById(switchDat);
-	//var tar = ev.target.id;
-	//ev.target.appendChild(document.getElementById(dat));
-	//src.appendChild(switchDat);
-	//if(ev.target.firstChild != null) {
-		//src.removeChild(src.firstChild);
-		//src.appendChild(document.getElementById(switchDat));
-	//}
 	
 	var obj = document.getElementById(dat).id;
-	var obj2 = src.innerHTML.id;
+	var obj2 = 0;
 	var i = Number(tar);
 	if(i < 100) {
+		obj2 = dpBlocks[i];
 		for(var j = 0; j < dpBlocks.length; j++) {
 			if(dpBlocks[j] == obj) {
 				dpBlocks[j] = obj2;
@@ -66,7 +52,19 @@ function drop(ev) {
 		}
 		dpBlocks[i] = obj;
 	}
+	else if(i > 99 && i < 200) {
+		for(var j = 0; j < dpBlocks.length; j++) {
+			for(var k = 0; k < dpToolbox.length; k++) {
+				if(dpBlocks[j] == obj) {
+					dpBlocks[j] = dpToolbox[i - 100];
+					dpToolbox[i - 100] = obj;
+					break;
+				}
+			}
+		}
+	}
 	else if(i > 199 && i < 300) {
+		obj2 = mainBlocks[i - 200];
 		for(var j = 0; j < mainBlocks.length; j++) {
 			if(mainBlocks[j] == obj) {
 				mainBlocks[j] = obj2;
@@ -74,6 +72,17 @@ function drop(ev) {
 			}
 		}
 		mainBlocks[i - 200] = obj;
+	}
+	else {
+		for(var j = 0; j < mainBlocks.length; j++) {
+			for(var k = 0; k < mainToolbox.length; k++) {
+				if(mainBlocks[j] == obj) {
+					mainBlocks[j] = mainToolbox[i - 300];
+					mainToolbox[i - 300] = obj;
+					break;
+				}
+			}
+		}
 	}
 
 	return;
@@ -140,15 +149,15 @@ function run() {
 		return 1;
 	}
 
-	if((request_sticks_in_order > 15 && request_sticks_in_order < 19) && (eat_until_timer_ends > 8 && eat_until_timer_ends < 13) && number_sticks_in_order == 0) {
+	if((request_sticks_in_order > 14 && request_sticks_in_order < 18) && (eat_until_timer_ends > 7 && eat_until_timer_ends < 12) && number_sticks_in_order == 0) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
 		return 0;
 	}
-	if((request_sticks_in_order > 15 && request_sticks_in_order < 19) && ((eat_until_timer_ends > 8 || eat_until_full > 8) && (eat_until_timer_ends < 13 || eat_until_full < 13)) && number_sticks_in_order == 0 && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
+	if((request_sticks_in_order > 14 && request_sticks_in_order < 18) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && number_sticks_in_order == 0 && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
 		return 0;
 	}
-	if(((request_sticks_in_order > 15 || request_sticks_no_order > 15) && (request_sticks_in_order < 19 || request_sticks_no_order < 19)) && ((eat_until_timer_ends > 8 || eat_until_full > 8) && (eat_until_timer_ends < 13 || eat_until_full < 13)) && (number_sticks_in_order == 0 || number_sticks_no_order == 0) && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
+	if(((request_sticks_in_order > 14 || request_sticks_no_order > 14) && (request_sticks_in_order < 18 || request_sticks_no_order < 18)) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && (number_sticks_in_order == 0 || number_sticks_no_order == 0) && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
 		return 0;
 	}
@@ -179,85 +188,85 @@ div[class="codeBox"] {width:300px;height:25px;padding:3px;border:1px solid #aaaa
 </style>
 <div>
 Philosopher Behavior:<br/>
-<div id="1" class="codeBox">
-<img id="do_action" src="do_action.png" draggable="false" width="300" height="25">
+<div id="0" class="codeBox">
+<img id="do_action" src="do_action.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="2" class="codeBox">
+<div id="1" class="codeBox">
 <img id="if_too_hungry" src="if_too_hungry.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="3" class="codeBox">
+<div id="2" class="codeBox">
 <img id="release_sticks1" src="release_sticks.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="4" class="codeBox">
+<div id="3" class="codeBox">
 <img id="report_starvation" src="report_starvation.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="5" class="codeBox">
+<div id="4" class="codeBox">
 <img id="exit_failure" src="exit_failure.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="6" class="codeBox">
+<div id="5" class="codeBox">
 <img id="close1" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="7" class="codeBox">
+<div id="6" class="codeBox">
 <img id="if_not_full" src="if_not_full.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="8" class="codeBox">
+<div id="7" class="codeBox">
 <img id="if_has_sticks" src="if_has_sticks.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="9" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="8" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="eat_until_full" src="eat_until_full.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_full').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="10" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="9" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank1" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank1').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="11" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="10" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank2" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank2').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="12" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="11" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank3" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank3').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="13" class="codeBox">
+<div id="12" class="codeBox">
 <img id="close2" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="14" class="codeBox">
+<div id="13" class="codeBox">
 <img id="else1" src="else.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="15" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="14" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="hunger++" src="hunger++.png" draggable="true" ondragstart="drag(event, document.getElementById('hunger++').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="16" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="15" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="request_sticks_no_order" src="request_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="17" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="16" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank4" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank4').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="18" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
+<div id="17" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank5" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank5').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="19" class="codeBox">
+<div id="18" class="codeBox">
 <img id="repeat_do_action" src="repeat_do_action.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="20" class="codeBox">
+<div id="19" class="codeBox">
 <img id="close3" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="21" class="codeBox">
+<div id="20" class="codeBox">
 <img id="close4" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="22" class="codeBox">
+<div id="21" class="codeBox">
 <img id="if_done_thinking" src="if_done_thinking.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="23" class="codeBox">
+<div id="22" class="codeBox">
 <img id="release_sticks2" src="release_sticks.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="24" class="codeBox">
+<div id="23" class="codeBox">
 <img id="think" src="think.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="25" class="codeBox">
+<div id="24" class="codeBox">
 <img id="exit_success" src="exit_success.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="26" class="codeBox">
+<div id="25" class="codeBox">
 <img id="close5" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="27" class="codeBox">
+<div id="26" class="codeBox">
 <img id="close6" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 </div>
@@ -269,30 +278,14 @@ Philosopher Behavior Toolbox:<br/>
 <div id="100" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="request_sticks_in_order" src="request_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_in_order').parentNode.id)" width="300" height="25"></img>
 </div>
-</div>
 <div id="101" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="eat_until_timer_ends" src="eat_until_timer_ends.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_timer_ends').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="102" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="report_starvation100" src="report_starvation.png" draggable="true" ondragstart="drag(event, document.getElementById('report_starvation100').parentNode.id)" width="300" height="25"></img>
-</div>
+<img id="blank100" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank100').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="103" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="check_hunger100" src="check_hunger.png" draggable="true" ondragstart="drag(event, document.getElementById('check_hunger100').parentNode.id)" width="300" height="25"></img>
-</div>
-<div id="104" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="exit_failure100" src="exit_failure.png" draggable="true" ondragstart="drag(event, document.getElementById('exit_failure100').parentNode.id)" width="300" height="25"></img>
-</div>
-</div>
-<div id="105" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="release_sticks100" src="release_sticks.png" draggable="true" ondragstart="drag(event, document.getElementById('release_sticks100').parentNode.id)" width="300" height="25"></img>
-</div>
-<div id="106" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="repeat_do_action100" src="repeat_do_action.png" draggable="true" ondragstart="drag(event, document.getElementById('repeat_do_action100').parentNode.id)" width="300" height="25"></img>
-</div>
-</div>
-<div id="107" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank100" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank100').parentNode.id)" width="300" height="25"></img>
+<img id="blank101" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank101').parentNode.id)" width="300" height="25"></img>
 </div>
 </div>
 
@@ -301,7 +294,7 @@ Philosopher Behavior Toolbox:<br/>
 <div>
 Main Function Behavior:<br/>
 <div id="200" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="number_sticks_no_order" src="number_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25">
+<img id="number_sticks_no_order" src="number_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="201" class="codeBox">
 <img id="run_philosophers" src="run_philosophers.png" draggable="false" width="300" height="25"></img>
@@ -313,7 +306,7 @@ Main Function Behavior:<br/>
 <img id="if_stick_request" src="if_stick_request.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="204" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="give_available_sticks" src="give_available_sticks.png" draggable="true" ondragstart="drag(event, document.getElementById('give_available_sticks').parentNode.id)" width="300" height="25">
+<img id="give_available_sticks" src="give_available_sticks.png" draggable="true" ondragstart="drag(event, document.getElementById('give_available_sticks').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="205" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank200" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank200').parentNode.id)" width="300" height="25"></img>
@@ -344,23 +337,17 @@ Main Function Behavior Toolbox:<br/>
 <div id="300" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="number_sticks_in_order" src="number_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_in_order').parentNode.id)" width="300" height="25"></img>
 </div>
-</div>
 <div id="301" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="run_timer" src="run_timer.png" draggable="true" ondragstart="drag(event, document.getElementById('run_timer').parentNode.id)" width="300" height="25"></img>
-</div>
-<div id="302" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="run_timer2" src="run_timer.png" draggable="true" ondragstart="drag(event, document.getElementById('run_timer2').parentNode.id)" width="300" height="25"></img>
-</div>
 </div>
 <div id="303" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="interrupt_current_action" src="interrupt_current_action.png" draggable="true" ondragstart="drag(event, document.getElementById('interrupt_current_action').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="304" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="interrupt_current_action2" src="interrupt_current_action.png" draggable="true" ondragstart="drag(event, document.getElementById('interrupt_current_action2').parentNode.id)" width="300" height="25"></img>
-</div>
+<img id="blank300" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank300').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="305" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank300" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank300').parentNode.id)" width="300" height="25"></img>
+<img id="blank301" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank301').parentNode.id)" width="300" height="25"></img>
 </div>
 </div>
 
@@ -368,7 +355,7 @@ Main Function Behavior Toolbox:<br/>
 <div id="junkyard" style="display:none">
 </div>
 <button id="codeSubmit" type="button" class="btn btn-lg btn-primary" onclick="run()">Test My Code</button>
-<div>
+<div><!--
 Code Here:
 <form>
 <textarea id="code" cols="128" rows="32">
@@ -626,6 +613,6 @@ function runCode() {
 	return 0;
 }
 </script>
-</div>
+</div>-->
 </body>
 </html>
