@@ -184,7 +184,7 @@ If you are not too confident in your JavaScript abilities, please refer to the <
 </p>
 </div>
 <style>
-div[class="codeBox"] {width:300px;height:25px;padding:3px;border:1px solid #aaaaaa;}
+div[class="codeBox"] {width:300px;height:25px;padding:10px;border:1px solid #aaaaaa;}
 </style>
 <div>
 Philosopher Behavior:<br/>
@@ -353,7 +353,7 @@ Main Function Behavior Toolbox:<br/>
 
 
 <div id="junkyard" style="display:none">
-</div>
+</div><br/>
 <button id="codeSubmit" type="button" class="btn btn-lg btn-primary" onclick="run()">Test My Code</button>
 <div><!--
 Code Here:
