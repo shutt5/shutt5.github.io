@@ -55,7 +55,6 @@ If we wanted to make sure all philosophers have a fair shot at eating (maybe one
 </p>
 <canvas id="hAnimation"></canvas>
 <button id="rscUpdate" type="button" onclick="updateHierarchy()" class="btn btn-lg btn-primary">Next Animation Step</button>
-<label id="rscCount" value=0 style="display:none"></label>
 </div>
 <div id="arbitratorSol" style="display:none">
 <p>
@@ -66,7 +65,6 @@ We can implement a timer scheme to ensure some degree of fair play. The waiter w
 </p>
 <canvas id="aAnimation"></canvas>
 <button id="arbUpdate" type="button" onclick="updateArbitrator()" class="btn btn-lg btn-primary">Next Animation Step</button>
-<label id="arbCount" value=0 style="display:none"></label>
 </div>
 </div>
 <script>
