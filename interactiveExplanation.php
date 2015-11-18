@@ -30,8 +30,8 @@ include 'nav.php';
 </p>
 
 <center>
-  <object widht="775px" height="645px">
-    <embed width="775px" height ="645px" src="interactiveExplanationVisualization/example.html">
+  <object widht="775px" height="710px">
+    <embed width="775px" height ="710px" src="interactiveExplanationVisualization/example.html">
     </embed>
   </object>
 </center>
