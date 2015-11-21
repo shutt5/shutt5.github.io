@@ -71,6 +71,9 @@ We can implement a timer scheme to ensure some degree of fair play. The waiter w
 'use strict';
 var arbCount = 0;
 var rscCount = 0;
+var check = 0;
+var check2 = 0;
+
 
 function animate(source, backdrop, frameNum, id) {
 	var diningImage = new Image();
@@ -88,8 +91,54 @@ function animate(source, backdrop, frameNum, id) {
 		that.image = options.image;
 		that.loop = options.loop;
 
+		
+		if(check == 0 && id == 0){	
+			that.render = function() {
+				that.context.clearRect(0, 0, that.width, that.height);
+
+				that.image.onload=function(){	
+				that.context.drawImage(
+					that.image,
+					frameIndex * (that.width / numberOfFrames),
+					0,
+					that.width / numberOfFrames,
+					that.height,
+					0,
+					0,
+					that.width / numberOfFrames,
+					that.height);
+			
+				}
+			check = 9000;
+			}
+
+		}
+		else if(check2 == 0 && id == 1){	
+			that.render = function() {
+				that.context.clearRect(0, 0, that.width, that.height);
+
+				that.image.onload=function(){	
+				that.context.drawImage(
+					that.image,
+					frameIndex * (that.width / numberOfFrames),
+					0,
+					that.width / numberOfFrames,
+					that.height,
+					0,
+					0,
+					that.width / numberOfFrames,
+					that.height);
+
+			
+				}
+			check2 = 9000;
+			}
+
+		}
+		else{
 		that.render = function() {
 			that.context.clearRect(0, 0, that.width, that.height);
+
 			that.context.drawImage(
 				that.image,
 				frameIndex * (that.width / numberOfFrames),
@@ -100,7 +149,9 @@ function animate(source, backdrop, frameNum, id) {
 				0,
 				that.width / numberOfFrames,
 				that.height);
-		};
+			}
+
+		}
 
 		that.update = function() {
 			tickCount++;
@@ -113,8 +164,10 @@ function animate(source, backdrop, frameNum, id) {
 					frameIndex = 0;
 				}
 			}
-		};
+		}
 		return that;
+
+
 	}
 
 	var canvas = document.getElementById(backdrop);
@@ -178,8 +231,16 @@ function showArbitrator(frame) {
 	return 0;
 }
 
-function updateHierarchy() {
-	if(rscCount < 11) {
+function updateHierarchy() {	
+	if(check == 9000){
+		rscCount++;
+		showHierarchy(rscCount);
+		rscCount++;
+		check = 9001;
+
+	}
+	else if(rscCount < 11) {
+
 		showHierarchy(rscCount);
 		rscCount++;
 	}
@@ -192,6 +253,13 @@ function updateHierarchy() {
 }
 
 function updateArbitrator() {
+	if(check2 == 9000){
+		arbCount++;
+		showArbitrator(arbCount);
+		arbCount++;
+		check2 = 9001;
+
+	}	
 	if(arbCount < 7) {
 		showArbitrator(arbCount);
 		arbCount++;
