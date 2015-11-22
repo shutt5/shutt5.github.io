@@ -20,9 +20,9 @@
 
 <div>
 <p>
-Thank you for using our tool, we hope you have enjoyed working through Placating Plato with Plates of Pasta,
+Thank you for using our tool, we hope you have enjoyed working through Placating Plato with Plates of Pasta.
 
-It is now time for you to take a quick survery to show us what you have learned. Please click the link below to be taken to the post test</p>
+It is now time for you to take a quick survery to show us what you have learned. Please click the link below to be taken to the post test.</p>
 </div>
 
 <div class="row">
