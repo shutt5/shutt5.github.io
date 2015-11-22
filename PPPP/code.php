@@ -38,7 +38,7 @@ function drop(ev) {
 	switchDat.innerHTML = ev.target.parentNode.innerHTML;
 	ev.target.parentNode.innerHTML = src.innerHTML;
 	src.innerHTML = switchDat.innerHTML;
-	
+
 	var obj = document.getElementById(dat).id;
 	var obj2 = 0;
 	var i = Number(tar);
@@ -380,7 +380,16 @@ Main Function Behavior Toolbox:<br/>
 <div id="junkyard" style="display:none">
 </div><br/>
 <button id="codeSubmit" type="button" class="btn btn-lg btn-primary" onclick="run()">Test My Code</button>
-<div><!--
+<div>
+
+
+	<div class="row">
+	  <div class="col-md-10"></div>
+	  <div class="col-md-2">
+	    <a href = "thankyou.php"><button type="button" class="btn btn-lg btn-primary">Move On</button></a>
+	  </div>
+	</div>
+	<!--
 Code Here:
 <form>
 <textarea id="code" cols="128" rows="32">
