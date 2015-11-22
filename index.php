@@ -80,7 +80,7 @@
         <div class="panel-body">
           <ul>
             <li>Clicking begin will take you too a short survey </li>
-            <li>Then click the link at the end of the survey go through the study <li>
+            <li>Then click the link at the end of the survey go through the study </li>
             <li>At the end of the study take another survey</li>
             <li>Data from this study will only be used in the context of the Graduate Operating Systems Class at the University of Notre Dame </li>
             <li>Your usename is stored to match data from the two tests, it will not be used in conjuction with the data </li>
