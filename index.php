@@ -33,13 +33,17 @@
             </div>
           </div>
 
+<div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">What will happen to my data?</h3>
           </div>
           <div class="panel-body">
 
           </div>
+        </div>
 
+
+<div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">How long will it take?</h3>
           </div>
@@ -48,19 +52,20 @@
           </div>
         </div>
 
-        <div class="panel-heading">
+
+
+
+<div class="panel panel-primary">
+          <div class="panel-heading">
           <h3 class="panel-title">Summary</h3>
         </div>
         <div class="panel-body">
 
         </div>
+
       </div>
 
 
-
-
-
-        </div>
 
  <!--        <div class="panel panel-primary">
                       <div class="panel-heading">
@@ -90,6 +95,9 @@
         </div>
 
       </div>
+
+
+
 
 </div>
 </body>
