@@ -30,7 +30,7 @@
             </div>
             <div class="panel-body">
               Thank you for agreeing to take part in our study.
-              The study consists.of three sections.
+              The study consists of three sections.
 
               <ul>
                 <li> An initial survey </li>
@@ -40,11 +40,14 @@
 
 
               This study is part of the Graduate Operating Systems course at the University of Notre Dame (CSE 60461).
-              If at any time you have any questions, please do not hesitate to get in touch. you can email any of the group members
+              If at any time you have any questions, please do not hesitate to get in touch. You can email any of the group members
               listed below.
 
               If halfway through the study you decide that you do not wish to participate, simply close the window, we will discard any data
-              from the initial survey that does not match to data from the post survey.
+              from the initial survey that does not map to data from the post survey.
+
+              <br>
+              Project team members email addresses: [jdebened, shutt, lfaust, aliu1, nkremerh] [at] nd.edu
             </div>
           </div>
 
@@ -53,8 +56,8 @@
             <h3 class="panel-title">What will happen to my data?</h3>
           </div>
           <div class="panel-body">
-            Data collected in this study will be used only in the context of the Graduate Operating Systems Course at the University of Notre Dame.
-            Your Notre Dame username will be collected as part of the study, this will only be used to match data together and will not be used in
+            Data collected in this study will be used only in the context of the Graduate Operating Systems course at the University of Notre Dame.
+            Your Notre Dame username will be collected as part of the study. This will only be used to match data together and will not be used in
             conjuction with your answers.
             No data in our final write up will involve your usernames and will all be de-personalized.
           </div>
@@ -66,7 +69,7 @@
             <h3 class="panel-title">How long will it take?</h3>
           </div>
           <div class="panel-body">
-            You can take as long as you like, but we imagine you will spend around 20-30 minutes.
+            You may take as long as you like, but we imagine you will spend around 20-30 minutes.
           </div>
         </div>
 
@@ -79,10 +82,10 @@
         </div>
         <div class="panel-body">
           <ul>
-            <li>Clicking begin will take you too a short survey </li>
+            <li>Clicking "Begin" will take you to a short survey </li>
             <li>Then click the link at the end of the survey go through the study </li>
-            <li>At the end of the study take another survey</li>
-            <li>Data from this study will only be used in the context of the Graduate Operating Systems Class at the University of Notre Dame </li>
+            <li>Upon completion of the session you will be asked to take another brief survey</li>
+            <li>Data from this study will only be used in the context of the Graduate Operating Systems class at the University of Notre Dame </li>
             <li>Your usename is stored to match data from the two tests, it will not be used in conjuction with the data </li>
           </ul>
         </div>

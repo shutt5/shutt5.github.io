@@ -30,8 +30,8 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Help</a></li>
+
+        <li><a href="help.php">Contact/Help</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
