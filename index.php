@@ -2,7 +2,7 @@
 <html>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="PPPP/css/bootstrap.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -17,7 +17,7 @@
 
 
   <?
-  include 'nav.php';
+  include 'PPPP/nav.php';
   ?>
 
 
@@ -26,19 +26,41 @@
 
 <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">What is Placating Plato?</h3>
+              <h3 class="panel-title">Welcome</h3>
             </div>
             <div class="panel-body">
-              Placating Plato with Plates of pasta is an online, interactive tutorial for the Dining Philosphers problem. In the tutorial we will discuss:
-              <ul>
-                <li> Explain the Problem </li>
-                <li> Highlight where things can go wrong </li>
-                <li> Show you some real world examples </li>
-                <li> Show some potential solutions </li>
-                <li> Let you practice those solutions </li>
-              </ul>
+
             </div>
           </div>
+
+          <div class="panel-heading">
+            <h3 class="panel-title">What will happen to my data?</h3>
+          </div>
+          <div class="panel-body">
+
+          </div>
+
+          <div class="panel-heading">
+            <h3 class="panel-title">How long will it take?</h3>
+          </div>
+          <div class="panel-body">
+
+          </div>
+        </div>
+
+        <div class="panel-heading">
+          <h3 class="panel-title">Summary</h3>
+        </div>
+        <div class="panel-body">
+
+        </div>
+      </div>
+
+
+
+
+
+        </div>
 
  <!--        <div class="panel panel-primary">
                       <div class="panel-heading">
@@ -63,7 +85,7 @@
         <div class="row">
           <div class="col-md-10"></div>
           <div class="col-md-2">
-            <a href = "intro.php"><button type="button" class="btn btn-lg btn-primary">Get Started</button></a>
+            <a href = "intro.php"><button type="button" class="btn btn-lg btn-primary">Begin!</button></a>
           </div>
         </div>
 
