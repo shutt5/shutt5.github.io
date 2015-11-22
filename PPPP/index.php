@@ -29,7 +29,7 @@
               <h3 class="panel-title">What is Placating Plato?</h3>
             </div>
             <div class="panel-body">
-              Placating Plato with Plates of pasta is an online, interactive tutorial for the Dining Philosphers problem. In the tutorial we will discuss:
+              Placating Plato with Plates of Pasta is an online, interactive tutorial for the Dining Philosphers Problem. In the tutorial we will:
               <ul>
                 <li> Explain the Problem </li>
                 <li> Highlight where things can go wrong </li>
