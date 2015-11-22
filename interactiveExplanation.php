@@ -23,10 +23,10 @@ include 'nav.php';
 
 <h1> Interactive Explanation</h1>
 
-<p>Having covered the basics, try out the following visualization
+<p>Having covered the basics, try out the following visualization.
 </p>
 
-<p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are switched to an eating state.
+<p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are switched to an eating state. Be careful though, once a philosopher starves it'll be game over!
 </p>
 
 <center>
