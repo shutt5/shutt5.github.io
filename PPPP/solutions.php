@@ -172,10 +172,10 @@ function animate(source, backdrop, frameNum, id) {
 
 	var canvas = document.getElementById(backdrop);
 	if(id == 0) {
-		canvas.width = 463;
+		canvas.width = 460;
 	}
 	if(id == 1) {
-		canvas.width = 461;
+		canvas.width = 460;
 	}
 	canvas.height = 450;
 
