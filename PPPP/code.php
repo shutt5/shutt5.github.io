@@ -209,14 +209,18 @@ Since we now understand the Dining Philosophers Problem (in both theoretical and
 </p>
 </div>
 <style>
-div[class="codeBox"] {width:306px;height:30px;border:3px solid #aaaaaa;}
+div[class="codeBox"] {width:306px;height:30px;border:3px solid #000000;}
+div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 </style>
 <div style="float: left">
 Philosopher Behavior:<br/>
 <!--<div id="0" class="codeBox">
 <img id="do_action" src="do_action.png" draggable="false" width="300" height="25"></img>
 </div>-->
-<div id="1" class="codeBox">
+<div id="6" class="flatBox">
+<img id="if_not_full" src="if_not_full.png" draggable="false" width="300" height="25"></img>
+</div>
+<div id="1" class="flatBox">
 <img id="if_too_hungry" src="if_too_hungry.png" draggable="false" width="300" height="25"></img>
 </div>
 <!--<div id="2" class="codeBox">
@@ -225,16 +229,13 @@ Philosopher Behavior:<br/>
 <!--<div id="3" class="codeBox">
 <img id="report_starvation" src="report_starvation.png" draggable="false" width="300" height="25"></img>
 </div>-->
-<div id="4" class="codeBox">
+<div id="4" class="flatBox">
 <img id="exit_failure" src="exit_failure.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="5" class="codeBox">
+<div id="5" class="flatBox">
 <img id="close1" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="6" class="codeBox">
-<img id="if_not_full" src="if_not_full.png" draggable="false" width="300" height="25"></img>
-</div>
-<div id="7" class="codeBox">
+<div id="7" class="flatBox">
 <img id="if_has_sticks" src="if_has_sticks.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="8" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
@@ -249,10 +250,10 @@ Philosopher Behavior:<br/>
 <!--<div id="11" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank3" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank3').parentNode.id)" width="300" height="25"></img>
 </div>-->
-<div id="12" class="codeBox">
+<div id="12" class="flatBox">
 <img id="close2" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="13" class="codeBox">
+<div id="13" class="flatBox">
 <img id="else1" src="else.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="14" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
@@ -267,29 +268,29 @@ Philosopher Behavior:<br/>
 <!--<div id="17" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank5" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank5').parentNode.id)" width="300" height="25"></img>
 </div>-->
-<div id="18" class="codeBox">
+<!--<div id="18" class="codeBox">
 <img id="repeat_do_action" src="repeat_do_action.png" draggable="false" width="300" height="25"></img>
-</div>
-<div id="19" class="codeBox">
+</div>-->
+<div id="19" class="flatBox">
 <img id="close3" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="20" class="codeBox">
+<div id="20" class="flatBox">
 <img id="close4" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="21" class="codeBox">
+<div id="21" class="flatBox">
 <img id="if_done_thinking" src="if_done_thinking.png" draggable="false" width="300" height="25"></img>
 </div>
 <!--<div id="22" class="codeBox">
 <img id="release_sticks2" src="release_sticks.png" draggable="false" width="300" height="25"></img>
 </div>-->
-<div id="23" class="codeBox">
+<div id="23" class="flatBox">
 <img id="think" src="think.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="24" class="codeBox">
-<img id="exit_success" src="exit_success.png" draggable="false" width="300" height="25"></img>
-</div>
-<div id="25" class="codeBox">
+<div id="25" class="flatBox">
 <img id="close5" src="close_brace.png" draggable="false" width="300" height="25"></img>
+</div>
+<div id="24" class="flatBox">
+<img id="exit_success" src="exit_success.png" draggable="false" width="300" height="25"></img>
 </div>
 <!--<div id="26" class="codeBox">
 <img id="close6" src="close_brace.png" draggable="false" width="300" height="25"></img>
@@ -321,13 +322,13 @@ Main Function Behavior:<br/>
 <div id="200" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="number_sticks_no_order" src="number_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="201" class="codeBox">
+<div id="201" class="flatBox">
 <img id="run_philosophers" src="run_philosophers.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="202" class="codeBox">
+<div id="202" class="flatBox">
 <img id="while_true" src="while_true.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="203" class="codeBox">
+<div id="203" class="flatBox">
 <img id="if_stick_request" src="if_stick_request.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="204" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
@@ -348,10 +349,10 @@ Main Function Behavior:<br/>
 <div id="209" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
 <img id="blank204" src="blank.png" draggable="true" ondragstart="drag(event, document.getElementById('blank204').parentNode.id)" width="300" height="25"></img>
 </div>-->
-<div id="210" class="codeBox">
+<div id="210" class="flatBox">
 <img id="close200" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="211" class="codeBox">
+<div id="211" class="flatBox">
 <img id="close201" src="close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 </div>
