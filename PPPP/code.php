@@ -247,61 +247,61 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <div style="float: left">
 <b>Philosopher Behavior:</b><br/>
 <div id="6" class="flatBox">
-<img id="if_not_full" src="if_not_full.png" draggable="false" width="300" height="25"></img>
+<img id="if_not_full" src="./code_block_assets/if_not_full.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="1" class="flatBox">
-<img id="if_too_hungry" src="if_too_hungry.png" draggable="false" width="300" height="25"></img>
+<img id="if_too_hungry" src="./code_block_assets/if_too_hungry.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="4" class="flatBox">
-<img id="exit_failure" src="exit_failure.png" draggable="false" width="300" height="25"></img>
+<img id="exit_failure" src="./code_block_assets/exit_failure.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="5" class="flatBox">
-<img id="close1" src="close_brace.png" draggable="false" width="300" height="25"></img>
+<img id="close1" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="7" class="flatBox">
-<img id="if_has_sticks" src="if_has_sticks.png" draggable="false" width="300" height="25"></img>
+<img id="if_has_sticks" src="./code_block_assets/if_has_sticks.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="8" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="eat_until_full" src="eat_until_full.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_full').parentNode.id)" width="300" height="25"></img>
+<img id="eat_until_full" src="./code_block_assets/eat_until_full.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_full').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="9" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank1" src="blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank1').parentNode.id)" width="300" height="25"></img>
+<img id="blank1" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank1').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="10" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank2" src="blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank2').parentNode.id)" width="300" height="25"></img>
+<img id="blank2" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank2').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="12" class="flatBox">
-<img id="close2" src="close_brace.png" draggable="false" width="300" height="25"></img>
+<img id="close2" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="13" class="flatBox">
-<img id="else1" src="else.png" draggable="false" width="300" height="25"></img>
+<img id="else1" src="./code_block_assets/else.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="14" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="hunger++" src="hunger++.png" draggable="true" ondragstart="drag(event, document.getElementById('hunger++').parentNode.id)" width="300" height="25"></img>
+<img id="hunger++" src="./code_block_assets/hunger++.png" draggable="true" ondragstart="drag(event, document.getElementById('hunger++').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="15" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="request_sticks_no_order" src="request_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_no_order').parentNode.id)" width="300" height="25"></img>
+<img id="request_sticks_no_order" src="./code_block_assets/request_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="16" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank4" src="blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank4').parentNode.id)" width="300" height="25"></img>
+<img id="blank4" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank4').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="19" class="flatBox">
-<img id="close3" src="close_brace.png" draggable="false" width="300" height="25"></img>
+<img id="close3" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="20" class="flatBox">
-<img id="close4" src="close_brace.png" draggable="false" width="300" height="25"></img>
+<img id="close4" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="21" class="flatBox">
-<img id="if_done_thinking" src="if_done_thinking.png" draggable="false" width="300" height="25"></img>
+<img id="if_done_thinking" src="./code_block_assets/if_done_thinking.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="23" class="flatBox">
-<img id="think" src="think.png" draggable="false" width="300" height="25"></img>
+<img id="think" src="./code_block_assets/think.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="25" class="flatBox">
-<img id="close5" src="close_brace.png" draggable="false" width="300" height="25"></img>
+<img id="close5" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="24" class="flatBox">
-<img id="exit_success" src="exit_success.png" draggable="false" width="300" height="25"></img>
+<img id="exit_success" src="./code_block_assets/exit_success.png" draggable="false" width="300" height="25"></img>
 </div>
 </div>
 
@@ -311,16 +311,16 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <div>
 <b>Philosopher Behavior Toolbox:</b><br/>
 <div id="100" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="request_sticks_in_order" src="request_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_in_order').parentNode.id)" width="300" height="25"></img>
+<img id="request_sticks_in_order" src="./code_block_assets/request_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_in_order').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="101" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="eat_until_timer_ends" src="eat_until_timer_ends.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_timer_ends').parentNode.id)" width="300" height="25"></img>
+<img id="eat_until_timer_ends" src="./code_block_assets/eat_until_timer_ends.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_timer_ends').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="102" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank100" src="blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank100').parentNode.id)" width="300" height="25"></img>
+<img id="blank100" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank100').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="103" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank101" src="blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank101').parentNode.id)" width="300" height="25"></img>
+<img id="blank101" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank101').parentNode.id)" width="300" height="25"></img>
 </div>
 </div>
 
@@ -329,31 +329,31 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <div>
 <b>Main Function Behavior:</b><br/>
 <div id="200" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="number_sticks_no_order" src="number_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25"></img>
+<img id="number_sticks_no_order" src="./code_block_assets/number_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="201" class="flatBox">
-<img id="run_philosophers" src="run_philosophers.png" draggable="false" width="300" height="25"></img>
+<img id="run_philosophers" src="./code_block_assets/run_philosophers.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="202" class="flatBox">
-<img id="while_true" src="while_true.png" draggable="false" width="300" height="25"></img>
+<img id="while_true" src="./code_block_assets/while_true.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="203" class="flatBox">
-<img id="if_stick_request" src="if_stick_request.png" draggable="false" width="300" height="25"></img>
+<img id="if_stick_request" src="./code_block_assets/if_stick_request.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="204" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="give_available_sticks" src="give_available_sticks.png" draggable="true" ondragstart="drag(event, document.getElementById('give_available_sticks').parentNode.id)" width="300" height="25"></img>
+<img id="give_available_sticks" src="./code_block_assets/give_available_sticks.png" draggable="true" ondragstart="drag(event, document.getElementById('give_available_sticks').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="205" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank200" src="blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank200').parentNode.id)" width="300" height="25"></img>
+<img id="blank200" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank200').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="206" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank201" src="blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank201').parentNode.id)" width="300" height="25"></img>
+<img id="blank201" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank201').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="210" class="flatBox">
-<img id="close200" src="close_brace.png" draggable="false" width="300" height="25"></img>
+<img id="close200" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="211" class="flatBox">
-<img id="close201" src="close_brace.png" draggable="false" width="300" height="25"></img>
+<img id="close201" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 </div>
 
@@ -362,19 +362,19 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <div style="float: left">
 <b>Main Function Behavior Toolbox:</b><br/>
 <div id="300" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="number_sticks_in_order" src="number_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_in_order').parentNode.id)" width="300" height="25"></img>
+<img id="number_sticks_in_order" src="./code_block_assets/number_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_in_order').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="301" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="run_timer" src="run_timer.png" draggable="true" ondragstart="drag(event, document.getElementById('run_timer').parentNode.id)" width="300" height="25"></img>
+<img id="run_timer" src="./code_block_assets/run_timer.png" draggable="true" ondragstart="drag(event, document.getElementById('run_timer').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="303" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="interrupt_current_action" src="interrupt_current_action.png" draggable="true" ondragstart="drag(event, document.getElementById('interrupt_current_action').parentNode.id)" width="300" height="25"></img>
+<img id="interrupt_current_action" src="./code_block_assets/interrupt_current_action.png" draggable="true" ondragstart="drag(event, document.getElementById('interrupt_current_action').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="304" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank300" src="blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank300').parentNode.id)" width="300" height="25"></img>
+<img id="blank300" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank300').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="305" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank301" src="blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank301').parentNode.id)" width="300" height="25"></img>
+<img id="blank301" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank301').parentNode.id)" width="300" height="25"></img>
 </div>
 </div>
 </div>
