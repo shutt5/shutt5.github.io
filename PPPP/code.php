@@ -197,21 +197,31 @@ function run() {
 
 	if((hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && (eat_until_timer_ends > 7 && eat_until_timer_ends < 12) && number_sticks_in_order == 0) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		solution = 1;
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (eat_until_timer_ends > 7) && (eat_until_timer_ends < 12) && (run_timer > 4 && run_timer < 9)) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		solution = 2;
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && number_sticks_in_order == 0 && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		solution = 3;
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && ((request_sticks_in_order > 14 || request_sticks_no_order > 14) && (request_sticks_in_order < 18 || request_sticks_no_order < 18)) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && (number_sticks_in_order == 0 || number_sticks_no_order == 0) && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		solution = 4;
 		return 0;
 	}
 
+	if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
+		starvation = 1;
+	}
+	else if(eat_until_timer_ends != -1 && run_timer == -1)	{
+		starvation = 1;
+	}
 	animate(deadlock, starvation, success);
 	alert("Your solution does not successfully solve the Dining Philosophers Problem.\nPlease review your pseudocode and try again.");
 	return 1;
