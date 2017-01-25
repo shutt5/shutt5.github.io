@@ -123,6 +123,8 @@ function run() {
 	var deadlock = 0;
 	var starvation = 0;
 	var success = 0;
+	var error = 0;
+	var error_string = "";
 
 	for(var j = 0; j < dpBlocks.length; j++) {
 		if(dpBlocks[j] == "eat_until_full") {
@@ -145,24 +147,20 @@ function run() {
 		}
 	}
 	if(eat_until_full != -1 && eat_until_timer_ends != -1) {
-		alert("Contradiction: Philosopher eats until full and also eats until timer ends.\nPlease fix your contradiction and try again.");
-		return 1;
+		error = 1;
+		error_string = error_string + ("Contradiction: Philosopher should only eat once per loop iteration.\nPlease remove either 'eat until full' or 'eat until timer ends'.\n\n");
 	}
-	else if(request_sticks_no_order != -1 && request_sticks_in_order != -1) {
-		alert("Contradiction: Philosopher requests chopsticks in no particular order and also requests chopsticks in a particular order.\nPlease fix your contradiction and try again.");
-		return 1;
+	if(request_sticks_no_order != -1 && request_sticks_in_order != -1) {
+		error = 1;
+		error_string = error_string + ("Contradiction: Philosopher should only request chopsticks once per loop iteration.\nPlease remove either 'request sticks in order' or 'request sticks in no order'.\n\n");
 	}
-	else if(hunger == -1) {
-		alert("Tricky: Philosopher must increase in hunger if it cannot eat.\nNice try. Please put 'increase hunger' back in the code.");
-		return 1;
+	if(request_sticks_in_order == -1 && request_sticks_no_order == -1) {
+		error = 1;
+		error_string = error_string + ("Error: Philosopher must request chopsticks.\nPlease put either 'request sticks in order' or 'request sticks in no order' back in the code.\n\n");
 	}
-	else if(request_sticks_in_order == -1 && request_sticks_no_order == -1) {
-		alert("Error: Philosopher must request chopsticks at some point.\nPlease put either 'request sticks in no order' or 'request sticks in order' function back in the code and try again.");
-		return 1;
-	}
-	else if(eat_until_full == -1 && eat_until_timer_ends == -1) {
-		alert("Error: Philosopher must eat.\nPlease put either 'eat until full' or 'eat until timer ends' function back in the code and try again.");
-		return 1;
+	if(eat_until_full == -1 && eat_until_timer_ends == -1) {
+		error = 1;
+		error_string = error_string + ("Error: Philosopher must eat.\nPlease put either 'eat until full' or 'eat until timer ends' back in the code.\n\n");
 	}
 
 	for(var j = 0; j < mainBlocks.length; j++) {
@@ -183,45 +181,40 @@ function run() {
 		}
 	}
 	if(number_sticks_no_order == -1 && number_sticks_in_order == -1) {
-		alert("Error: Main function must number the chopsticks so the dining philosophers know which ones they can pick up.\nPlease put either 'number sticks in no order' or 'number sticks in order' function back in the code and try again.");
-		return 1;
+		error = 1;
+		error_string = error_string + ("Error: Main function must number the chopsticks so the dining philosophers know which ones they can pick up.\nPlease put either 'number sticks in order' or 'number sticks in no order' back in the code.");
 	}
-	else if(number_sticks_no_order != -1 && number_sticks_in_order != -1) {
-		alert("Contradiction: Main function numbers chopsticks in no particular order and also numbers chopsticks in a particular order.\nPlease fix your contradiction and try again.");
-		return 1;
+	if(number_sticks_no_order != -1 && number_sticks_in_order != -1) {
+		error = 1;
+		error_string = error_string + ("Contradiction: Main function should only number chopsticks once.\nPlease remove either 'number sticks in order' or 'number sticks in no order'.");
 	}
-	else if(give_available_sticks == -1) {
-		alert("Error: Main function must give available adjacent chopsticks to a philosopher upon request.\nPlease put 'give available sticks' back in the code and try again.");
+	if(give_available_sticks == -1) {
+		error = 1;
+		error_string = error_string + ("Error: Main function must give available adjacent chopsticks to a philosopher upon request.\nPlease put 'give available sticks' back in the code and try again.");
+	}
+
+	if(error > 0) {
+		alert(error_string);
 		return 1;
 	}
 
 	if((hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && (eat_until_timer_ends > 7 && eat_until_timer_ends < 12) && number_sticks_in_order == 0) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
-		solution = 1;
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (eat_until_timer_ends > 7) && (eat_until_timer_ends < 12) && (run_timer > 4 && run_timer < 9)) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
-		solution = 2;
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && number_sticks_in_order == 0 && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
-		solution = 3;
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && ((request_sticks_in_order > 14 || request_sticks_no_order > 14) && (request_sticks_in_order < 18 || request_sticks_no_order < 18)) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && (number_sticks_in_order == 0 || number_sticks_no_order == 0) && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
-		solution = 4;
 		return 0;
 	}
 
-	if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
-		starvation = 1;
-	}
-	else if(eat_until_timer_ends != -1 && run_timer == -1)	{
-		starvation = 1;
-	}
 	animate(deadlock, starvation, success);
 	alert("Your solution does not successfully solve the Dining Philosophers Problem.\nPlease review your pseudocode and try again.");
 	return 1;
@@ -248,14 +241,16 @@ When you submit your test code, you will see how your choices play out. If you h
 </p>
 </div>
 <style>
-div[class="codeBox"] {width:306px;height:30px;border:3px solid #000000;}
-div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
+div[class="outline"] {border:3px solid #000000;background-color:#cbcbcb;}
+div[class="codeBox"] {width:302px;height:27px;border:1px solid #000000;}
+div[class="flatBox"] {width:302px;height:26px;}
 </style>
 
 
 
 <div style="float: left">
 <b>Philosopher Behavior:</b><br/>
+<div class="outline">
 <div id="6" class="flatBox">
 <img id="if_not_full" src="./code_block_assets/if_not_full.png" draggable="false" width="300" height="25"></img>
 </div>
@@ -271,14 +266,14 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <div id="7" class="flatBox">
 <img id="if_has_sticks" src="./code_block_assets/if_has_sticks.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="8" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="eat_until_full" src="./code_block_assets/eat_until_full.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_full').parentNode.id)" width="300" height="25"></img>
+<div id="8" class="codeBox" >
+<img id="eat_until_full" src="./code_block_assets/eat_until_full.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('eat_until_full').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="9" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank1" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank1').parentNode.id)" width="300" height="25"></img>
+<div id="9" class="codeBox" >
+<img id="blank1" src="./code_block_assets/blank_phil.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank1').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="10" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank2" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank2').parentNode.id)" width="300" height="25"></img>
+<div id="10" class="codeBox" >
+<img id="blank2" src="./code_block_assets/blank_phil.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank2').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="12" class="flatBox">
 <img id="close2" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
@@ -286,14 +281,14 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <div id="13" class="flatBox">
 <img id="else1" src="./code_block_assets/else.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="14" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="hunger++" src="./code_block_assets/hunger++.png" draggable="true" ondragstart="drag(event, document.getElementById('hunger++').parentNode.id)" width="300" height="25"></img>
+<div id="14" class="flatBox" >
+<img id="hunger++" src="./code_block_assets/hunger++.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="15" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="request_sticks_no_order" src="./code_block_assets/request_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_no_order').parentNode.id)" width="300" height="25"></img>
+<div id="15" class="codeBox" >
+<img id="request_sticks_no_order" src="./code_block_assets/request_sticks_no_order.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('request_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="16" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank4" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank4').parentNode.id)" width="300" height="25"></img>
+<div id="16" class="codeBox" >
+<img id="blank4" src="./code_block_assets/blank_phil.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank4').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="19" class="flatBox">
 <img id="close3" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
@@ -314,32 +309,15 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <img id="exit_success" src="./code_block_assets/exit_success.png" draggable="false" width="300" height="25"></img>
 </div>
 </div>
+</div>
 
 
 
 <div style="float: left">
-<div>
-<b>Philosopher Behavior Toolbox:</b><br/>
-<div id="100" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="request_sticks_in_order" src="./code_block_assets/request_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('request_sticks_in_order').parentNode.id)" width="300" height="25"></img>
-</div>
-<div id="101" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="eat_until_timer_ends" src="./code_block_assets/eat_until_timer_ends.png" draggable="true" ondragstart="drag(event, document.getElementById('eat_until_timer_ends').parentNode.id)" width="300" height="25"></img>
-</div>
-<div id="102" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank100" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank100').parentNode.id)" width="300" height="25"></img>
-</div>
-<div id="103" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank101" src="./code_block_assets/blank_phil.png" draggable="true" ondragstart="drag(event, document.getElementById('blank101').parentNode.id)" width="300" height="25"></img>
-</div>
-</div>
-
-
-
-<div>
 <b>Main Function Behavior:</b><br/>
-<div id="200" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="number_sticks_no_order" src="./code_block_assets/number_sticks_no_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25"></img>
+<div class="outline">
+<div id="200" class="codeBox" >
+<img id="number_sticks_no_order" src="./code_block_assets/number_sticks_no_order.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="201" class="flatBox">
 <img id="run_philosophers" src="./code_block_assets/run_philosophers.png" draggable="false" width="300" height="25"></img>
@@ -350,14 +328,14 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <div id="203" class="flatBox">
 <img id="if_stick_request" src="./code_block_assets/if_stick_request.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="204" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="give_available_sticks" src="./code_block_assets/give_available_sticks.png" draggable="true" ondragstart="drag(event, document.getElementById('give_available_sticks').parentNode.id)" width="300" height="25"></img>
+<div id="204" class="codeBox" >
+<img id="give_available_sticks" src="./code_block_assets/give_available_sticks.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('give_available_sticks').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="205" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank200" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank200').parentNode.id)" width="300" height="25"></img>
+<div id="205" class="codeBox" >
+<img id="blank200" src="./code_block_assets/blank_main.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank200').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="206" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank201" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank201').parentNode.id)" width="300" height="25"></img>
+<div id="206" class="codeBox" >
+<img id="blank201" src="./code_block_assets/blank_main.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank201').parentNode.id)" width="300" height="25"></img>
 </div>
 <div id="210" class="flatBox">
 <img id="close200" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
@@ -366,25 +344,46 @@ div[class="flatBox"] {width:306px;height:30px;border:3px solid #cbcbcb;}
 <img id="close201" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
 </div>
-
+</div>
 
 
 <div style="float: left">
+<b>Philosopher Behavior Toolbox:</b><br/>
+<div class="outline">
+<div id="100" class="codeBox" >
+<img id="request_sticks_in_order" src="./code_block_assets/request_sticks_in_order.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('request_sticks_in_order').parentNode.id)" width="300" height="25"></img>
+</div>
+<div id="101" class="codeBox" >
+<img id="eat_until_timer_ends" src="./code_block_assets/eat_until_timer_ends.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('eat_until_timer_ends').parentNode.id)" width="300" height="25"></img>
+</div>
+<div id="102" class="codeBox" >
+<img id="blank100" src="./code_block_assets/blank_phil.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank100').parentNode.id)" width="300" height="25"></img>
+</div>
+<div id="103" class="codeBox" >
+<img id="blank101" src="./code_block_assets/blank_phil.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank101').parentNode.id)" width="300" height="25"></img>
+</div>
+</div>
+
+
+
 <b>Main Function Behavior Toolbox:</b><br/>
-<div id="300" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="number_sticks_in_order" src="./code_block_assets/number_sticks_in_order.png" draggable="true" ondragstart="drag(event, document.getElementById('number_sticks_in_order').parentNode.id)" width="300" height="25"></img>
+<div class="outline">
+<div id="300" class="codeBox" >
+<img id="number_sticks_in_order" src="./code_block_assets/number_sticks_in_order.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('number_sticks_in_order').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="301" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="run_timer" src="./code_block_assets/run_timer.png" draggable="true" ondragstart="drag(event, document.getElementById('run_timer').parentNode.id)" width="300" height="25"></img>
+<div id="301" class="codeBox" >
+<img id="run_timer" src="./code_block_assets/run_timer.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('run_timer').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="303" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="interrupt_current_action" src="./code_block_assets/interrupt_current_action.png" draggable="true" ondragstart="drag(event, document.getElementById('interrupt_current_action').parentNode.id)" width="300" height="25"></img>
+<div id="303" class="codeBox" >
+<img id="interrupt_current_action" src="./code_block_assets/interrupt_current_action.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('interrupt_current_action').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="304" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank300" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank300').parentNode.id)" width="300" height="25"></img>
+<div id="304" class="codeBox" >
+<img id="blank300" src="./code_block_assets/blank_main.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank300').parentNode.id)" width="300" height="25"></img>
 </div>
-<div id="305" class="codeBox" ondrop="drop(event)" ondragover="droppable(event)">
-<img id="blank301" src="./code_block_assets/blank_main.png" draggable="true" ondragstart="drag(event, document.getElementById('blank301').parentNode.id)" width="300" height="25"></img>
+<div id="305" class="codeBox" >
+<img id="blank301" src="./code_block_assets/blank_main.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('blank301').parentNode.id)" width="300" height="25"></img>
+</div>
+</div>
 </div>
 </div>
 </div>
