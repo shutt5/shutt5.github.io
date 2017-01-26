@@ -2,9 +2,10 @@
 
 <html>
 
-<body onload="init();>
+<body onload="init();">
 
-  <!DOCTYPE html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="css/bootstrap.css">
 
@@ -13,6 +14,7 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
   <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
   <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
@@ -34,9 +36,12 @@ include 'nav.php';
 </p>
 
 <center>
+
     <div style="position: relative;">
         <canvas id="canvas" width="701" height="650" style="border: 1px solid black;  background:url('assets/wall.jpg') "></canvas>
     </div>
+
+
 </center>
 
       <div class="row">
@@ -44,7 +49,7 @@ include 'nav.php';
         <div class="row">
           <div class="col-md-10"></div>
           <div class="col-md-2">
-            <a href = "solutions.php"><button type="button" class="btn btn-lg btn-primary" onclick="moveOn()">Next</button></a>
+            <a href = "solutions.php"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
           </div>
         </div>
 
@@ -269,12 +274,12 @@ include 'nav.php';
 
             //Score Text
             scoreText = new createjs.Text("Score: ", "35px Arial", "white");
-            scoreText.x = 3; scoreText.y = 618;
+            scoreText.x = 3; scoreText.y = 613;
             stage.addChild(scoreText);
 
             //Score Total
             scoreTotal = new createjs.Text("0", "35px Arial", "white");
-            scoreTotal.x = 108; scoreTotal.y = 618;
+            scoreTotal.x = 108; scoreTotal.y = 613;
             stage.addChild(scoreTotal);
 
             if (retry == 0) {
@@ -485,6 +490,8 @@ include 'nav.php';
             console.log(diag)
         }
     </script>
+
+
 
 </body>
 
