@@ -27,6 +27,41 @@ function clickUp() {
 	return 0;
 }
 
+function showAnswer(num) {
+	var show;
+	var hide1;
+	var hide2;
+	switch(num) {
+		case 1:
+			show = document.getElementById('answer1');
+			show.setAttribute("style", "");
+			hide1 = document.getElementById('answer2');
+			hide1.setAttribute("style", "display: none");
+			hide2 = document.getElementById('answer3');
+			hide2.setAttribute("style", "display: none");
+			break;
+		case 2:
+			show = document.getElementById('answer2');
+			show.setAttribute("style", "");
+			hide1 = document.getElementById('answer1');
+			hide1.setAttribute("style", "display: none");
+			hide2 = document.getElementById('answer3');
+			hide2.setAttribute("style", "display: none");
+			break;
+		case 3:
+			show = document.getElementById('answer3');
+			show.setAttribute("style", "");
+			hide1 = document.getElementById('answer1');
+			hide1.setAttribute("style", "display: none");
+			hide2 = document.getElementById('answer2');
+			hide2.setAttribute("style", "display: none");
+			break;
+		default:
+			break;
+	}
+	return 0;
+}
+
 function changeText(count) {
 	document.getElementById("pseudobox").innerHTML=pseudocode[count];
 	document.getElementById("answer1").innerHTML=answers[count];
@@ -37,6 +72,7 @@ function changeText(count) {
 </script>
 <style>
 div[class="outline"] {border:3px solid #000000}
+p[class="border"] {border:1px solid #000000}
 </style>
 <body>
 <div class="container">
@@ -53,17 +89,26 @@ This is a-blue.
 </p>
 </div>
 
-<p id="answer1">
+<div>
+<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Next</button>
+<p id="answer1" class="border" style="display: none">
 Wrong.
 </p>
+</div>
 
-<p id="answer2">
+<div>
+<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Next</button>
+<p id="answer2" class="border" style="display: none">
 *Leans closer to mic* Wrong.
 </p>
+</div>
 
-<p id="answer3">
+<div>
+<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(3)">Next</button>
+<p id="answer3" class="border" style="display: none">
 *Leans closelier* Wrong.
 </p>
+</div>
 
 <div class="row">
 
