@@ -18,7 +18,7 @@
   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
   <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
   <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
-  <script src="http://momentjs.com/downloads/moment.min.js"></script>
+  <script src="https://momentjs.com/downloads/moment.min.js"></script>
 
 <div class="container">
 
