@@ -22,7 +22,7 @@ function clickUp() {
 	}
 	else {
 		var next = document.getElementById('next_button');
-		next.setAttribute("href", "code.php");
+		next.setAttribute("href", "code.php?PID=<?=$PID?>");
 	}
 	return 0;
 }
@@ -68,7 +68,7 @@ function changeText(count) {
 	document.getElementById("answer2").innerHTML=answers[count + 1];
 	document.getElementById("answer3").innerHTML=answers[count + 2];
 	return 0;
-}	
+}
 </script>
 <style>
 div[class="outline"] {border:3px solid #000000}

@@ -91,12 +91,12 @@ function animate(source, backdrop, frameNum, id) {
 		that.image = options.image;
 		that.loop = options.loop;
 
-		
-		if(check == 0 && id == 0){	
+
+		if(check == 0 && id == 0){
 			that.render = function() {
 				that.context.clearRect(0, 0, that.width, that.height);
 
-				that.image.onload=function(){	
+				that.image.onload=function(){
 				that.context.drawImage(
 					that.image,
 					frameIndex * (that.width / numberOfFrames),
@@ -107,17 +107,17 @@ function animate(source, backdrop, frameNum, id) {
 					0,
 					that.width / numberOfFrames,
 					that.height);
-			
+
 				}
 			check = 9000;
 			}
 
 		}
-		else if(check2 == 0 && id == 1){	
+		else if(check2 == 0 && id == 1){
 			that.render = function() {
 				that.context.clearRect(0, 0, that.width, that.height);
 
-				that.image.onload=function(){	
+				that.image.onload=function(){
 				that.context.drawImage(
 					that.image,
 					frameIndex * (that.width / numberOfFrames),
@@ -129,7 +129,7 @@ function animate(source, backdrop, frameNum, id) {
 					that.width / numberOfFrames,
 					that.height);
 
-			
+
 				}
 			check2 = 9000;
 			}
@@ -231,7 +231,7 @@ function showArbitrator(frame) {
 	return 0;
 }
 
-function updateHierarchy() {	
+function updateHierarchy() {
 	if(check == 9000){
 		rscCount++;
 		showHierarchy(rscCount);
@@ -259,7 +259,7 @@ function updateArbitrator() {
 		arbCount++;
 		check2 = 9001;
 
-	}	
+	}
 	if(arbCount < 7) {
 		showArbitrator(arbCount);
 		arbCount++;
@@ -278,7 +278,7 @@ function updateArbitrator() {
 <div class="row">
   <div class="col-md-10"></div>
   <div class="col-md-2">
-    <a href = "realWorld.php"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+    <a href = "realWorld.php?PID=<?=$PID?>"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
   </div>
 </div>
 
