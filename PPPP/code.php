@@ -3,8 +3,9 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 
 <!-- Optional theme -->
-
-
+<?php
+$PID =  $_GET["PID"];
+?>
 <head>
 <script>
 var test = 0;
@@ -105,8 +106,9 @@ function animate(deadlock, starvation, success) {
 }
 
 function run() {
+	transaction("Run My Code Clicked");
 	var next = document.getElementById('next_button');
-	next.setAttribute("href", "thankyou.php");
+	next.setAttribute("href", "thankyou.php?PID=<?=$PID?>");
 	test = 1;
 	var eat_until_full = -1;
 	var eat_until_timer_ends = -1;
@@ -195,28 +197,34 @@ function run() {
 
 	if(error > 0) {
 		alert(error_string);
+		transaction("Code Run Failed");
 		return 1;
 	}
 
 	if((hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && (eat_until_timer_ends > 7 && eat_until_timer_ends < 12) && number_sticks_in_order == 0) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		transaction("Code Run successfully");
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (eat_until_timer_ends > 7) && (eat_until_timer_ends < 12) && (run_timer > 4 && run_timer < 9)) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		transaction("Code Run successfully");
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && number_sticks_in_order == 0 && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		transaction("Code Run successfully");
 		return 0;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && ((request_sticks_in_order > 14 || request_sticks_no_order > 14) && (request_sticks_in_order < 18 || request_sticks_no_order < 18)) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && (number_sticks_in_order == 0 || number_sticks_no_order == 0) && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
 		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		transaction("Code Run successfully");
 		return 0;
 	}
 
 	animate(deadlock, starvation, success);
 	alert("Your solution does not successfully solve the Dining Philosophers Problem.\nPlease review your pseudocode and try again.");
+	transaction("Code Run Failed");
 	return 1;
 }
 </script>
@@ -229,6 +237,8 @@ function run() {
   include 'nav.php';
   $SESSION['started'] = "t";
   ?>
+
+
 <div>
 <p>
 Since we now understand the Dining Philosophers Problem and its solutions, it is now your turn to solve the problem. You can use one of the two common solutions or try one of your own. Below you will find drag-and-droppable code blocks which simulate the Dining Philosophers Problem in pseudocode. You are given starter code for a dining philosopher and a main function which handles them. Currently, this code encounters both deadlock and starvation. You are also given two toolboxes which contain all you need to prevent both deadlock and starvation in the dining philosopher and the main function. There are multiple correct solutions.

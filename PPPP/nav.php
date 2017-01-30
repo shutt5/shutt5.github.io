@@ -1,7 +1,13 @@
 <?
   session_start();
   include 'analyticstracking.php';
+  $PageName = $_SERVER[REQUEST_URI];
+  include 'tracking.php';
 ?>
+
+<script>
+transaction("PageLoaded");
+</script>
 
 <h1> Placating Plato with Plates of Pasta </h1>
 <br>
@@ -15,13 +21,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">Placating Plato</a>
+      <a class="navbar-brand" href="index.php?PID=<?=$PID?>">Placating Plato</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="index.php">Home</a></li>
+        <li ><a href="index.php?PID=<?=$PID?>">Home</a></li>
         <? if(isset($SESSION['started'])){ ?>
         <li><a href="#">Getting Started</a></li>
         <li><a href="whoAreWe.php">Who are we?</a></li>
