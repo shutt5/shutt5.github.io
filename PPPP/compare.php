@@ -13,10 +13,10 @@ var clicks = 0;
 
 var pseudocode = ["Test text", "Test text 2"];
 
-var answers = ["Wrong", "Wrong", "Right", "1", "2", "A-blue"];
+var answers = ["Wrong. <b> Wrong. </b>", "2"];
 
 function clickUp() {
-	if(clicks < 2) {
+	if(clicks < 1) {
 		changeText(clicks);
 		clicks++;
 	}
@@ -63,13 +63,12 @@ function showAnswer(num) {
 }
 
 function changeText(count) {
-	document.getElementById("pseudobox").innerHTML=pseudocode[count];
-	document.getElementById("answer1").innerHTML=answers[(count* 3)];
-	document.getElementById("answer2").innerHTML=answers[(count * 3) + 1];
-	document.getElementById("answer3").innerHTML=answers[(count * 3) + 2];
+	document.getElementById("pseudobox1").innerHTML=pseudocode[count];
+	document.getElementById("pseudobox2").innerHTML=pseudocode[count + 1];
+	document.getElementById("answer1").innerHTML=answers[(count* 2)];
+	document.getElementById("answer2").innerHTML=answers[(count * 2) + 1];
 	document.getElementById('answer1').setAttribute("style", "display: none");
 	document.getElementById('answer2').setAttribute("style", "display: none");
-	document.getElementById('answer3').setAttribute("style", "display: none");
 	return 0;
 }	
 </script>
@@ -86,35 +85,47 @@ p[class="border"] {border:1px solid #000000}
   $SESSION['started'] = "t";
   ?>
 
+<div>
+<table>
+<tr>
+<td>
 <div class="outline">
-<p id="pseudobox">
+<p id="pseudobox1">
 This is a-blue.
 </p>
 </div>
+</td>
 
+<td>
+<div class="outline">
+<p id="pseudobox2">
+This is not.
+</p>
+</div>
+</td>
+</tr>
+<tr>
+<td>
 <div>
-<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Next</button>
+<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Code 1</button>
 <p id="answer1" class="border" style="display: none">
 Wrong.
 </p>
 </div>
-
+</td>
+<td>
 <div>
-<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Next</button>
+<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Code 2</button>
 <p id="answer2" class="border" style="display: none">
 *Leans closer to mic* Wrong.
 </p>
 </div>
-
-<div>
-<button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(3)">Next</button>
-<p id="answer3" class="border" style="display: none">
-*Leans closelier* Wrong.
-</p>
+</td>
+</tr>
+</table>
 </div>
 
 <div class="row">
-
 <div class="row">
   <div class="col-md-10"></div>
   <div class="col-md-2">
