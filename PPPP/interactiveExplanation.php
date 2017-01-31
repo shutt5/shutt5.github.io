@@ -72,6 +72,12 @@ include 'nav.php';
         var retry = 0;
 
         function init() {
+            stage = new createjs.Stage("canvas");
+            //Loading
+            loadingText = new createjs.Text("Loading...", "50px Arial", "white");
+            loadingText.x = 250; loadingText.y = 250;
+            stage.addChild(loadingText);
+            stage.update();
             queue.on("complete", handleComplete, this);
             queue.loadManifest([
                 { id: "oneThinking", src: "assets/oneThinking.png" },
@@ -116,7 +122,8 @@ include 'nav.php';
 
         function handleComplete() {
             if (retry == 0) {
-                stage = new createjs.Stage("canvas");
+                stage.removeChild(loadingText);
+                //stage = new createjs.Stage("canvas");
                 stage.enableMouseOver(20);
 
                 //set the table
@@ -486,8 +493,10 @@ include 'nav.php';
             function pad(n) {
                 return (n < 10) ? ("0" + n) : n;
             }
-            console.log(length)
-            console.log(diag)
+            //console.log(length)
+            //console.log(diag)
+            transaction(length);
+            transaction(diag);
         }
     </script>
 
