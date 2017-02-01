@@ -254,11 +254,12 @@ When you submit your test code, you will see how your choices play out. If you h
 div[class="outline"] {border:3px solid #000000;background-color:#cbcbcb;}
 div[class="codeBox"] {width:302px;height:27px;border:1px solid #000000;}
 div[class="flatBox"] {width:302px;height:26px;}
+div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 </style>
 
 
 
-<div style="float: left">
+<div class="bigBox">
 <b>Philosopher Behavior:</b><br/>
 <div class="outline">
 <div id="6" class="flatBox">
@@ -323,7 +324,7 @@ div[class="flatBox"] {width:302px;height:26px;}
 
 
 
-<div style="float: left">
+<div class="bigBox">
 <b>Main Function Behavior:</b><br/>
 <div class="outline">
 <div id="200" class="codeBox" >
@@ -357,7 +358,7 @@ div[class="flatBox"] {width:302px;height:26px;}
 </div>
 
 
-<div style="float: left">
+<div class="bigBox">
 <b>Philosopher Behavior Toolbox:</b><br/>
 <div class="outline">
 <div id="100" class="codeBox" >
@@ -401,16 +402,15 @@ div[class="flatBox"] {width:302px;height:26px;}
 
 <div id="junkyard" style="display:none">
 </div><br/>
+<div style="position: relative; left: 1024px; bottom: 150px">
 <button id="codeSubmit" type="button" class="btn btn-lg btn-primary" onclick="run()">Test My Code</button>
-<div>
+<br/><br/>
+<div class="row">
+<div class="col-md-2">
+<a href = "#" id="next_button" onclick="next_check()"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+</div>
+</div>
 
-
-	<div class="row">
-	  <div class="col-md-10"></div>
-	  <div class="col-md-2">
-	    <a href = "#" id="next_button" onclick="next_check()"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
-	  </div>
-	</div>
-
+</div>
 </body>
 </html>
