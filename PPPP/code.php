@@ -7,13 +7,106 @@
 $PID =  $_GET["PID"];
 ?>
 <head>
+<script src="jquery-2.1.4.js"></script>
 <script>
+var sprite_table;
+var sprite_numbers;
+
+var table_image = new Image();
+
+var success2 = new Image();
+success2.src = "code_block_assets/success2.png";
+
+var success3 = new Image();
+success3.src = "code_block_assets/success3.png";
+
+var success4 = new Image();
+success4.src = "code_block_assets/success4.png";
+
+var sprite_deadlock = new Image();
+sprite_deadlock.src = "code_block_assets/fail_deadlock.png";
+
+var sprite_starvation = new Image();
+sprite_starvation.src = "code_block_assets/fail_starvation.png";
+
+function sprite (options) {
+				
+    var that = {},
+        frameIndex = 0,
+        tickCount = 0,
+		ticksPerFrame = 120,
+		numberOfFrames = options.numberOfFrames || 1;
+					
+    that.context = options.context;
+    that.width = options.width;
+    that.height = options.height;
+    that.image = options.image;
+
+	that.render = function () {
+			
+		// Clear the canvas
+    	that.context.clearRect(0, 0, that.width, that.height);
+
+        // Draw the animation
+		that.context.drawImage(
+           that.image,
+           frameIndex * that.width / numberOfFrames,
+           0,
+           that.width / numberOfFrames,
+           that.height,
+           0,
+           0,
+           that.width / numberOfFrames,
+           that.height);
+	};
+
+	that.loop = options.loop;
+
+	that.update = function () {
+
+        tickCount += 1;
+			
+        if (tickCount > ticksPerFrame) {
+        
+        	tickCount = 0;
+        	
+			// If the current frame index is in range
+            if (frameIndex < numberOfFrames - 1) {	
+                // Go to the next frame
+                frameIndex += 1;
+			}
+			else if (that.loop) {
+                frameIndex = 0;
+            }
+        }
+    };
+
+    return that;
+}
+
+function animationLoop () {
+
+  window.requestAnimationFrame(animationLoop);
+  
+  sprite_table.update();
+  sprite_table.render();
+}
+
+
+
+
+
+
 var test = 0;
 var dpBlocks = ["do_action","if_too_hungry","release_sticks","report_starvation","exit_failure","close1","if_not_full","if_has_sticks","eat_until_full","blank1","blank2","blank3","close2","else1","hunger++","request_sticks_no_order","blank4","blank5","repeat_do_action","close3","close4","if_done_thinking","release_sticks","think","exit_success","close5","close6"];
 var mainBlocks = ["number_sticks_no_order","run_philosophers","while_true","if_stick_request","give_available_sticks","blank200","blank201","blank202","blank203","blank204","close200","close201"];
 var dpToolbox = ["request_sticks_in_order","eat_until_timer_ends","blank100","blank101"];
 var mainToolbox = ["number_sticks_in_order","run_timer","interrupt_current_action","blank300","blank301"];
 var dragSrc;
+
+function transaction(comment){
+  $.get("transact.php?PID=<?=$PID?>&string=<?=$PID?>,<?=$PageName?>," + comment);
+}
 
 function next_check() {
 	if(test > 0) {
@@ -101,7 +194,66 @@ function drop(ev) {
 	return;
 }
 
-function animate(deadlock, starvation, success) {
+function reload_code() {
+	var main = document.getElementById('codeSection');
+	var animation = document.getElementById('animation');
+	main.setAttribute('style', 'display: inline');
+	animation.setAttribute('style', 'display: none');
+}
+
+function draw_table(success) {
+	var frames = 1;
+	var w = 700;
+	switch(success) {
+		case -1:
+			frames = 2;
+			w = w * frames;
+			table_image.src = "code_block_assets/fail_deadlock.png";
+			break;
+		case 0:
+			table_image.src = "code_block_assets/fail_starvation.png";
+			break;
+		case 1:
+			table_image.src = "code_block_assets/success1.png";
+			break;
+		case 2:
+			table_image.src = "code_block_assets/sucess2.png";
+			break;
+		case 3:
+			table_image.src = "code_block_assets/success3.png";
+			break;
+		case 4:
+			table_image.src = "code_block_assets/success4k.png";
+			break;
+		default:
+			alert("Source image for code test animation could not load.\nPlease try again.");
+			break;
+	}
+	var canvas = document.getElementById('layer1');
+	sprite_table = sprite({
+    context: canvas.getContext("2d"),
+    width: w,
+    height: 630,
+	image: table_image,
+	numberOfFrames: frames,
+	loop: true
+	});
+
+	sprite_table.render();
+
+	table_image.addEventListener("load", animationLoop);
+
+	return 0;
+}
+
+function draw_numbers(mode) {
+	return 0;
+}
+
+function animate(stick_mode, success) {
+	draw_table(success);
+	draw_numbers(stick_mode);
+	animationLoop();
 	return 0;
 }
 
@@ -122,6 +274,7 @@ function run() {
 	var give_available_sticks = -1;
 	var run_timer = -1;
 	var interrupt_current_action = -1;
+	var stick_mode = 0;
 	var deadlock = 0;
 	var starvation = 0;
 	var success = 0;
@@ -202,30 +355,37 @@ function run() {
 	}
 
 	if((hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && (eat_until_timer_ends > 7 && eat_until_timer_ends < 12) && number_sticks_in_order == 0) {
-		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
-		transaction("Code Run successfully");
-		return 0;
+		success = 1;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (eat_until_timer_ends > 7) && (eat_until_timer_ends < 12) && (run_timer > 4 && run_timer < 9)) {
-		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
-		transaction("Code Run successfully");
-		return 0;
+		success = 2;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && (request_sticks_in_order > 14 && request_sticks_in_order < 18) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && number_sticks_in_order == 0 && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
-		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
-		transaction("Code Run successfully");
-		return 0;
+		success = 3;
 	}
 	if((give_available_sticks > 3 && give_available_sticks < run_timer) && (hunger > 13 && (hunger < request_sticks_in_order || hunger < request_sticks_no_order)) && ((request_sticks_in_order > 14 || request_sticks_no_order > 14) && (request_sticks_in_order < 18 || request_sticks_no_order < 18)) && ((eat_until_timer_ends > 7 || eat_until_full > 7) && (eat_until_timer_ends < 12 || eat_until_full < 12)) && (number_sticks_in_order == 0 || number_sticks_no_order == 0) && (run_timer > 4 && run_timer < 9) && (interrupt_current_action > 5 && interrupt_current_action < 10) && run_timer < interrupt_current_action) {
-		alert("Your solution successfully solves the Dining Philosophers Problem.\nCongratulations!");
+		success = 4;
+	}
+
+	if(number_sticks_in_order != -1) {
+		stick_mode = 1;
+	}
+	if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
+		success = -1;
+	}
+	var main = document.getElementById('codeSection');
+	var animation = document.getElementById('animation');
+	main.setAttribute('style', 'display: none');
+	animation.setAttribute('style', 'display: inline');
+	animate(stick_mode, success);
+	if(success > 0) {
 		transaction("Code Run successfully");
 		return 0;
 	}
-
-	animate(deadlock, starvation, success);
-	alert("Your solution does not successfully solve the Dining Philosophers Problem.\nPlease review your pseudocode and try again.");
-	transaction("Code Run Failed");
-	return 1;
+	else {
+		transaction("Code Run Failed");
+		return 1;
+	}
 }
 </script>
 </head>
@@ -258,7 +418,7 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 </style>
 
 
-
+<div id="codeSection">
 <div class="bigBox">
 <b>Philosopher Behavior:</b><br/>
 <div class="outline">
@@ -398,7 +558,28 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 </div>
 </div>
 </div>
+</div>
 
+<div id="animation" style="display: none">
+<div id="canvasesdiv" style="position:relative; width:700px; height:630px">
+<canvas id="layer1"
+style="z-index: 1;
+position:absolute;
+left:0px;
+top:0px;
+" height="630px" width="700">
+</canvas>
+
+<canvas id="layer2"
+style="z-index: 2;
+position:absolute;
+left:0px;
+top:0px;
+" height="630px" width="700">
+</canvas>
+</div>
+<button id="next_try" type="button" class="btn btn-lg btn-primary" onclick="reload_code()">Go Back to Code</button>
+</div>
 
 <div id="junkyard" style="display:none">
 </div><br/>
