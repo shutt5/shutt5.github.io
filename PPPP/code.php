@@ -207,10 +207,10 @@ function draw_table(success) {
 	switch(success) {
 		case -1:
 			frames = 2;
-			w = w * frames;
 			table_image.src = "code_block_assets/fail_deadlock.png";
 			break;
 		case 0:
+			frames = 4;
 			table_image.src = "code_block_assets/fail_starvation.png";
 			break;
 		case 1:
@@ -229,6 +229,7 @@ function draw_table(success) {
 			alert("Source image for code test animation could not load.\nPlease try again.");
 			break;
 	}
+	w = w * frames;
 	var canvas = document.getElementById('layer1');
 	sprite_table = sprite({
     context: canvas.getContext("2d"),
@@ -370,9 +371,15 @@ function run() {
 	if(number_sticks_in_order != -1) {
 		stick_mode = 1;
 	}
-	if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
-		success = -1;
+	if(success < 1) {
+		if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
+			success = 0;
+		}
+		else {
+			success = -1;
+		}
 	}
+	alert(success);
 	var main = document.getElementById('codeSection');
 	var animation = document.getElementById('animation');
 	main.setAttribute('style', 'display: none');
