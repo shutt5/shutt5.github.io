@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
@@ -30,20 +33,20 @@ var sprite_starvation = new Image();
 sprite_starvation.src = "code_block_assets/fail_starvation.png";
 
 function sprite (options) {
-				
+
     var that = {},
         frameIndex = 0,
         tickCount = 0,
 		ticksPerFrame = 120,
 		numberOfFrames = options.numberOfFrames || 1;
-					
+
     that.context = options.context;
     that.width = options.width;
     that.height = options.height;
     that.image = options.image;
 
 	that.render = function () {
-			
+
 		// Clear the canvas
     	that.context.clearRect(0, 0, that.width, that.height);
 
@@ -65,13 +68,13 @@ function sprite (options) {
 	that.update = function () {
 
         tickCount += 1;
-			
+
         if (tickCount > ticksPerFrame) {
-        
+
         	tickCount = 0;
-        	
+
 			// If the current frame index is in range
-            if (frameIndex < numberOfFrames - 1) {	
+            if (frameIndex < numberOfFrames - 1) {
                 // Go to the next frame
                 frameIndex += 1;
 			}
@@ -87,7 +90,7 @@ function sprite (options) {
 function animationLoop () {
 
   window.requestAnimationFrame(animationLoop);
-  
+
   sprite_table.update();
   sprite_table.render();
 }
@@ -261,7 +264,7 @@ function animate(stick_mode, success) {
 function run() {
 	transaction("Run My Code Clicked");
 	var next = document.getElementById('next_button');
-	next.setAttribute("href", "thankyou.php?PID=<?=$PID?>");
+	next.setAttribute("href", "compare.php?PID=<?=$PID?>");
 	test = 1;
 	var eat_until_full = -1;
 	var eat_until_timer_ends = -1;
@@ -401,6 +404,7 @@ function run() {
 
 
   <?
+	$pageNum = 6;
   include 'nav.php';
   $SESSION['started'] = "t";
   ?>

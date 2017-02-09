@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +20,7 @@
 
 
   <?
+  $pageNum = 0;
   include 'nav.php';
   ?>
 

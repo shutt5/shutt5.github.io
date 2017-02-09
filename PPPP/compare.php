@@ -15,17 +15,7 @@ var pseudocode = ["Test text", "Test text 2"];
 
 var answers = ["Wrong. <b> Wrong. </b>", "2"];
 
-function clickUp() {
-	if(clicks < 1) {
-		changeText(clicks);
-		clicks++;
-	}
-	else {
-		var next = document.getElementById('next_button');
-		next.setAttribute("href", "code.php");
-	}
-	return 0;
-}
+
 
 function showAnswer(num) {
 	var show;
@@ -70,7 +60,7 @@ function changeText(count) {
 	document.getElementById('answer1').setAttribute("style", "display: none");
 	document.getElementById('answer2').setAttribute("style", "display: none");
 	return 0;
-}	
+}
 </script>
 <style>
 div[class="outline"] {border:3px solid #000000}
@@ -81,9 +71,26 @@ p[class="border"] {border:1px solid #000000}
 
 
   <?
+	$pageNum=7;
   include 'nav.php';
   $SESSION['started'] = "t";
   ?>
+
+	<script>
+
+	function clickUp() {
+		if(clicks < 1) {
+			changeText(clicks);
+			clicks++;
+		}
+		else {
+			var next = document.getElementById('next_button');
+			next.setAttribute("href", "thankyou.php?PID=<?=$PID?>");
+		}
+		return 0;
+	}
+
+	</script>
 
 <div>
 <table>

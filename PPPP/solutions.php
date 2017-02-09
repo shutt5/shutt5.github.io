@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +19,7 @@
 <div class="container">
 
 <?
+$pageNum =5;
 include 'nav.php';
 
 ?>
@@ -278,7 +282,7 @@ function updateArbitrator() {
 <div class="row">
   <div class="col-md-10"></div>
   <div class="col-md-2">
-    <a href = "realWorld.php?PID=<?=$PID?>"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+    <a href = "code.php?PID=<?=$PID?>"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
   </div>
 </div>
 

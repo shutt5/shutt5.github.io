@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
@@ -14,6 +17,7 @@
 
 
   <?
+  $pageNum =2;
   include 'nav.php';
   $SESSION['started'] = "t";
   ?>
@@ -52,7 +56,7 @@ So how do we solve it?
 <div class="row">
   <div class="col-md-10"></div>
   <div class="col-md-2">
-    <a href = "code.php?PID=<?=$PID?>"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+    <a href = "identify.php?PID=<?=$PID?>"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
   </div>
 </div>
 

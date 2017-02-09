@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
@@ -14,6 +17,7 @@
 
 
   <?
+  $pageNum = 7;
   include 'nav.php';
   $SESSION['started'] = "t";
   ?>
@@ -22,17 +26,12 @@
 <p>
 Thank you for using our tool, we hope you have enjoyed working through Placating Plato with Plates of Pasta.
 
-It is now time for you to take a quick survery to show us what you have learned. Please click the link below to be taken to the post-test.</p>
+To continue with the Survey, please enter the password 'laughter' in the box underneath this window.</p>
 </div>
 
 <div class="row">
 
-  <div class="row">
-    <div class="col-md-10"></div>
-    <div class="col-md-2">
-      <a href = "https://docs.google.com/a/nd.edu/forms/d/1OTopbTQUTcmQVC2lMnLaBSMEG5PecwHqEg_KIUklL2s/viewform"><button type="button" class="btn btn-lg btn-primary">Complete!</button></a>
-    </div>
-  </div>
+
 
 </div>
 

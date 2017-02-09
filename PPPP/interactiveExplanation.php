@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 
 <html>
@@ -23,6 +26,7 @@
 <div class="container">
 
 <?
+$pageNum=4;
 include 'nav.php';
 
 ?>

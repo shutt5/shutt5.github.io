@@ -1,8 +1,18 @@
 <?
-  session_start();
+
   include 'analyticstracking.php';
   $PageName = $_SERVER[REQUEST_URI];
   include 'tracking.php';
+  //echo $_SESSION['stage'];
+  if(!isset($_SESSION['stage'])){
+    $_SESSION['stage'] = 0;
+  }
+//echo session_id();
+//echo $pageNum;
+//echo $_SESSION['stage'];
+  if($pageNum > $_SESSION['stage']){
+    $_SESSION['stage'] = $pageNum;
+  }
 ?>
 
 <script>
@@ -28,11 +38,32 @@ transaction("PageLoaded");
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li ><a href="index.php?PID=<?=$PID?>">Home</a></li>
-        <? if(isset($SESSION['started'])){ ?>
-        <li><a href="#">Getting Started</a></li>
-        <li><a href="whoAreWe.php">Who are we?</a></li>
-         <li><a href="interactiveExplanation.php">Stressful Game</a></li>
-       <? } ?>
+
+        <?php
+        if($_SESSION['stage'] >= 1){
+          echo "<li><a href=\"intro.php?PID=<?=$PID?>\">Intro</a></li>";
+        }
+        if($_SESSION['stage'] >= 2){
+          echo "<li><a href=\"realWorld.php?PID=$PID\">Real World Example</a></li>";
+        }
+        if($_SESSION['stage'] >= 3){
+          echo "<li><a href=\"identify.php?PID=$PID\">Identify</a></li>";
+        }
+        if($_SESSION['stage'] >= 4){
+          echo "<li><a href=\"intro.php?PID=$PID\">Philosophers Game</a></li>";
+        }
+        if($_SESSION['stage'] >= 5){
+          echo "<li><a href=\"solutions.php?PID=$PID\">Solutions</a></li>";
+        }
+        if($_SESSION['stage'] >= 6){
+          echo "<li><a href=\"code.php?PID=$PID\">Code Game</a></li>";
+        }
+        if($_SESSION['stage'] >= 7){
+          echo "<li><a href=\"code.php?PID=$PID\">Compare Solutions</a></li>";
+        }
+         ?>
+
+
 
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
@@ -14,6 +17,7 @@
 
 
   <?
+  $pageNum = 1;
   include 'nav.php';
   $SESSION['started'] = "t";
   ?>
@@ -85,7 +89,7 @@ Another major issue that arises in this problem is called <q>starvation</q>.  St
         <div class="row">
           <div class="col-md-10"></div>
           <div class="col-md-2">
-            <a href = "interactiveExplanation.php?PID=<?=$PID?>"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+            <a href = "realWorld.php?PID=<?=$PID?>"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
           </div>
         </div>
 
