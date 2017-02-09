@@ -37,11 +37,11 @@ transaction("PageLoaded");
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="index.php?PID=<?=$PID?>">Home</a></li>
+        <li ><a href="index.php?PID=$PID">Home</a></li>
 
         <?php
         if($_SESSION['stage'] >= 1){
-          echo "<li><a href=\"intro.php?PID=<?=$PID?>\">Intro</a></li>";
+          echo "<li><a href=\"intro.php?PID=$PID\">Intro</a></li>";
         }
         if($_SESSION['stage'] >= 2){
           echo "<li><a href=\"realWorld.php?PID=$PID\">Real World Example</a></li>";
