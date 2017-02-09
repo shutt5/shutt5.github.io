@@ -13,19 +13,11 @@ $PID =  $_GET["PID"];
 <script src="jquery-2.1.4.js"></script>
 <script>
 var sprite_table;
-var sprite_numbers;
+var sprite_arbitrator;
 
 var table_image = new Image();
 var numbers_image = new Image();
-
-var success2 = new Image();
-success2.src = "code_block_assets/success2.png";
-
-var success3 = new Image();
-success3.src = "code_block_assets/success3.png";
-
-var success4 = new Image();
-success4.src = "code_block_assets/success4.png";
+var arbitrator_image = new Image();
 
 var sprite_deadlock = new Image();
 sprite_deadlock.src = "code_block_assets/fail_deadlock.png";
@@ -38,7 +30,7 @@ function sprite (options) {
     var that = {},
         frameIndex = 0,
         tickCount = 0,
-		ticksPerFrame = 200,
+		ticksPerFrame = 240,
 		numberOfFrames = options.numberOfFrames || 1;
 
     that.context = options.context;
@@ -94,14 +86,11 @@ function animationLoop () {
 
   sprite_table.update();
   sprite_table.render();
-  sprite_numbers.update();
-  sprite_numbers.render();
+  if(sprite_arbitrator) {
+  	sprite_arbitrator.update();
+  	sprite_arbitrator.render();
+  }
 }
-
-
-
-
-
 
 var test = 0;
 var dpBlocks = ["do_action","if_too_hungry","release_sticks","report_starvation","exit_failure","close1","if_not_full","if_has_sticks","eat_until_full","blank1","blank2","blank3","close2","else1","hunger++","request_sticks_no_order","blank4","blank5","repeat_do_action","close3","close4","if_done_thinking","release_sticks","think","exit_success","close5","close6"];
@@ -203,6 +192,9 @@ function drop(ev) {
 function reload_code() {
 	var main = document.getElementById('codeSection');
 	var animation = document.getElementById('animation');
+	var test_code = document.getElementById('codeSubmit');
+	test_code.onclick = run;
+	test_code.innerHTML = "Test My Code";
 	main.setAttribute('style', 'display: inline');
 	animation.setAttribute('style', 'display: none');
 }
@@ -259,23 +251,41 @@ function draw_table(success) {
 
 function draw_numbers(mode) {	
 	if(mode > 0) {
-		numbers_image.src = "code_block_assets/number_layer.png"
-		var canvas = document.getElementById('layer2');
-		sprite_numbers = sprite({
-    	context: canvas.getContext("2d"),
-    	width: 700,
-    	height: 630,
-		image: numbers_image,
-		numberOfFrames: 1,
-		loop: true
-		});
-		sprite_numbers.render();
-		numbers_image.addEventListener("load", animationLoop);
+		numbers_image.src = "code_block_assets/number_layer.png";
+		var canvas = document.getElementById('layer3');
+		var inner = canvas.getContext("2d");
+		inner.drawImage(numbers_image, 0, 0);
+	}
+	else {
+		numbers_image.src = " ";
+		var layer3 = document.getElementById('layer3')
+		var context = layer3.getContext('2d');
+		context.clearRect(0, 0, layer3.width, layer3.height);
 	}
 	return 0;
 }
 
 function draw_arbitrator(mode) {
+	if(mode > 0) {
+		arbitrator_image.src = "code_block_assets/arbitrator_layer.png"
+		var canvas = document.getElementById('layer2');
+		sprite_arbitrator = sprite({
+    	context: canvas.getContext("2d"),
+    	width: 700,
+    	height: 630,
+		image: arbitrator_image,
+		numberOfFrames: 8,
+		loop: true
+		});
+		sprite_arbitrator.render();
+		arbitrator_image.addEventListener("load", animationLoop);
+	}
+	else {
+		arbitrator_image.src = " ";
+		var layer2 = document.getElementById('layer2')
+		var context = layer2.getContext('2d');
+		context.clearRect(0, 0, layer2.width, layer2.height);
+	}
 	return 0;
 }
 
@@ -292,6 +302,7 @@ function run() {
 	var next = document.getElementById('next_button');
 	next.setAttribute("href", "compare.php?PID=<?=$PID?>");
 	test = 1;
+
 	var eat_until_full = -1;
 	var eat_until_timer_ends = -1;
 	var request_sticks_no_order = -1;
@@ -401,6 +412,9 @@ function run() {
 	if(number_sticks_in_order != -1) {
 		stick_mode = 1;
 	}
+	if(interrupt_current_action != -1) {
+		arbitrator_mode = 1;
+	}
 	if(success < 1) {
 		if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
 			success = 0;
@@ -411,6 +425,9 @@ function run() {
 	}
 	var main = document.getElementById('codeSection');
 	var animation = document.getElementById('animation');
+	var test_code = document.getElementById('codeSubmit');
+	test_code.onclick = reload_code;
+	test_code.innerHTML = "Go Back to Code";
 	main.setAttribute('style', 'display: none');
 	animation.setAttribute('style', 'display: inline');
 	animate(stick_mode, arbitrator_mode, success);
@@ -604,26 +621,25 @@ style="z-index: 1;
 position:absolute;
 left:0px;
 top:0px;
-" height="630px" width="700">
+" height="630px" width="700px">
 </canvas>
 
 <canvas id="layer2"
-style="z-index: 3;
-position:absolute;
-left:0px;
-top:0px;
-" height="630px" width="700">
-</canvas>
-
-<canvas id="layer3"
 style="z-index: 2;
 position:absolute;
 left:0px;
 top:0px;
-" height="630px" width="700">
+" height="630px" width="700px">
+</canvas>
+
+<canvas id="layer3"
+style="z-index: 3;
+position:absolute;
+left:0px;
+top:0px;
+" height="630px" width="700px">
 </canvas>
 </div>
-<button id="next_try" type="button" class="btn btn-lg btn-primary" onclick="reload_code()">Go Back to Code</button>
 </div>
 
 <div id="junkyard" style="display:none">
