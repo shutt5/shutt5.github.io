@@ -14,17 +14,15 @@ session_start();
 <script>
 var clicks = 0;
 
-var pseudocode = ["Fred recently moved to Indiana.  He has to register to vote and get his driver’s license.  In order to register to vote, they need to see his Indiana driver’s license as a photo ID.  In order to get his license, he needs to show his voter registration as proof of residence.  This is an example of:",
-		  "Power is out at an intersection.  As a result, one direction has a blinking yellow (proceed with caution), the other direction is blinking red (stop, then proceed if clear).  Cars proceed slowly but steadily through the blinking yellow.  Cars occasionally proceed through the blinking red when clear.  This is an example of:"];
-
-var answers = ["Incorrect :( The reasoning behind Freds inability to register is not due to others registering. An example would be if Fred waited in line at the DMV to explain his predicament. However, teenagers keep cutting in line to fail their driving tests, so Fred never makes it to a representative.",
-	       "Correct! Fred requires two separate resources to vote, but because obtaining either of these resources requires the other, Fred is left in a state of deadlock.",
-	       "Incorrect :( Fred is unable register to vote because obtaining either of the two resources necessary requires already owning one of them which presents a problem.",
-	       "Incorrect :( All cars are still able to move through the intersection. An example of starvation would be if one road is stuck on green and the other is stuck on red.  Cars can drive freely through the green while others wait indefinitely for their light to change from red. This would be an example of starvation as some cars are unable to pass through.",
-	       "Incorrect :( All cars are still able to move through the intersection. An example of deadlock would be if both lights are flashing red. Four student drivers pull up to the stoplights and unsure of what to do, wait for the other to go through. Because no cars can move through until a different car has, no cars make it through",
-	       "Correct! While cars traveling through the yellow light are given a higher priority, some cars do make it through the red light as they are able to pass when the coast is clear."];
-
-
+var pseudocode = ["Fred recently moved to Indiana.  He has to register to vote and get his driver’s license.  In order to register to vote, they need to see his Indiana driver’s license as a photo ID.  In order to get his license, he needs to show his voter registration as proof of residence.  This is an example of:", 
+				  "Power is out at an intersection.  As a result, one direction has a blinking yellow (proceed with caution), the other direction is blinking red (stop, then proceed if clear).  Cars proceed slowly but steadily through the blinking yellow.  Cars occasionally proceed through the blinking red when clear.  This is an example of:"];
+	
+var answers = ["<div style='background-color:#f45d01'>Incorrect :( The reasoning behind Freds inability to register is not due to others registering. An example would be if Fred waited in line at the DMV to explain his predicament. However, teenagers keep cutting in line to fail their driving tests, so Fred never makes it to a representative.</div>", 
+			   "<div style='background-color:#97cc04'>Correct! Fred requires two separate resources to vote, but because obtaining either of these resources requires the other, Fred is left in a state of deadlock.", 
+			   "<div style='background-color:#f45d01'>Incorrect :( Fred is unable register to vote because obtaining either of the two resources necessary requires already owning one of them which presents a problem.</div>", 
+			   "<div style='background-color:#f45d01'>Incorrect :( All cars are still able to move through the intersection. An example of starvation would be if one road is stuck on green and the other is stuck on red.  Cars can drive freely through the green while others wait indefinitely for their light to change from red. This would be an example of starvation as some cars are unable to pass through.</div>", 
+			   "<div style='background-color:#f45d01'>Incorrect :( All cars are still able to move through the intersection. An example of deadlock would be if both lights are flashing red. Four student drivers pull up to the stoplights and unsure of what to do, wait for the other to go through. Because no cars can move through until a different car has, no cars make it through.</div>", 
+			   "<div style='background-color:#97cc04'>Correct! While cars traveling through the yellow light are given a higher priority, some cars do make it through the red light as they are able to pass when the coast is clear.</div>"];
 
 function showAnswer(num) {
 	var show;
@@ -112,23 +110,29 @@ In airport security there are two lines, one for TSA pre-check and one for all o
 
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Starvation</button>
-<p id="answer1" class="border" style="display: none">
+<div id="answer1" class="border" style="display: none">
+<div style="background-color:#97cc04">
 Correct! Since pre-check passengers are always given priority and always in line, regular passengers are never given the opportunity to move through the line.
-</p>
+</div>
+</div>				   
 </div>
 
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Deadlock</button>
-<p id="answer2" class="border" style="display: none">
+<div id="answer2" class="border" style="display: none">
+<div style="background-color:#f45d01">
 Incorrect :( Since pre-check passengers are always going through security, at least one type of passenger is always recieving service. An example of Deadlock in this case would be two unbelievablly nice passengers, both a pre-check and regular. The pre-check sees a regular in line and offers for them to go first. Appreciative of the offer, the regular insists the pre-check go first, which the pre-check brushes off and again offers the regular go through security first. This back-and-forth exchange continues until everyone dies.
-</p>
+</div>
+</div>
 </div>
 
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(3)">Neither</button>
-<p id="answer3" class="border" style="display: none">
+<div id="answer3" class="border" style="display: none">
+<div style="background-color:#f45d01">
 Incorrect :( Regular passengers are unable to move through security which presents a problem.
-</p>
+</div>
+</div>
 </div>
 
 <div class="row">
