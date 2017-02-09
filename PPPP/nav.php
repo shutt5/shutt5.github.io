@@ -37,7 +37,7 @@ transaction("PageLoaded");
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="index.php?PID=$PID">Home</a></li>
+        <li ><a href="index.php?PID=<?=$PID?>">Home</a></li>
 
         <?php
         if($_SESSION['stage'] >= 1){
@@ -50,7 +50,7 @@ transaction("PageLoaded");
           echo "<li><a href=\"identify.php?PID=$PID\">Identify</a></li>";
         }
         if($_SESSION['stage'] >= 4){
-          echo "<li><a href=\"intro.php?PID=$PID\">Philosophers Game</a></li>";
+          echo "<li><a href=\"interactiveExplanation.php?PID=$PID\">Philosophers Game</a></li>";
         }
         if($_SESSION['stage'] >= 5){
           echo "<li><a href=\"solutions.php?PID=$PID\">Solutions</a></li>";
@@ -59,7 +59,7 @@ transaction("PageLoaded");
           echo "<li><a href=\"code.php?PID=$PID\">Code Game</a></li>";
         }
         if($_SESSION['stage'] >= 7){
-          echo "<li><a href=\"code.php?PID=$PID\">Compare Solutions</a></li>";
+          echo "<li><a href=\"compare.php?PID=$PID\">Compare Solutions</a></li>";
         }
          ?>
 
