@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
@@ -15,22 +12,18 @@ $PID =  $_GET["PID"];
 var sprite_table;
 var sprite_arbitrator;
 
+var test = 0;
+
 var table_image = new Image();
 var numbers_image = new Image();
 var arbitrator_image = new Image();
 
-var sprite_deadlock = new Image();
-sprite_deadlock.src = "code_block_assets/fail_deadlock.png";
-
-var sprite_starvation = new Image();
-sprite_starvation.src = "code_block_assets/fail_starvation.png";
-
 function sprite (options) {
-
+				
     var that = {},
         frameIndex = 0,
         tickCount = 0,
-		ticksPerFrame = 240,
+		ticksPerFrame = 240 * test,
 		numberOfFrames = options.numberOfFrames || 1;
 
     that.context = options.context;
@@ -39,7 +32,7 @@ function sprite (options) {
     that.image = options.image;
 
 	that.render = function () {
-
+			
 		// Clear the canvas
     	that.context.clearRect(0, 0, that.width, that.height);
 
@@ -61,13 +54,13 @@ function sprite (options) {
 	that.update = function () {
 
         tickCount += 1;
-
+			
         if (tickCount > ticksPerFrame) {
-
+        
         	tickCount = 0;
-
+        	
 			// If the current frame index is in range
-            if (frameIndex < numberOfFrames - 1) {
+            if (frameIndex < numberOfFrames - 1) {	
                 // Go to the next frame
                 frameIndex += 1;
 			}
@@ -83,7 +76,7 @@ function sprite (options) {
 function animationLoop () {
 
   window.requestAnimationFrame(animationLoop);
-
+  
   sprite_table.update();
   sprite_table.render();
   if(sprite_arbitrator) {
@@ -92,7 +85,6 @@ function animationLoop () {
   }
 }
 
-var test = 0;
 var dpBlocks = ["do_action","if_too_hungry","release_sticks","report_starvation","exit_failure","close1","if_not_full","if_has_sticks","eat_until_full","blank1","blank2","blank3","close2","else1","hunger++","request_sticks_no_order","blank4","blank5","repeat_do_action","close3","close4","if_done_thinking","release_sticks","think","exit_success","close5","close6"];
 var mainBlocks = ["number_sticks_no_order","run_philosophers","while_true","if_stick_request","give_available_sticks","blank200","blank201","blank202","blank203","blank204","close200","close201"];
 var dpToolbox = ["request_sticks_in_order","eat_until_timer_ends","blank100","blank101"];
@@ -221,11 +213,11 @@ function draw_table(success) {
 			break;
 		case 3:
 			frames = 8;
-			table_image.src = "code_block_assets/success.png";
+			table_image.src = "code_block_assets/arbitrator_layer.png";
 			break;
 		case 4:
 			frames = 8;
-			table_image.src = "code_block_assets/success.png";
+			table_image.src = "code_block_assets/arbitrator_layer.png";
 			break;
 		default:
 			alert("Source image for code test animation could not load.\nPlease try again.");
@@ -243,7 +235,6 @@ function draw_table(success) {
 	});
 
 	sprite_table.render();
-
 	table_image.addEventListener("load", animationLoop);
 
 	return 0;
@@ -252,23 +243,23 @@ function draw_table(success) {
 function draw_numbers(mode) {	
 	if(mode > 0) {
 		numbers_image.src = "code_block_assets/number_layer.png";
-		var canvas = document.getElementById('layer3');
+		var canvas = document.getElementById('layer2');
 		var inner = canvas.getContext("2d");
 		inner.drawImage(numbers_image, 0, 0);
 	}
 	else {
 		numbers_image.src = " ";
-		var layer3 = document.getElementById('layer3')
-		var context = layer3.getContext('2d');
-		context.clearRect(0, 0, layer3.width, layer3.height);
+		var layer2 = document.getElementById('layer2')
+		var context = layer2.getContext('2d');
+		context.clearRect(0, 0, layer2.width, layer2.height);
 	}
 	return 0;
 }
 
 function draw_arbitrator(mode) {
-	if(mode > 0) {
+	if(mode == 1) {
 		arbitrator_image.src = "code_block_assets/arbitrator_layer.png"
-		var canvas = document.getElementById('layer2');
+		var canvas = document.getElementById('layer3');
 		sprite_arbitrator = sprite({
     	context: canvas.getContext("2d"),
     	width: 700,
@@ -280,11 +271,17 @@ function draw_arbitrator(mode) {
 		sprite_arbitrator.render();
 		arbitrator_image.addEventListener("load", animationLoop);
 	}
+	else if(mode == 2) {
+		arbitrator_image.src = "code_block_assets/arbitrator_fail.png";
+		var canvas = document.getElementById('layer3');
+		var inner = canvas.getContext("2d");
+		inner.drawImage(numbers_image, 0, 0);
+	}
 	else {
 		arbitrator_image.src = " ";
-		var layer2 = document.getElementById('layer2')
-		var context = layer2.getContext('2d');
-		context.clearRect(0, 0, layer2.width, layer2.height);
+		var layer3 = document.getElementById('layer3')
+		var context = layer3.getContext('2d');
+		context.clearRect(0, 0, layer3.width, layer3.height);
 	}
 	return 0;
 }
@@ -300,8 +297,12 @@ function animate(stick_mode, arbitrator_mode, success) {
 function run() {
 	transaction("Run My Code Clicked");
 	var next = document.getElementById('next_button');
-	next.setAttribute("href", "compare.php?PID=<?=$PID?>");
-	test = 1;
+	next.setAttribute("href", "thankyou.php?PID=<?=$PID?>");
+	test += 1;
+
+	var layer1 = document.getElementById('layer1')
+	var context = layer2.getContext('2d');
+	context.clearRect(0, 0, layer1.width, layer1.height);
 
 	var eat_until_full = -1;
 	var eat_until_timer_ends = -1;
@@ -412,8 +413,12 @@ function run() {
 	if(number_sticks_in_order != -1) {
 		stick_mode = 1;
 	}
-	if(interrupt_current_action != -1) {
+
+	if(interrupt_current_action != -1 && (success > 0 && success < 3)) {
 		arbitrator_mode = 1;
+	}
+	else if(interrupt_current_action != -1 && success <= 0) {
+		arbitrator_mode = 2;
 	}
 	if(success < 1) {
 		if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
@@ -447,7 +452,6 @@ function run() {
 
 
   <?
-	$pageNum = 6;
   include 'nav.php';
   $SESSION['started'] = "t";
   ?>
@@ -615,30 +619,12 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 </div>
 
 <div id="animation" style="display: none">
-<div id="canvasesdiv" style="position:relative; width:700px; height:630px">
-<canvas id="layer1"
-style="z-index: 1;
-position:absolute;
-left:0px;
-top:0px;
-" height="630px" width="700px">
-</canvas>
+<div id="canvasesdiv" style="position:relative; left: 128px; width:700px; height:630px">
+<canvas id="layer1" style="z-index: 1; position:absolute; left:0px; top:0px;" height="630px" width="700px"></canvas>
 
-<canvas id="layer2"
-style="z-index: 2;
-position:absolute;
-left:0px;
-top:0px;
-" height="630px" width="700px">
-</canvas>
+<canvas id="layer2" style="z-index: 2; position:absolute; left:0px; top:0px;" height="630px" width="700px"></canvas>
 
-<canvas id="layer3"
-style="z-index: 3;
-position:absolute;
-left:0px;
-top:0px;
-" height="630px" width="700px">
-</canvas>
+<canvas id="layer3" style="z-index: 3; position:absolute; left:0px; top:0px;" height="630px" width="700px"></canvas>
 </div>
 </div>
 
