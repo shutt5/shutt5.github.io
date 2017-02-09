@@ -13,6 +13,7 @@ var sprite_table;
 var sprite_numbers;
 
 var table_image = new Image();
+var numbers_image = new Image();
 
 var success2 = new Image();
 success2.src = "code_block_assets/success2.png";
@@ -34,9 +35,9 @@ function sprite (options) {
     var that = {},
         frameIndex = 0,
         tickCount = 0,
-		ticksPerFrame = 120,
+		ticksPerFrame = 200,
 		numberOfFrames = options.numberOfFrames || 1;
-					
+
     that.context = options.context;
     that.width = options.width;
     that.height = options.height;
@@ -90,6 +91,8 @@ function animationLoop () {
   
   sprite_table.update();
   sprite_table.render();
+  sprite_numbers.update();
+  sprite_numbers.render();
 }
 
 
@@ -214,16 +217,20 @@ function draw_table(success) {
 			table_image.src = "code_block_assets/fail_starvation.png";
 			break;
 		case 1:
-			table_image.src = "code_block_assets/success1.png";
+			frames = 8;
+			table_image.src = "code_block_assets/success.png";
 			break;
 		case 2:
-			table_image.src = "code_block_assets/sucess2.png";
+			frames = 8;
+			table_image.src = "code_block_assets/success.png";
 			break;
 		case 3:
-			table_image.src = "code_block_assets/success3.png";
+			frames = 8;
+			table_image.src = "code_block_assets/success.png";
 			break;
 		case 4:
-			table_image.src = "code_block_assets/success4k.png";
+			frames = 8;
+			table_image.src = "code_block_assets/success.png";
 			break;
 		default:
 			alert("Source image for code test animation could not load.\nPlease try again.");
@@ -247,13 +254,32 @@ function draw_table(success) {
 	return 0;
 }
 
-function draw_numbers(mode) {
+function draw_numbers(mode) {	
+	if(mode > 0) {
+		numbers_image.src = "code_block_assets/number_layer.png"
+		var canvas = document.getElementById('layer2');
+		sprite_numbers = sprite({
+    	context: canvas.getContext("2d"),
+    	width: 700,
+    	height: 630,
+		image: numbers_image,
+		numberOfFrames: 1,
+		loop: true
+		});
+		sprite_numbers.render();
+		numbers_image.addEventListener("load", animationLoop);
+	}
 	return 0;
 }
 
-function animate(stick_mode, success) {
+function draw_arbitrator(mode) {
+	return 0;
+}
+
+function animate(stick_mode, arbitrator_mode, success) {
 	draw_table(success);
 	draw_numbers(stick_mode);
+	draw_arbitrator(arbitrator_mode);
 	animationLoop();
 	return 0;
 }
@@ -276,6 +302,7 @@ function run() {
 	var run_timer = -1;
 	var interrupt_current_action = -1;
 	var stick_mode = 0;
+	var arbitrator_mode = 0;
 	var deadlock = 0;
 	var starvation = 0;
 	var success = 0;
@@ -379,12 +406,11 @@ function run() {
 			success = -1;
 		}
 	}
-	alert(success);
 	var main = document.getElementById('codeSection');
 	var animation = document.getElementById('animation');
 	main.setAttribute('style', 'display: none');
 	animation.setAttribute('style', 'display: inline');
-	animate(stick_mode, success);
+	animate(stick_mode, arbitrator_mode, success);
 	if(success > 0) {
 		transaction("Code Run successfully");
 		return 0;
@@ -578,6 +604,14 @@ top:0px;
 </canvas>
 
 <canvas id="layer2"
+style="z-index: 3;
+position:absolute;
+left:0px;
+top:0px;
+" height="630px" width="700">
+</canvas>
+
+<canvas id="layer3"
 style="z-index: 2;
 position:absolute;
 left:0px;
