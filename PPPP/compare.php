@@ -16,7 +16,7 @@ session_start();
 var clicks = 0;
 
 var pseudocode = [
-	"function startDinnerParty(){<br>
+	`function startDinnerParty(){<br>
 &nbsp;&nbsp;//seat philosophers<br>
 &nbsp;&nbsp;P1, P2, P3, P4, P5 = new philosopher<br>
 &nbsp;&nbsp;startTimer()<br>	
@@ -66,8 +66,8 @@ function serve(i){<br>
 &nbsp;&nbsp;i.chopsticks = false<br>
 }<br>
 
-", 
-	"function startDinnerParty(){<br>
+`, 
+	`function startDinnerParty(){<br>
 &nbsp;&nbsp;//seat philosophers<br>
 &nbsp;&nbsp;P1, P2, P3, P4, P5 = new philosopher<br>
 &nbsp;&nbsp;startTimer()<br>	
@@ -128,7 +128,7 @@ function serve(i){<br>
 &nbsp;&nbsp;i.chopsticks = true<br>
 &nbsp;&nbsp;waitOneSecond()<br>
 &nbsp;&nbsp;i.chopsticks = false<br>
-}<br>"
+}<br>`
 		];
 
 var answers = ["Right", "Wrong"];
@@ -236,7 +236,7 @@ Function philosopher{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return “starved”;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(hasSticks == True){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(timer > 0 && full == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(timer > 0 AND full == False){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// eat<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hunger--;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(hunger == 0){<br>
