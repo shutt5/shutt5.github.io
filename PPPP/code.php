@@ -248,7 +248,6 @@ function draw_numbers(mode) {
 		inner.drawImage(numbers_image, 0, 0);
 	}
 	else {
-		numbers_image.src = " ";
 		var layer2 = document.getElementById('layer2')
 		var context = layer2.getContext('2d');
 		context.clearRect(0, 0, layer2.width, layer2.height);
@@ -278,7 +277,6 @@ function draw_arbitrator(mode) {
 		inner.drawImage(numbers_image, 0, 0);
 	}
 	else {
-		arbitrator_image.src = " ";
 		var layer3 = document.getElementById('layer3')
 		var context = layer3.getContext('2d');
 		context.clearRect(0, 0, layer3.width, layer3.height);
@@ -287,6 +285,13 @@ function draw_arbitrator(mode) {
 }
 
 function animate(stick_mode, arbitrator_mode, success) {
+	var text = document.getElementById('try_text');
+	if(success > 0) {
+		text.innerHTML = "<b>You have successfully solved the Dining Philosophers Problem!</b>";
+	}
+	else {
+		text.innerHTML = "<b>Your code does not solve the Dining Philosophers Problem. Please try again!</b>";
+	}
 	draw_table(success);
 	draw_numbers(stick_mode);
 	draw_arbitrator(arbitrator_mode);
@@ -624,6 +629,7 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 
 <canvas id="layer3" style="z-index: 3; position:absolute; left:0px; top:0px;" height="630px" width="700px"></canvas>
 </div>
+<div id="try_text"></div>
 </div>
 
 </div>
