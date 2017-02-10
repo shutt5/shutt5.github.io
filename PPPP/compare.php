@@ -301,7 +301,7 @@ Function philosopher{<br>
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Code 1</button>
 <p id="answer1" class="border" style="display: none">
-Right
+This code successfully avoids deadlock and starvation!  Since the sticks are numbered, we can avoid deadlock by making sure not all five philosophers are holding one chopstick.  We also avoid starvation with the timer on eating preventing a single philosopher from eating for too long.
 </p>
 </div>
 </td>
@@ -309,7 +309,7 @@ Right
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Code 2</button>
 <p id="answer2" class="border" style="display: none">
-Wrong
+Since philosophers eat until full, we may encounter starvation in which philosophers starve waiting for one philosopher to eat their fill.  We also may encounter deadlock since we place no restrictions on which chopsticks to pick up, thus each philosopher may pick up one chopstick and all be stuck waiting on the other chopstick.
 </p>
 </div>
 </td>
