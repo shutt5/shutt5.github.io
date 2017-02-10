@@ -615,8 +615,6 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 </div>
 </div>
 </div>
-</div>
-</div>
 
 <div id="animation" style="display: none">
 <div id="canvasesdiv" style="position:relative; left: 128px; width:700px; height:630px">
@@ -628,9 +626,12 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 </div>
 </div>
 
+</div>
+</div>
+
 <div id="junkyard" style="display:none">
 </div><br/>
-<div style="position: relative; left: 1024px; bottom: 150px">
+<div style="position: relative; left: 1280px; bottom: 150px">
 <button id="codeSubmit" type="button" class="btn btn-lg btn-primary" onclick="run()">Test My Code</button>
 <br/><br/>
 <div class="row">
