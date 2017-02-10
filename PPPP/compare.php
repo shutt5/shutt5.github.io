@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 ?>
@@ -15,9 +14,123 @@ session_start();
 <script>
 var clicks = 0;
 
-var pseudocode = ["Test text", "Test text 2"];
+var pseudocode = [
+	`function startDinnerParty(){<br>
+&nbsp;&nbsp;//seat philosophers<br>
+&nbsp;&nbsp;P1, P2, P3, P4, P5 = new philosopher<br>
+&nbsp;&nbsp;startTimer()<br>	
+&nbsp;&nbsp;waiter()<br>	
+&nbsp;&nbsp;while(dinnerParty == 'going well'){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(totalSeconds == 30){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('successful party!')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+function philosopher(){<br>
+&nbsp;&nbsp;hunger = 10<br>
+&nbsp;&nbsp;chopsticks = false<br>
+&nbsp;&nbsp;if(chopsticks == true){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hunger = 10;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;if(hunger == 0){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dinnerParty = 'starved philosopher'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print('party ruined')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;end<br>
+&nbsp;&nbsp;}<br>
+}<br>
+function startTimer(){<br>
+&nbsp;&nbsp;eachSecond{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P1.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P2.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P3.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P4.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P5.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;totalSeconds++;<br>
+	}<br>
+}<br>
+//correct<br>
+function waiter(){<br>
+&nbsp;&nbsp;while(dinnerParty == 'going well'){}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for i in ([P1, P2, P3, P4, P5]){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;serve(i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
 
-var answers = ["Wrong. <b> Wrong. </b>", "2"];
+function serve(i){<br>
+&nbsp;&nbsp;//allow philosopher to eat<br>
+&nbsp;&nbsp;i.chopsticks = true<br>
+&nbsp;&nbsp;waitOneSecond()<br>
+&nbsp;&nbsp;i.chopsticks = false<br>
+}<br>
+
+`, 
+	`function startDinnerParty(){<br>
+&nbsp;&nbsp;//seat philosophers<br>
+&nbsp;&nbsp;P1, P2, P3, P4, P5 = new philosopher<br>
+&nbsp;&nbsp;startTimer()<br>	
+&nbsp;&nbsp;waiter()<br>	
+&nbsp;&nbsp;while(dinnerParty == 'going well'){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(totalSeconds == 30){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('successful party!')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+function philosopher(){<br>
+&nbsp;&nbsp;hunger = 10<br>
+&nbsp;&nbsp;chopsticks = false<br>
+&nbsp;&nbsp;if(chopsticks == true){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hunger = 10;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;if(hunger == 0){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dinnerParty = 'starved philosopher'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print('party ruined')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;end<br>
+&nbsp;&nbsp;}<br>
+}<br>
+function startTimer(){<br>
+&nbsp;&nbsp;eachSecond{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P1.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P2.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P3.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P4.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;P5.hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;totalSeconds++;<br>
+	}<br>
+}<br>
+
+//incorrect
+function waiter(){<br>
+&nbsp;&nbsp;	while(dinnerParty == 'going well'){}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;		for i in ([P1, P2, P3, P4, P5]){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			if(P1.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			if(P2.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			if(P3.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			if(P4.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P4)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			serve(i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;		}<br>
+&nbsp;&nbsp;	}<br>
+}
+
+function serve(i){<br>
+&nbsp;&nbsp;//allow philosopher to eat<br>
+&nbsp;&nbsp;i.chopsticks = true<br>
+&nbsp;&nbsp;waitOneSecond()<br>
+&nbsp;&nbsp;i.chopsticks = false<br>
+}<br>`
+		];
+
+var answers = ["Right", "Wrong"];
 
 
 
@@ -102,7 +215,43 @@ p[class="border"] {border:1px solid #000000}
 <td>
 <div class="outline">
 <p id="pseudobox1">
-This is a-blue.
+Function main{<br>
+&nbsp;&nbsp;numberSticks();<br>
+&nbsp;&nbsp;Host philosophers;<br>
+&nbsp;&nbsp;while(philosophers dine){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If(stick request given){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;giveSticksInOrder();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runTimer(5);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+Function philosopher{<br>
+&nbsp;&nbsp;MAX = 10;<br>
+&nbsp;&nbsp;Full = False;<br>
+&nbsp;&nbsp;Hunger = 1;<br>
+&nbsp;&nbsp;hasSticks = False;<br>
+&nbsp;&nbsp;while(full == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(hunger == MAX){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return “starved”;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(hasSticks == True){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(timer > 0 AND full == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// eat<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(hunger == 0){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full = True;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}else{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hunger++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requestSticksInOrder();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;while(doneThinking == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;think(randomTime);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Return “success”;<br>
+}<br>
 </p>
 </div>
 </td>
@@ -110,7 +259,41 @@ This is a-blue.
 <td>
 <div class="outline">
 <p id="pseudobox2">
-This is not.
+Function main{<br>
+&nbsp;&nbsp;hostPhilosophers();<br>
+&nbsp;&nbsp;while(philosophersReturned == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If(sticksRequested == True){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;giveSticks();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+Function philosopher{<br>
+&nbsp;&nbsp;MAX = 10;<br>
+&nbsp;&nbsp;Full = False;<br>
+&nbsp;&nbsp;Hunger = 1;<br>
+&nbsp;&nbsp;hasSticks = False;<br>
+&nbsp;&nbsp;while(full == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(hunger == MAX){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return “starved”;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(hasSticks == True){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(full == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// eat<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hunger--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(hunger == 0){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full = True;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}else{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hunger++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requestSticks();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;while(doneThinking == False){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;think(randomTime);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Return “success”;<br>
+}
 </p>
 </div>
 </td>
@@ -120,7 +303,7 @@ This is not.
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Code 1</button>
 <p id="answer1" class="border" style="display: none">
-Wrong.
+Right
 </p>
 </div>
 </td>
@@ -128,7 +311,7 @@ Wrong.
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Code 2</button>
 <p id="answer2" class="border" style="display: none">
-*Leans closer to mic* Wrong.
+Wrong
 </p>
 </div>
 </td>
@@ -147,3 +330,4 @@ Wrong.
 
 </body>
 </html>
+>>>>>>> 310bd78a2dd91f2f7422cd76e46498a2385f6e58
