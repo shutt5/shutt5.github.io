@@ -47,13 +47,12 @@ function startTimer(){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;P4.hunger--;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;P5.hunger--;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;totalSeconds++;<br>
-	}<br>
+&nbsp;&nbsp;}<br>
 }<br>
-//correct<br>
 function waiter(){<br>
 &nbsp;&nbsp;while(dinnerParty == 'going well'){}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;for i in ([P1, P2, P3, P4, P5]){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;serve(i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serve(i)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;}<br>
 }<br>
@@ -97,31 +96,30 @@ function startTimer(){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;P3.hunger--;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;P4.hunger--;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;P5.hunger--;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;totalSeconds++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalSeconds++;<br>
 	}<br>
 }<br>
 
-//incorrect
 function waiter(){<br>
 &nbsp;&nbsp;	while(dinnerParty == 'going well'){}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;		for i in ([P1, P2, P3, P4, P5]){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			if(P1.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			if(P1.hunger < 9){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			if(P2.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			if(P2.hunger < 9){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P2)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			if(P3.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			if(P3.hunger < 9){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P3)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			if(P4.hunger < 9){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			if(P4.hunger < 9){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				serve(P4)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			serve(i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			serve(i)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;		}<br>
 &nbsp;&nbsp;	}<br>
 }
-
+<br>
 function serve(i){<br>
 &nbsp;&nbsp;//allow philosopher to eat<br>
 &nbsp;&nbsp;i.chopsticks = true<br>
