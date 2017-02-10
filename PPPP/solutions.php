@@ -57,7 +57,6 @@ Let us assume, keeping our example from before, that the philosopher 1 beats the
 <p>
 If we wanted to make sure all philosophers have a fair shot at eating (maybe one is very hungry and will not stop eating for a few hours), we can place a time limit on each philosopher when they begin eating. This prevents the philosophers from encountering resource starvation.
 </p>
-<canvas id="hAnimation"></canvas>
 <button id="rscUpdate" type="button" onclick="updateHierarchy()" class="btn btn-lg btn-primary">Next Animation Step</button>
 </div>
 <div id="arbitratorSol" style="display:none">
@@ -67,8 +66,11 @@ The arbitrator solution adds a new construct to the problem: a waiter. Instead o
 <p>
 We can implement a timer scheme to ensure some degree of fair play. The waiter will give each philospher requesting permission a certain amount of time to eat before they must relinquish their permission and it is passed on to the next request. Essentially, the mutex lock they have on the permission to eat will time out and they must give up their lock. This constraint prevents the philosophers from encountering resource starvation.
 </p>
-<canvas id="aAnimation"></canvas>
 <button id="arbUpdate" type="button" onclick="updateArbitrator()" class="btn btn-lg btn-primary">Next Animation Step</button>
+</div>
+<div style="position:relative; width:560px; height:504px;">
+<canvas id="animation" style="z-index: 1; position:absolute; left:0px; top:0px;" height="504px" width="560px"></canvas>
+<canvas id="num_layer" style="z-index: 1; position:absolute; left:0px; top:0px;" height="504px" width="560px"></canvas>
 </div>
 </div>
 <script>
@@ -78,201 +80,77 @@ var rscCount = 0;
 var check = 0;
 var check2 = 0;
 
-
-function animate(source, backdrop, frameNum, id) {
-	var diningImage = new Image();
-	diningImage.src = source;
-
-	function sprite(options, frame) {
-		var that = {},
-		    frameIndex = frame,
-		    tickCount = 0,
-		    ticksPerFrame = options.ticksPerFrame,
-		    numberOfFrames = options.numberOfFrames || 1;
-		that.context = options.context;
-		that.width = options.width;
-		that.height = options.height;
-		that.image = options.image;
-		that.loop = options.loop;
-
-
-		if(check == 0 && id == 0){
-			that.render = function() {
-				that.context.clearRect(0, 0, that.width, that.height);
-
-				that.image.onload=function(){
-				that.context.drawImage(
-					that.image,
-					frameIndex * (that.width / numberOfFrames),
-					0,
-					that.width / numberOfFrames,
-					that.height,
-					0,
-					0,
-					that.width / numberOfFrames,
-					that.height);
-
-				}
-			check = 9000;
-			}
-
-		}
-		else if(check2 == 0 && id == 1){
-			that.render = function() {
-				that.context.clearRect(0, 0, that.width, that.height);
-
-				that.image.onload=function(){
-				that.context.drawImage(
-					that.image,
-					frameIndex * (that.width / numberOfFrames),
-					0,
-					that.width / numberOfFrames,
-					that.height,
-					0,
-					0,
-					that.width / numberOfFrames,
-					that.height);
-
-
-				}
-			check2 = 9000;
-			}
-
-		}
-		else{
-		that.render = function() {
-			that.context.clearRect(0, 0, that.width, that.height);
-
-			that.context.drawImage(
-				that.image,
-				frameIndex * (that.width / numberOfFrames),
-				0,
-				that.width / numberOfFrames,
-				that.height,
-				0,
-				0,
-				that.width / numberOfFrames,
-				that.height);
-			}
-
-		}
-
-		that.update = function() {
-			tickCount++;
-			if(tickCount > ticksPerFrame) {
-				tickCount = 0;
-				if(frameIndex < numberOfFrames - 1) {
-					frameIndex++;
-				}
-				else if(that.loop) {
-					frameIndex = 0;
-				}
-			}
-		}
-		return that;
-
-
-	}
-
-	var canvas = document.getElementById(backdrop);
-	if(id == 0) {
-		canvas.width = 460;
-	}
-	if(id == 1) {
-		canvas.width = 460;
-	}
-	canvas.height = 450;
-
-	if(id == 0) {
-		var animation = sprite({
-			context: canvas.getContext("2d"),
-			width: 5098,
-			height: 450,
-			image: diningImage,
-			numberOfFrames: 11,
-			ticksPerFrame: 60,
-			loop: 1
-			}, frameNum);
-			animation.render();
-	}
-	if(id == 1) {
-		var animation = sprite({
-			context: canvas.getContext("2d"),
-			width: 3244,
-			height: 450,
-			image: diningImage,
-			numberOfFrames: 7,
-			ticksPerFrame: 60,
-			loop: 1
-			}, frameNum);
-			animation.render();
-	}
-
-	function frameLoop() {
-		window.requestAnimationFrame(frameLoop);
-
-		animation.render();
-	}
-
-	return 0;
-}
+var rscImage = new Image();
+rscImage.src = "code_block_assets/success_scaled.png";
+var arbImage = new Image();
+arbImage.src = "code_block_assets/arbitrator_layer_scaled.png";
+var numbersImage = new Image();
+numbersImage.src = "code_block_assets/number_layer_scaled.png";
 
 function showHierarchy(frame) {
 	var r = "rscHierarchySol";
 	var a = "arbitratorSol";
+	var canvas = document.getElementById('animation').getContext('2d');
+	canvas.clearRect(0, 0, canvas.width, canvas.height);
+	var canvas2 = document.getElementById('animation').getContext('2d');
+	canvas2.clearRect(0, 0, canvas2.width, canvas2.height);
 	document.getElementById(a).style.display = "none";
 	document.getElementById(r).style.display = "inline";
-	animate("rscHierarchy.png", "hAnimation", frame, 0);
+	arbCount = 0;
+	rscCount = 0;
+	updateHierarchy();
 	return 0;
 }
 
 function showArbitrator(frame) {
 	var r = "rscHierarchySol";
 	var a = "arbitratorSol";
+	var canvas = document.getElementById('animation').getContext('2d');
+	canvas.clearRect(0, 0, canvas.width, canvas.height);
+	var canvas2 = document.getElementById('animation').getContext('2d');
+	canvas2.clearRect(0, 0, canvas2.width, canvas2.height);
 	document.getElementById(r).style.display = "none";
 	document.getElementById(a).style.display = "inline";
-	animate("arbitrator.png", "aAnimation", frame, 1);
+	arbCount = 0;
+	rscCount = 0;
+	updateArbitrator();
 	return 0;
 }
 
 function updateHierarchy() {
-	if(check == 9000){
-		rscCount++;
-		showHierarchy(rscCount);
-		rscCount++;
-		check = 9001;
-
-	}
-	else if(rscCount < 11) {
-
-		showHierarchy(rscCount);
+	var canvas = document.getElementById('num_layer');
+	var canvas2 = document.getElementById('animation')
+	var context = canvas2.getContext('2d');
+	var num_context = canvas.getContext('2d');
+	context.clearRect(0, 0, canvas2.width, canvas2.height);
+	num_context.clearRect(0, 0, canvas.width, canvas.height);
+	context.drawImage(rscImage, 560 * rscCount, 0, 560, 504, 0, 0, 560, 504);	
+	num_context.drawImage(numbersImage, 0, 0);	
+	if(rscCount < 6) {
 		rscCount++;
 	}
 	else {
 		rscCount = 0;
-		showHierarchy(0);
-		rscCount++;
 	}
+
 	return 0;
 }
 
 function updateArbitrator() {
-	if(check2 == 9000){
-		arbCount++;
-		showArbitrator(arbCount);
-		arbCount++;
-		check2 = 9001;
-
-	}
+	var canvas = document.getElementById('num_layer');
+	var canvas2 = document.getElementById('animation');
+	var context = canvas2.getContext('2d');
+	var num_context = canvas.getContext('2d');
+	num_context.clearRect(0, 0, canvas.width, canvas.height);
+	context.clearRect(0, 0, canvas2.width, canvas2.height);
+	context.drawImage(arbImage, 560 * arbCount, 0, 560, 504, 0, 0, 560, 504);
 	if(arbCount < 7) {
-		showArbitrator(arbCount);
 		arbCount++;
 	}
 	else {
 		arbCount = 0;
-		showArbitrator(0);
-		arbCount++;
 	}
+
 	return 0;
 }
 </script>
