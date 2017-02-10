@@ -302,7 +302,7 @@ function animate(stick_mode, arbitrator_mode, success) {
 function run() {
 	transaction("Run My Code Clicked");
 	var next = document.getElementById('next_button');
-	next.setAttribute("href", "thankyou.php?PID=<?=$PID?>");
+	next.setAttribute("href", "compare.php?PID=<?=$PID?>");
 	test += 1;
 
 	var layer1 = document.getElementById('layer1')
