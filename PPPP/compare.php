@@ -128,7 +128,7 @@ function serve(i){<br>
 }<br>`
 		];
 
-var answers = ["Right", "Wrong"];
+var answers = ["Correct! The Waiter ensure each philosopher is given the same amount of time to eat.", "Incorrect :( As the waiter circles the table, he first ensure philosophers 1-4 are not hungry, making him unable to reach philosopher 5 before that philosopher starves."];
 
 
 
