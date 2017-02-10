@@ -121,7 +121,7 @@ Correct! Since pre-check passengers are always given priority and always in line
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Deadlock</button>
 <div id="answer2" class="border" style="display: none">
 <div style="background-color:#f45d01">
-Incorrect :( Since pre-check passengers are always going through security, at least one type of passenger is always recieving service. An example of Deadlock in this case would be two unbelievablly nice passengers, both a pre-check and regular. The pre-check sees a regular in line and offers for them to go first. Appreciative of the offer, the regular insists the pre-check go first, which the pre-check brushes off and again offers the regular go through security first. This back-and-forth exchange continues until everyone dies.
+Incorrect :( Since pre-check passengers are always going through security, at least one type of passenger is always recieving service. An example of Deadlock in this case would be two unbelievablly nice passengers, both a pre-check and regular. The pre-check sees a regular in line and offers for them to go first. Appreciative of the offer, the regular insists the pre-check go first, which the pre-check brushes off and again offers the regular go through security first. This back-and-forth exchange continues indefinitely.
 </div>
 </div>
 </div>
