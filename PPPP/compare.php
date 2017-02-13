@@ -230,7 +230,7 @@ Function philosopher{<br>
 &nbsp;&nbsp;hasSticks = False;<br>
 &nbsp;&nbsp;while(full == False){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(hunger == MAX){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return “starved”;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return &quot;starved&quot;;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(hasSticks == True){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(timer > 0 AND full == False){<br>
@@ -248,7 +248,7 @@ Function philosopher{<br>
 &nbsp;&nbsp;while(doneThinking == False){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;think(randomTime);<br>
 &nbsp;&nbsp;}<br>
-&nbsp;&nbsp;Return “success”;<br>
+&nbsp;&nbsp;Return &quot;success&quot;;<br>
 }<br>
 </p>
 </div>
@@ -272,7 +272,7 @@ Function philosopher{<br>
 &nbsp;&nbsp;hasSticks = False;<br>
 &nbsp;&nbsp;while(full == False){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(hunger == MAX){<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return “starved”;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return &quot;starved&quot;;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(hasSticks == True){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(full == False){<br>
