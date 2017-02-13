@@ -100,7 +100,9 @@ function clickUp() {
 </script>
 
 
+<h2> Identifying Deadlock and Starvation Activity </h2>
 
+Below we present a few real life examples of potential deadlock and starvation. For each example, please select whether you think it is a case of deadlock, starvation, or neither.<br/><br/>
 
 <div class="outline">
 <p id="pseudobox">

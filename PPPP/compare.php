@@ -128,7 +128,7 @@ function serve(i){<br>
 }<br>`
 		];
 
-var answers = ["Correct! The Waiter ensure each philosopher is given the same amount of time to eat.", "Incorrect :( As the waiter circles the table, he first ensure philosophers 1-4 are not hungry, making him unable to reach philosopher 5 before that philosopher starves."];
+var answers = ["Correct! The Waiter ensure each philosopher is given the same amount of time to eat.", "Incorrect. As the waiter circles the table, he first ensure philosophers 1-4 are not hungry, making him unable to reach philosopher 5 before that philosopher starves."];
 
 
 
@@ -206,6 +206,10 @@ p[class="border"] {border:1px solid #000000}
 	}
 
 	</script>
+
+<h2> Comparing Solutions for the Dining Philosophers Problem Activity </h2>
+
+Below you will find two pseudocode solutions for the Dining Philosophers Problem. Building off you experience with using the code blocks to design your own solution, please compare between the presented solutions and determine select which one will work.<br/><br/>
 
 <div>
 <table>
@@ -301,7 +305,7 @@ Function philosopher{<br>
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Code 1</button>
 <p id="answer1" class="border" style="display: none">
-This code successfully avoids deadlock and starvation!  Since the sticks are numbered, we can avoid deadlock by making sure not all five philosophers are holding one chopstick.  We also avoid starvation with the timer on eating preventing a single philosopher from eating for too long.
+Correct! Since the sticks are numbered, we can avoid deadlock by making sure not all five philosophers are holding one chopstick. We also avoid starvation with the timer on eating preventing a single philosopher from eating for too long.
 </p>
 </div>
 </td>
@@ -309,7 +313,7 @@ This code successfully avoids deadlock and starvation!  Since the sticks are nu
 <div>
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Code 2</button>
 <p id="answer2" class="border" style="display: none">
-Since philosophers eat until full, we may encounter starvation in which philosophers starve waiting for one philosopher to eat their fill.  We also may encounter deadlock since we place no restrictions on which chopsticks to pick up, thus each philosopher may pick up one chopstick and all be stuck waiting on the other chopstick.
+Incorrect. Since philosophers eat until full, we may encounter starvation in which philosophers starve waiting for one philosopher to eat their fill. We also may encounter deadlock since we place no restrictions on which chopsticks to pick up, thus each philosopher may pick up one chopstick and all be stuck waiting on the other chopstick.
 </p>
 </div>
 </td>
