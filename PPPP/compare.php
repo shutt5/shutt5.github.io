@@ -18,8 +18,8 @@ var pseudocode = [
 	`function startDinnerParty(){<br>
 &nbsp;&nbsp;//seat philosophers<br>
 &nbsp;&nbsp;P1, P2, P3, P4, P5 = new philosopher<br>
-&nbsp;&nbsp;startTimer()<br>	
-&nbsp;&nbsp;waiter()<br>	
+&nbsp;&nbsp;startTimer()<br>
+&nbsp;&nbsp;waiter()<br>
 &nbsp;&nbsp;while(dinnerParty == 'going well'){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(totalSeconds == 30){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('successful party!')<br>
@@ -63,13 +63,25 @@ function serve(i){<br>
 &nbsp;&nbsp;waitOneSecond()<br>
 &nbsp;&nbsp;i.chopsticks = false<br>
 }<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-`, 
+`,
 	`function startDinnerParty(){<br>
 &nbsp;&nbsp;//seat philosophers<br>
 &nbsp;&nbsp;P1, P2, P3, P4, P5 = new philosopher<br>
-&nbsp;&nbsp;startTimer()<br>	
-&nbsp;&nbsp;waiter()<br>	
+&nbsp;&nbsp;startTimer()<br>
+&nbsp;&nbsp;waiter()<br>
 &nbsp;&nbsp;while(dinnerParty == 'going well'){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(totalSeconds == 30){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('successful party!')<br>
@@ -212,10 +224,11 @@ p[class="border"] {border:1px solid #000000}
 Below you will find two pseudocode solutions for the Dining Philosophers Problem. Building off you experience with using the code blocks to design your own solution, please compare between the presented solutions and determine select which one will work.<br/><br/>
 
 <div>
-<table>
-<tr>
-<td>
+
+<div class="row">
+	 <div class="col-md-6">
 <div class="outline">
+
 <p id="pseudobox1">
 Function main{<br>
 &nbsp;&nbsp;numberSticks();<br>
@@ -256,9 +269,10 @@ Function philosopher{<br>
 }<br>
 </p>
 </div>
-</td>
 
-<td>
+</div>
+
+	<div class="col-md-6">
 <div class="outline">
 <p id="pseudobox2">
 Function main{<br>
@@ -296,29 +310,30 @@ Function philosopher{<br>
 &nbsp;&nbsp;}<br>
 &nbsp;&nbsp;Return &quot;success&quot;;<br>
 }
+<br>
+<br>
+<br>
 </p>
 </div>
-</td>
-</tr>
-<tr>
-<td>
-<div>
+</div> </div>
+
+<div class="row">
+	 <div class="col-md-6">
+
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(1)">Code 1</button>
 <p id="answer1" class="border" style="display: none">
 Correct! Since the sticks are numbered, we can avoid deadlock by making sure not all five philosophers are holding one chopstick. We also avoid starvation with the timer on eating preventing a single philosopher from eating for too long.
 </p>
+
 </div>
-</td>
-<td>
-<div>
+<div class="col-md-6">
+
 <button type="button" class="btn btn-lg btn-primary" onclick="showAnswer(2)">Code 2</button>
 <p id="answer2" class="border" style="display: none">
 Incorrect. Since philosophers eat until full, we may encounter starvation in which philosophers starve waiting for one philosopher to eat their fill. We also may encounter deadlock since we place no restrictions on which chopsticks to pick up, thus each philosopher may pick up one chopstick and all be stuck waiting on the other chopstick.
 </p>
 </div>
-</td>
-</tr>
-</table>
+</div>
 </div>
 
 <div class="row">
