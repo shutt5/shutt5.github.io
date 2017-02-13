@@ -290,7 +290,7 @@ Function philosopher{<br>
 &nbsp;&nbsp;while(doneThinking == False){<br>
 &nbsp;&nbsp;&nbsp;&nbsp;think(randomTime);<br>
 &nbsp;&nbsp;}<br>
-&nbsp;&nbsp;Return “success”;<br>
+&nbsp;&nbsp;Return &quot;success&quot;;<br>
 }
 </p>
 </div>
@@ -328,4 +328,3 @@ Since philosophers eat until full, we may encounter starvation in which philosop
 
 </body>
 </html>
->>>>>>> 310bd78a2dd91f2f7422cd76e46498a2385f6e58
