@@ -19,7 +19,7 @@
 transaction("PageLoaded");
 </script>
 
-<h1> Placating Plato with Plates of Pasta </h1>
+<h1> Placating Plato with Plates of Pasta: An Interactive Tool for Teaching the Dining Philosophers Problem </h1>
 <br>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
