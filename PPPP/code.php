@@ -27,7 +27,7 @@ function sprite (options) {
     var that = {},
         frameIndex = 0,
         tickCount = 0,
-		ticksPerFrame = 240 * test,
+		ticksPerFrame = 120 * test,
 		numberOfFrames = options.numberOfFrames || 1;
 
     that.context = options.context;
@@ -95,6 +95,10 @@ var dpToolbox = ["request_sticks_in_order","eat_until_timer_ends","blank100","bl
 var mainToolbox = ["number_sticks_in_order","run_timer","interrupt_current_action","blank300","blank301"];
 var dragSrc;
 
+var items = [{"name": "do_action", "id": -1}, {"name": "if_too_hungry", "id": 1}, {"name": "release_sticks", "id": -1}, {"name": "report_starvation", "id": -1}, {"name": "exit_failure", "id": 4}, {"name": "close1", "id": 5}, {"name": "if_not_full", "id": 0}, {"name": "if_has_sticks", "id": 7}, {"name": "eat_until_full", "id": 8}, {"name": "blank1", "id": 9}, {"name": "blank2", "id": 10}, {"name": "blank3", "id": -1}, {"name": "close2", "id": 12}, {"name": "else1", "id": 13}, {"name": "hunger++", "id": 14}, {"name": "request_sticks_no_order", "id": 15}, {"name": "blank4", "id": 16}, {"name": "blank5", "id": -1}, {"name": "repeat_do_action", "id": -1}, {"name": "close3", "id": 19}, {"name": "close4", "id": 20}, {"name": "if_done_thinking", "id": 21}, {"name": "release_sticks", "id": -1}, {"name": "think", "id": 23}, {"name": "exit_success", "id": 25}, {"name": "close5", "id": 24}, {"name": "close6", "id": -1}, {"name": "request_sticks_in_order", "id": 100}, {"name": "eat_until_timer_ends", "id": 101}, {"name": "blank100", "id": 102}, {"name": "blank101", "id": 103}, {"name": "number_sticks_no_order", "id": 200}, {"name": "run_philosophers", "id": 201}, {"name": "while_true", "id": 202}, {"name": "if_stick_request", "id": 203}, {"name": "give_available_sticks", "id": 204}, {"name": "blank200", "id": 205}, {"name": "blank201", "id": 206}, {"name": "blank202", "id": -1}, {"name": "blank203", "id": -1}, {"name": "blank204", "id": -1}, {"name": "close200", "id": 210}, {"name": "close201", "id": 211}, {"name": "number_sticks_in_order", "id": 300}, {"name": "run_timer", "id": 301}, {"name": "interrupt_current_action", "id": 303}, {"name": "blank300", "id": 304}, {"name": "blank301", "id": 305}];
+
+
+
 function transaction(comment){
   $.get("transact.php?PID=<?=$PID?>&string=<?=$PID?>,<?=$PageName?>," + comment);
 }
@@ -122,6 +126,7 @@ function drop(ev) {
 	var src = document.getElementById(dragSrc);
 	var tar = ev.target.parentNode.id;
 	var origin = src.id;
+
 	if(tar < 200 && origin > 199) {
 		return;
 	}
@@ -133,54 +138,18 @@ function drop(ev) {
 	switchDat.innerHTML = ev.target.parentNode.innerHTML;
 	ev.target.parentNode.innerHTML = src.innerHTML;
 	src.innerHTML = switchDat.innerHTML;
-
-	var obj = document.getElementById(dat).id;
-	var obj2 = 0;
-	var i = Number(tar);
-	if(i < 100) {
-		obj2 = dpBlocks[i];
-		for(var j = 0; j < dpBlocks.length; j++) {
-			if(dpBlocks[j] == obj) {
-				dpBlocks[j] = obj2;
-				break;
-			}
+	var item1;
+	var item2;
+	for(var acc = 0; acc < items.length; acc++) {
+		if(items[acc].id == origin) {
+			item1 = acc;
 		}
-		dpBlocks[i] = obj;
-	}
-	else if(i > 99 && i < 200) {
-		for(var j = 0; j < dpBlocks.length; j++) {
-			for(var k = 0; k < dpToolbox.length; k++) {
-				if(dpBlocks[j] == obj) {
-					dpBlocks[j] = dpToolbox[i - 100];
-					dpToolbox[i - 100] = obj;
-					break;
-				}
-			}
+		if(items[acc].id == tar) {
+			item2 = acc;
 		}
-		dpToolbox[i - 100] = obj;
 	}
-	else if(i > 199 && i < 300) {
-		obj2 = mainBlocks[i - 200];
-		for(var j = 0; j < mainBlocks.length; j++) {
-			if(mainBlocks[j] == obj) {
-				mainBlocks[j] = obj2;
-				break;
-			}
-		}
-		mainBlocks[i - 200] = obj;
-	}
-	else {
-		for(var j = 0; j < mainBlocks.length; j++) {
-			for(var k = 0; k < mainToolbox.length; k++) {
-				if(mainBlocks[j] == obj) {
-					mainBlocks[j] = mainToolbox[i - 300];
-					mainToolbox[i - 300] = obj;
-					break;
-				}
-			}
-		}
-		mainToolbox[i - 300] = obj;
-	}
+	items[item1].id = tar;
+	items[item2].id = origin;
 
 	return;
 }
@@ -333,69 +302,67 @@ function run() {
 	var error = 0;
 	var error_string = "";
 
-	for(var j = 0; j < dpBlocks.length; j++) {
-		if(dpBlocks[j] == "eat_until_full") {
-			eat_until_full = j;
+	for(var j = 0; j < items.length; j++) {
+		if(items[j].name == "eat_until_full") {
+			eat_until_full = items[j].id;
 		}
-		else if(dpBlocks[j] == "eat_until_timer_ends") {
-			eat_until_timer_ends = j;
+		else if(items[j].name == "eat_until_timer_ends") {
+			eat_until_timer_ends = items[j].id;
 		}
-		else if(dpBlocks[j] == "request_sticks_no_order") {
-			request_sticks_no_order = j;
+		else if(items[j].name == "request_sticks_no_order") {
+			request_sticks_no_order = items[j].id;
 		}
-		else if(dpBlocks[j] == "request_sticks_in_order") {
-			request_sticks_in_order = j;
+		else if(items[j].name == "request_sticks_in_order") {
+			request_sticks_in_order = items[j].id;
 		}
-		else if(dpBlocks[j] == "repeat_do_action100") {
-			repeat_do_action = j;
+		else if(items[j].name == "repeat_do_action100") {
+			repeat_do_action = items[j].id;
 		}
-		else if(dpBlocks[j] == "hunger++") {
-			hunger = j;
+		else if(items[j].name == "hunger++") {
+			hunger = items[j].id;
+		}
+		else if(items[j].name == "number_sticks_no_order") {
+			number_sticks_no_order = items[j].id - 200;
+		}
+		else if(items[j].name == "number_sticks_in_order") {
+			number_sticks_in_order = items[j].id - 200;
+		}
+		else if(items[j].name == "give_available_sticks") {
+			give_available_sticks = items[j].id - 200;
+		}
+		else if(items[j].name == "run_timer") {
+			run_timer = items[j].id - 200;
+		}
+		else if(items[j].name == "interrupt_current_action") {
+			interrupt_current_action = items[j].id - 200;
 		}
 	}
-	if(eat_until_full != -1 && eat_until_timer_ends != -1) {
+	if(eat_until_full < 100 && eat_until_timer_ends < 100) {
 		error = 1;
 		error_string = error_string + ("Contradiction: Philosopher should only eat once per loop iteration.\nPlease remove either 'eat until full' or 'eat until timer ends'.\n\n");
 	}
-	if(request_sticks_no_order != -1 && request_sticks_in_order != -1) {
+	if(request_sticks_no_order < 100 && request_sticks_in_order < 100) {
 		error = 1;
 		error_string = error_string + ("Contradiction: Philosopher should only request chopsticks once per loop iteration.\nPlease remove either 'request sticks in order' or 'request sticks in no order'.\n\n");
 	}
-	if(request_sticks_in_order == -1 && request_sticks_no_order == -1) {
+	if(request_sticks_in_order > 99 && request_sticks_no_order > 99) {
 		error = 1;
 		error_string = error_string + ("Error: Philosopher must request chopsticks.\nPlease put either 'request sticks in order' or 'request sticks in no order' back in the code.\n\n");
 	}
-	if(eat_until_full == -1 && eat_until_timer_ends == -1) {
+	if(eat_until_full > 99 && eat_until_timer_ends > 99) {
 		error = 1;
 		error_string = error_string + ("Error: Philosopher must eat.\nPlease put either 'eat until full' or 'eat until timer ends' back in the code.\n\n");
 	}
 
-	for(var j = 0; j < mainBlocks.length; j++) {
-		if(mainBlocks[j] == "number_sticks_no_order") {
-			number_sticks_no_order = j;
-		}
-		else if(mainBlocks[j] == "number_sticks_in_order") {
-			number_sticks_in_order = j;
-		}
-		else if(mainBlocks[j] == "give_available_sticks") {
-			give_available_sticks = j;
-		}
-		else if(mainBlocks[j] == "run_timer") {
-			run_timer = j;
-		}
-		else if(mainBlocks[j] == "interrupt_current_action") {
-			interrupt_current_action = j;
-		}
-	}
-	if(number_sticks_no_order == -1 && number_sticks_in_order == -1) {
+	if(number_sticks_no_order > 99 && number_sticks_in_order > 99) {
 		error = 1;
-		error_string = error_string + ("Error: Main function must number the chopsticks so the dining philosophers know which ones they can pick up.\nPlease put either 'number sticks in order' or 'number sticks in no order' back in the code.");
+		error_string = error_string + ("Error: Main function must number the chopsticks so the dining philosophers know which ones they can pick up.\nPlease put either 'number sticks in order' or 'do not number sticks' back in the code.");
 	}
-	if(number_sticks_no_order != -1 && number_sticks_in_order != -1) {
+	if(number_sticks_no_order < 100 && number_sticks_in_order < 100) {
 		error = 1;
-		error_string = error_string + ("Contradiction: Main function should only number chopsticks once.\nPlease remove either 'number sticks in order' or 'number sticks in no order'.");
+		error_string = error_string + ("Contradiction: Main function should only number chopsticks once.\nPlease remove either 'number sticks in order' or 'do not number sticks'.");
 	}
-	if(give_available_sticks == -1) {
+	if(give_available_sticks > 99) {
 		error = 1;
 		error_string = error_string + ("Error: Main function must give available adjacent chopsticks to a philosopher upon request.\nPlease put 'give available sticks' back in the code and try again.");
 	}
@@ -489,8 +456,8 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 <div id="codeSection">
 <div class="bigBox">
 <b>Philosopher Behavior:</b><br/>
-<div class="outline">
-<div id="6" class="flatBox">
+<div id="philosopher_code" class="outline">
+<div id="0" class="flatBox">
 <img id="if_not_full" src="./code_block_assets/if_not_full.png" draggable="false" width="300" height="25"></img>
 </div>
 <div id="1" class="flatBox">
@@ -541,10 +508,10 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 <div id="23" class="flatBox">
 <img id="think" src="./code_block_assets/think.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="25" class="flatBox">
+<div id="24" class="flatBox">
 <img id="close5" src="./code_block_assets/close_brace.png" draggable="false" width="300" height="25"></img>
 </div>
-<div id="24" class="flatBox">
+<div id="25" class="flatBox">
 <img id="exit_success" src="./code_block_assets/exit_success.png" draggable="false" width="300" height="25"></img>
 </div>
 </div>
@@ -554,7 +521,7 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 
 <div class="bigBox">
 <b>Main Function Behavior:</b><br/>
-<div class="outline">
+<div id="main_code" class="outline">
 <div id="200" class="codeBox" >
 <img id="number_sticks_no_order" src="./code_block_assets/number_sticks_no_order.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('number_sticks_no_order').parentNode.id)" width="300" height="25"></img>
 </div>
@@ -588,7 +555,7 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 
 <div class="bigBox">
 <b>Philosopher Behavior Toolbox:</b><br/>
-<div class="outline">
+<div id="philosopher_toolbox" class="outline">
 <div id="100" class="codeBox" >
 <img id="request_sticks_in_order" src="./code_block_assets/request_sticks_in_order.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('request_sticks_in_order').parentNode.id)" width="300" height="25"></img>
 </div>
@@ -606,7 +573,7 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 
 
 <b>Main Function Behavior Toolbox:</b><br/>
-<div class="outline">
+<div id="main_toolbox" class="outline">
 <div id="300" class="codeBox" >
 <img id="number_sticks_in_order" src="./code_block_assets/number_sticks_in_order.png" draggable="true" ondrop="drop(event)" ondragover="droppable(event)" ondragstart="drag(event, document.getElementById('number_sticks_in_order').parentNode.id)" width="300" height="25"></img>
 </div>
