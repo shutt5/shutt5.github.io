@@ -279,7 +279,7 @@ function run() {
 	test += 1;
 
 	var layer1 = document.getElementById('layer1')
-	var context = layer2.getContext('2d');
+	var context = layer1.getContext('2d');
 	context.clearRect(0, 0, layer1.width, layer1.height);
 
 	var eat_until_full = -1;
@@ -386,18 +386,18 @@ function run() {
 		success = 4;
 	}
 
-	if(number_sticks_in_order != -1) {
+	if(number_sticks_in_order < 100) {
 		stick_mode = 1;
 	}
 
-	if(interrupt_current_action != -1 && (success > 0 && success < 3)) {
+	if(interrupt_current_action < 100 && (success > 0 && success < 3)) {
 		arbitrator_mode = 1;
 	}
-	else if(interrupt_current_action != -1 && success <= 0) {
+	else if(interrupt_current_action < 100 && success <= 0) {
 		arbitrator_mode = 2;
 	}
 	if(success < 1) {
-		if(eat_until_full != -1 && (run_timer == -1 && interrupt_current_action == -1)) {
+		if(eat_until_full < 100 && (run_timer > 99 && interrupt_current_action > 99)) {
 			success = 0;
 		}
 		else {
