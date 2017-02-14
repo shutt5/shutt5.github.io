@@ -444,7 +444,14 @@ The code with a gray background is static, you cannot move it. Code that is in a
 <p>
 When you submit your test code, you will see how your choices play out. If you have a logical contradiction in your code, you will see an error message popup. You will need to give it at least one try before proceeding to the next activity.
 </p>
+
+<button id="codeSubmit" type="button" class="btn btn-lg btn-primary" onclick="run()">Test My Code</button>
+<a href = "#" id="next_button" onclick="next_check()"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
+
 </div>
+
+
+
 <style>
 div[class="outline"] {border:3px solid #000000;background-color:#cbcbcb;}
 div[class="codeBox"] {width:302px;height:27px;border:1px solid #000000;}
@@ -609,15 +616,6 @@ div[class="bigBox"] {float: left; padding: 0px 0px 0px 10px}
 
 <div id="junkyard" style="display:none">
 </div><br/>
-<div style="position: relative; left: 1280px; bottom: 150px">
-<button id="codeSubmit" type="button" class="btn btn-lg btn-primary" onclick="run()">Test My Code</button>
-<br/><br/>
-<div class="row">
-<div class="col-md-2">
-<a href = "#" id="next_button" onclick="next_check()"><button type="button" class="btn btn-lg btn-primary">Next</button></a>
-</div>
-</div>
 
-</div>
 </body>
 </html>
