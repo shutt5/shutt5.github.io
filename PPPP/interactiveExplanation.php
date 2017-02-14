@@ -222,6 +222,7 @@ include 'nav.php';
             p1.num = 1; p1.state = 0; p1.starving = false;
             p1.graphics.beginBitmapFill(queue.getResult("oneThinking")).drawRect(0, 0, 130, 130)
             p1.x = 30; p1.y = 200;
+            p1.name = "p1";
             p1.addEventListener("mouseover", function () { rollOver(p1, queue.getResult("oneEatOverlay"), queue.getResult("oneThinkOverlay")) });
             p1.addEventListener("mouseout", function () { rollOut(p1, p1BarCommand, queue.getResult("oneEating"), queue.getResult("oneThinking"), queue.getResult("oneStarving")) });
             p1.addEventListener("click", function () { onClick(p1, p1BarCommand, 200, 330, c1BarCommand, 50, 10, c5BarCommand, 65, -20, p2, p5, queue.getResult("oneNoChopsticks")) });
@@ -236,6 +237,7 @@ include 'nav.php';
             p2.num = 2; p2.state = 0; p2.starving = false;
             p2.graphics.beginBitmapFill(queue.getResult("twoThinking")).drawRect(0, 0, 130, 130)
             p2.x = 285; p2.y = 10;
+            p2.name = "p2";
             p2.addEventListener("mouseover", function () { rollOver(p2, queue.getResult("twoEatOverlay"), queue.getResult("twoThinkOverlay")) });
             p2.addEventListener("mouseout", function () { rollOut(p2, p2BarCommand, queue.getResult("twoEating"), queue.getResult("twoThinking"), queue.getResult("twoStarving")) });
             p2.addEventListener("click", function () { onClick(p2, p2BarCommand, 10, 140, c1BarCommand, -55, 35, c2BarCommand, 55, 35, p3, p1, queue.getResult("twoNoChopsticks")) });
@@ -250,6 +252,7 @@ include 'nav.php';
             p3.num = 3; p3.state = 0; p3.starving = false;
             p3.graphics.beginBitmapFill(queue.getResult("threeThinking")).drawRect(0, 0, 130, 130)
             p3.x = 540; p3.y = 200;
+            p3.name = "p3";
             p3.addEventListener("mouseover", function () { rollOver(p3, queue.getResult("threeEatOverlay"), queue.getResult("threeThinkOverlay")) });
             p3.addEventListener("mouseout", function () { rollOut(p3, p3BarCommand, queue.getResult("threeEating"), queue.getResult("threeThinking"), queue.getResult("threeStarving")) });
             p3.addEventListener("click", function () { onClick(p3, p3BarCommand, 200, 330, c2BarCommand, -65, -5, c3BarCommand, -75, 10, p2, p4, queue.getResult("threeNoChopsticks")) });
@@ -264,6 +267,7 @@ include 'nav.php';
             p4.num = 4; p4.state = 0; p4.starving = false;
             p4.graphics.beginBitmapFill(queue.getResult("fourThinking")).drawRect(0, 0, 130, 130)
             p4.x = 445; p4.y = 485;
+            p4.name = "p4";
             p4.addEventListener("mouseover", function () { rollOver(p4, queue.getResult("fourEatOverlay"), queue.getResult("fourThinkOverlay")) });
             p4.addEventListener("mouseout", function () { rollOut(p4, p4BarCommand, queue.getResult("fourEating"), queue.getResult("fourThinking"), queue.getResult("fourStarving")) });
             p4.addEventListener("click", function () { onClick(p4, p4BarCommand, 485, 615, c3BarCommand, 55, -10, c4BarCommand, -55, -20, p3, p5, queue.getResult("fourNoChopsticks")) });
@@ -278,6 +282,7 @@ include 'nav.php';
             p5.state = 0; p5.starving = false;
             p5.graphics.beginBitmapFill(queue.getResult("fiveThinking")).drawRect(0, 0, 130, 130)
             p5.num = 5; p5.x = 120; p5.y = 485;
+            p5.name = "p5";
             p5.addEventListener("mouseover", function () { rollOver(p5, queue.getResult("fiveEatOverlay"), queue.getResult("fiveThinkOverlay")) });
             p5.addEventListener("mouseout", function () { rollOut(p5, p5BarCommand, queue.getResult("fiveEating"), queue.getResult("fiveThinking"), queue.getResult("fiveStarving")) });
             p5.addEventListener("click", function () { onClick(p5, p5BarCommand, 485, 615, c4BarCommand, 65, -20, c5BarCommand, -65, -5, p4, p1, queue.getResult("fiveNoChopsticks")) });
@@ -319,6 +324,8 @@ include 'nav.php';
                 retry = 1;
             }
 
+            transaction("Game:Start Clicked");
+
             stage.removeChild(startScreen);
             stage.removeChild(startButton);
             ticker = setInterval(tick, 50);
@@ -340,12 +347,15 @@ include 'nav.php';
                 createjs.Tween.get(pBarCommand, { loop: false, override: true }).to({ h: 130, y: y1 }, duration);
                 createjs.Tween.get(c1BarCommand, { loop: false, paused: false }).to({ y: c1y, x: c1x }, 200);
                 createjs.Tween.get(c2BarCommand, { loop: false, paused: false }).to({ y: c2y, x: c2x }, 200);
+                transaction("Game:" + p.name + " Now Eating")
             }
             else if (pL.state == 1 || pR.state == 1) {
                 run.push([p.num, 'X'])
                 p.graphics.clear().beginBitmapFill(noChopsticksImg).drawRect(0, 0, 130, 130)
+                transaction("Game:" + p.name + " No Available Chopsticks")
             }
             else {
+                transaction("Game:" + p.name + " No Longer Eating")
                 p.state = 0;
                 run.push([p.num, p.state])
                 duration = speed * (pBarCommand.h / 130);
@@ -391,6 +401,7 @@ include 'nav.php';
 
             clearInterval(scoreTimer);
             clearInterval(ticker);
+            transaction("Game:Game Over");
 
             p1.removeAllEventListeners();
             p2.removeAllEventListeners();
@@ -416,6 +427,7 @@ include 'nav.php';
             endTotal = new createjs.Text(score, "50px Arial", "white");
             endTotal.x = 325; endTotal.y = 260;
             stage.addChild(endTotal);
+            transaction("Game: Score = " + endTotal);
 
             retryButton = new createjs.Shape()
             retryButton.graphics.beginBitmapFill(queue.getResult("retry")).drawRect(0, 0, 287, 103)
@@ -466,6 +478,7 @@ include 'nav.php';
             if ((p1BarCommand.h == 0 || p2BarCommand.h == 0 || p3BarCommand.h == 0 || p4BarCommand.h == 0 || p5BarCommand.h == 0) && gameOverFlag == 0) {
                 //flag to run gameOver() only once
                 gameOverFlag = 1;
+                transaction("Game: Game Ending Health Bars : " + p1BarCommand.h + " " + p2BarCommand.h + " " + p3BarCommand.h + " " + p4BarCommand.h + " " + p5BarCommand.h )
                 gameOver();
             }
         }
@@ -474,9 +487,11 @@ include 'nav.php';
             if (pBarCommand.h < 40 && p.starving == false) {
                 p.graphics.beginBitmapFill(starvingImg).drawRect(0, 0, 130, 130)
                 p.starving = true;
+                transaction("Game:" + p.name + " Starving")
             }
             if (pBarCommand.h > 40 && p.starving == true) {
                 p.starving = false;
+                transaction("Game:" + p.name + " No Longer Starving")
                 if (p.state == 0) {
                     p.graphics.beginBitmapFill(thinkingImg).drawRect(0, 0, 130, 130)
                 }
