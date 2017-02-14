@@ -36,7 +36,7 @@ include 'nav.php';
 <p>Having covered the basics, try out the following visualization.
 </p>
 
-<p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are switched to an eating state. Be careful though, once a philosopher starves it'll be game over!
+<p>Click on a philosopher to change their state. As philosophers think, their health bar will begin to deplete until they are switched to an eating state. Be careful though, once a philosopher starves it'll be game over! Hint: Get a higher score by keeping all philosophers health bars as high as you can.
 </p>
 
 <center>
@@ -69,7 +69,7 @@ include 'nav.php';
         var score = 0;
         var scoreTotal;
         var queue = new createjs.LoadQueue();
-        var speed = 10000;
+        var speed = 20000;
         var scoreTimer;
         var ticker;
         var gameOverFlag = 0;
@@ -175,7 +175,7 @@ include 'nav.php';
             }
 
             score = 0;
-            speed = 10000;
+            speed = 20000;
             gameOverFlag = 0;
 
             c1 = new createjs.Shape();
@@ -328,13 +328,13 @@ include 'nav.php';
 
             stage.removeChild(startScreen);
             stage.removeChild(startButton);
-            ticker = setInterval(tick, 50);
+            ticker = setInterval(tick, 20);
             scoreTimer = setInterval(speedIncrease, 1000);
-            createjs.Tween.get(p1BarCommand, { loop: false, paused: false }).to({ h: 0, y: 330 }, 10000);
-            createjs.Tween.get(p2BarCommand, { loop: false, paused: false }).to({ h: 0, y: 140 }, 10000);
-            createjs.Tween.get(p3BarCommand, { loop: false, paused: false }).to({ h: 0, y: 330 }, 10000);
-            createjs.Tween.get(p4BarCommand, { loop: false, paused: false }).to({ h: 0, y: 615 }, 10000);
-            createjs.Tween.get(p5BarCommand, { loop: false, paused: false }).to({ h: 0, y: 615 }, 10000);
+            createjs.Tween.get(p1BarCommand, { loop: false, paused: false }).to({ h: 0, y: 330 }, speed);
+            createjs.Tween.get(p2BarCommand, { loop: false, paused: false }).to({ h: 0, y: 140 }, speed);
+            createjs.Tween.get(p3BarCommand, { loop: false, paused: false }).to({ h: 0, y: 330 }, speed);
+            createjs.Tween.get(p4BarCommand, { loop: false, paused: false }).to({ h: 0, y: 615 }, speed);
+            createjs.Tween.get(p5BarCommand, { loop: false, paused: false }).to({ h: 0, y: 615 }, speed);
         }
 
         function onClick(p, pBarCommand, y1, y2, c1BarCommand, c1y, c1x, c2BarCommand, c2y, c2x, pL, pR, noChopsticksImg) {
@@ -342,7 +342,7 @@ include 'nav.php';
             if (p.state == 0 && pL.state == 0 && pR.state == 0) {
                 p.state = 1;
                 run.push([p.num, p.state])
-                duration = 10000 * ((130 - pBarCommand.h) / 130);
+                duration = speed/2 * ((130 - pBarCommand.h) / 130);
                 //up
                 createjs.Tween.get(pBarCommand, { loop: false, override: true }).to({ h: 130, y: y1 }, duration);
                 createjs.Tween.get(c1BarCommand, { loop: false, paused: false }).to({ y: c1y, x: c1x }, 200);
@@ -390,7 +390,8 @@ include 'nav.php';
         }
 
         function speedIncrease() {
-            speed = speed - 50;
+            speed = speed - 125;
+            console.log(speed)
             score = parseInt(score) + parseInt(p1BarCommand.h / 10) + parseInt(p2BarCommand.h / 10) + parseInt(p3BarCommand.h / 10) + parseInt(p4BarCommand.h / 10) + parseInt(p5BarCommand.h / 10);
             scoreTotal.text = score;
         }
@@ -512,10 +513,10 @@ include 'nav.php';
             function pad(n) {
                 return (n < 10) ? ("0" + n) : n;
             }
-            //console.log(length)
-            //console.log(diag)
-            transaction(length);
-            transaction(diag);
+            console.log(length)
+            console.log(diag)
+            //transaction(length);
+            //transaction(diag);
         }
     </script>
 
